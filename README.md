@@ -1,50 +1,71 @@
-# Welcome to your Expo app 👋
+# TechSupport App - React Native com Expo
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Este é um aplicativo móvel desenvolvido em React Native com Expo para gerenciamento de chamados técnicos. O app permite que usuários abram chamados sobre problemas tecnológicos, que serão respondidos por IA e, se necessário, por técnicos humanos.
 
-## Get started
+## Estrutura do Projeto
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+tech_support_app/
+├── App.js                          # Arquivo principal do aplicativo
+├── src/                           # Código fonte principal
+│   ├── screens/                   # Telas do aplicativo
+│   │   ├── LoginScreen.js         # Tela de login
+│   │   └── RegisterScreen.js      # Tela de registro
+│   ├── components/                # Componentes reutilizáveis
+│   ├── navigation/                # Configuração de navegação
+│   ├── assets/                    # Imagens, ícones e outros recursos
+│   └── utils/                     # Funções utilitárias
+└── README.md                      # Documentação do projeto
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Funcionalidades Implementadas
 
-## Learn more
+### Tela de Login (LoginScreen.js)
+- Formulário com campos de email e senha
+- Validação de campos obrigatórios
+- Interface responsiva com KeyboardAvoidingView
+- Navegação para tela de registro
+- Preparado para integração com API .NET
 
-To learn more about developing your project with Expo, look at the following resources:
+### Tela de Registro (RegisterScreen.js)
+- Formulário completo com nome, email, senha e confirmação
+- Validações de entrada (campos obrigatórios, confirmação de senha, tamanho mínimo)
+- Interface responsiva e acessível
+- Navegação para tela de login
+- Preparado para integração com API .NET
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Próximos Passos
 
-## Join the community
+1. **Integração com API .NET**: Substituir as simulações nas funções `handleLogin` e `handleRegister` pelas chamadas reais para a API
+2. **Telas Adicionais**: Implementar telas para:
+   - Dashboard principal
+   - Lista de chamados
+   - Criação de novos chamados
+   - Chat com IA/técnico
+   - Perfil do usuário
+3. **Componentes**: Criar componentes reutilizáveis como:
+   - Header personalizado
+   - Cards de chamados
+   - Componente de chat
+4. **Navegação**: Configurar navegação completa entre todas as telas
+5. **Estado Global**: Implementar gerenciamento de estado (Context API ou Redux)
 
-Join our community of developers creating universal apps.
+## Tecnologias Utilizadas
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- React Native
+- Expo
+- React Navigation (para navegação entre telas)
+- JavaScript ES6+
+
+## Como Executar
+
+1. Certifique-se de ter o Expo CLI instalado
+2. Execute `expo start` na pasta do projeto
+3. Use o aplicativo Expo Go no seu dispositivo ou um emulador
+
+## Observações
+
+- As telas de login e registro estão funcionais em termos de interface, mas as chamadas para API ainda precisam ser implementadas
+- O projeto está estruturado de forma modular para facilitar a manutenção e expansão
+- Todos os estilos seguem boas práticas de design mobile com foco na experiência do usuário
+
