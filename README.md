@@ -15,6 +15,10 @@ app/
 │        ├── comp1/
 │             └── index.tsx
 │             └── style.ts
+├── components/
+│     ├── comp1/
+│        └── index.tsx
+│        └── style.ts
 └── README.md                      # Documentação do projeto
 ```
 
