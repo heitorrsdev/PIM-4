@@ -18,25 +18,10 @@ app/
 └── README.md                      # Documentação do projeto
 ```
 
-## Funcionalidades Implementadas
-
-### Tela de Login (LoginScreen.js)
-- Formulário com campos de email e senha
-- Validação de campos obrigatórios
-- Interface responsiva com KeyboardAvoidingView
-- Navegação para tela de registro
-- Preparado para integração com API .NET
-
-### Tela de Registro (RegisterScreen.js)
-- Formulário completo com nome, email, senha e confirmação
-- Validações de entrada (campos obrigatórios, confirmação de senha, tamanho mínimo)
-- Interface responsiva e acessível
-- Navegação para tela de login
-- Preparado para integração com API .NET
-
 ## Próximos Passos
 
-1. **Integração com API .NET**: Substituir as simulações nas funções `handleLogin` e `handleRegister` pelas chamadas reais para a API
+1. **Funcionalidades básicas de autenticação**
+   - Telas de login e registro funcionais com dados mockados
 2. **Telas Adicionais**: Implementar telas para:
    - Dashboard principal
    - Lista de chamados
@@ -49,6 +34,7 @@ app/
    - Componente de chat
 4. **Navegação**: Configurar navegação completa entre todas as telas
 5. **Estado Global**: Implementar gerenciamento de estado (Context API ou Redux)
+6. **Integração com API .NET**: Substituir as simulações nas funções `handleLogin` e `handleRegister` pelas chamadas reais para a API
 
 ## Tecnologias Utilizadas
 
