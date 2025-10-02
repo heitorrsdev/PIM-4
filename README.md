@@ -11,10 +11,10 @@ app/
 ├── rotaGenerica/
 │   └── index.tsx
 │   └── style.ts
-│   └── components/
-│        └── comp1/
+│   ├── components/
+│        ├── comp1/
 │             └── index.tsx
-│             └── tyle.ts
+│             └── style.ts
 └── README.md                      # Documentação do projeto
 ```
 
