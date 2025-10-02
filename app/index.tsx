@@ -1,15 +1,21 @@
-import { Text, View } from 'react-native';
+import { Link } from 'expo-router';
+import { Pressable, Text, View } from 'react-native';
+import styles from './sytyle';
 
-export default function Index() {
+export default function Home() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Tela Inicial</Text>
+      <Link href='/login' asChild>
+        <Pressable style={styles.button}>
+          <Text style={styles.buttonText}>Login</Text>
+        </Pressable>
+      </Link>
+      <Link href='/register' asChild>
+        <Pressable style={styles.button}>
+          <Text style={styles.buttonText}>Criar conta</Text>
+        </Pressable>
+      </Link>
     </View>
   );
 }
