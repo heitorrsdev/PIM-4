@@ -5,16 +5,16 @@ Este é um aplicativo móvel desenvolvido em React Native com Expo para gerencia
 ## Estrutura do Projeto
 
 ```
-tech_support_app/
-├── App.js                          # Arquivo principal do aplicativo
-├── src/                           # Código fonte principal
-│   ├── screens/                   # Telas do aplicativo
-│   │   ├── LoginScreen.js         # Tela de login
-│   │   └── RegisterScreen.js      # Tela de registro
-│   ├── components/                # Componentes reutilizáveis
-│   ├── navigation/                # Configuração de navegação
-│   ├── assets/                    # Imagens, ícones e outros recursos
-│   └── utils/                     # Funções utilitárias
+app/
+├── index.tsx           # rota "/"
+├── style.ts
+├── rotaGenerica/
+│   └── index.tsx
+│   └── style.ts
+│   └── components/
+│        └── comp1/
+│             └── index.tsx
+│             └── tyle.ts
 └── README.md                      # Documentação do projeto
 ```
 
