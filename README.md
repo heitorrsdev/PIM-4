@@ -8,16 +8,16 @@ Este é um aplicativo móvel desenvolvido em React Native com Expo para gerencia
 app/
 ├── index.tsx           # rota "/"
 ├── style.ts
-├── rotaGenerica/
-│   └── index.tsx
-│   └── style.ts
-│   ├── components/
-│        ├── comp1/
-│             └── index.tsx
+├── rotaGenerica/       # pasta com o nome da rota
+│   ├── index.tsx
+│   ├── style.ts
+│   └── components/
+│        └── comp1/
+│             ├── index.tsx
 │             └── style.ts
 ├── components/
-│     ├── comp1/
-│        └── index.tsx
+│     └── comp1/
+│        ├── index.tsx
 │        └── style.ts
 └── README.md                      # Documentação do projeto
 ```
