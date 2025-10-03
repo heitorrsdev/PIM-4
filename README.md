@@ -6,20 +6,26 @@ Este é um aplicativo móvel desenvolvido em React Native com Expo para gerencia
 
 ```
 app/
-├── index.tsx           # rota "/"
-├── style.ts
-├── rotaGenerica/       # pasta com o nome da rota
-│   ├── index.tsx
-│   ├── style.ts
-│   └── components/
-│        └── comp1/
-│             ├── index.tsx
-│             └── style.ts
-├── components/
-│     └── comp1/
-│        ├── index.tsx
-│        └── style.ts
-└── README.md                      # Documentação do projeto
+├── index.tsx              # Rota '/'
+├── style.ts               # Estilos da rota '/'
+├── rotaGenerica/
+│   ├── index.tsx          # Componente principal
+│   ├── style.ts           # Estilos específicos
+│   └── components/        # Componentes da rota
+│      └── comp1/
+│         ├── index.tsx    # Componente comp1
+│         └── style.ts     # Estilos do comp1
+├── components/            # Componentes globais
+│   └── divisaoLogica/
+│      ├── index.tsx       # Exports
+│      ├── componenteEx1/  
+│      │   ├── componenteEx.tsx
+│      │   └── style.ts
+│      └── componenteEx2/  
+│          ├── componenteEx.tsx
+│          └── style.ts
+└── README.md              # Documentação
+
 ```
 
 ## Próximos Passos
