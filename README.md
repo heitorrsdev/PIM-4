@@ -19,10 +19,10 @@ app/
 │   └── divisaoLogica/
 │      ├── index.tsx       # Exports
 │      ├── componenteEx1/  
-│      │   ├── componenteEx.tsx
+│      │   ├── componenteEx1.tsx
 │      │   └── style.ts
 │      └── componenteEx2/  
-│          ├── componenteEx.tsx
+│          ├── componenteEx2.tsx
 │          └── style.ts
 └── README.md              # Documentação
 
