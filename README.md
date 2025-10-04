@@ -44,7 +44,7 @@ app/
    - Componente de chat
 4. **Navegação**: Configurar navegação completa entre todas as telas
 5. **Estado Global**: Implementar gerenciamento de estado (Context API ou Redux)
-6. **Integração com API .NET**: Substituir as simulações nas funções `handleLogin` e `handleRegister` pelas chamadas reais para a API
+6. **Integração com API .NET**: Implementar chamadas reais à API
 
 ## Tecnologias Utilizadas
 
