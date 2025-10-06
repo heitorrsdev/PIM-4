@@ -5,6 +5,19 @@ Este é um aplicativo móvel desenvolvido em React Native com Expo para gerencia
 ## Estrutura do Projeto
 
 ```
+components/            # Componentes globais
+├── divisaoLogica/     # 1 componente apenas
+│   └── componenteEx1/
+│      ├── componenteEx1.tsx
+│      └── style.ts
+├── divisaoLogica/     # 2 ou + componentes
+│   ├── index.tsx       # Exports
+│   ├── componenteEx2/  
+│   │   ├── componenteEx2.tsx
+│   │   └── style.ts
+│   └── componenteEx3/  
+│       ├── componenteEx3.tsx
+│       └── style.ts
 app/
 ├── index.tsx              # Rota '/'
 ├── style.ts               # Estilos da rota '/'
@@ -15,19 +28,6 @@ app/
 │      └── comp1/
 │         ├── index.tsx    # Componente comp1
 │         └── style.ts     # Estilos do comp1
-├── components/            # Componentes globais
-│   └── divisaoLogica/     # 1 componente apenas
-│      └── componenteEx1/
-│         ├── componenteEx1.tsx
-│         └── style.ts
-│   └── divisaoLogica/     # 2 ou + componentes
-│      ├── index.tsx       # Exports
-│      ├── componenteEx2/  
-│      │   ├── componenteEx2.tsx
-│      │   └── style.ts
-│      └── componenteEx3/  
-│          ├── componenteEx3.tsx
-│          └── style.ts
 └── README.md              # Documentação
 
 ```
