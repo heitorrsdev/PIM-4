@@ -1,21 +1,24 @@
-import { Text, TouchableOpacity, View } from 'react-native';
+import { BaseButton } from '@/components/button';
+import { View } from 'react-native';
 import styles from './style';
 
 export default function BaseForm({
   children,
   onSubmit,
   submitLabel,
+  isValid,
 }: {
   children: React.ReactNode;
   onSubmit: () => void;
   submitLabel: string;
+  isValid?: boolean;
 }) {
   return (
     <View style={styles.container}>
       {children}
-      <TouchableOpacity style={styles.button} onPress={onSubmit}>
-        <Text style={styles.buttonText}>{submitLabel}</Text>
-      </TouchableOpacity>
+      <BaseButton onPress={onSubmit} disabled={!isValid}>
+        {submitLabel}
+      </BaseButton>
     </View>
   );
 }
