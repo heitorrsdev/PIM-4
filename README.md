@@ -16,13 +16,17 @@ app/
 │         ├── index.tsx    # Componente comp1
 │         └── style.ts     # Estilos do comp1
 ├── components/            # Componentes globais
-│   └── divisaoLogica/
+│   └── divisaoLogica/     # 1 componente apenas
+│      └── componenteEx1/
+│         ├── componenteEx1.tsx
+│         └── style.ts
+│   └── divisaoLogica/     # 2 ou + componentes
 │      ├── index.tsx       # Exports
-│      ├── componenteEx1/  
-│      │   ├── componenteEx1.tsx
+│      ├── componenteEx2/  
+│      │   ├── componenteEx2.tsx
 │      │   └── style.ts
-│      └── componenteEx2/  
-│          ├── componenteEx2.tsx
+│      └── componenteEx3/  
+│          ├── componenteEx3.tsx
 │          └── style.ts
 └── README.md              # Documentação
 
