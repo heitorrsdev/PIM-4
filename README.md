@@ -15,12 +15,12 @@ app/
 ├── index.tsx              # Rota '/'
 ├── style.ts               # Estilos da rota '/'
 ├── rotaGenerica/
-│   ├── index.tsx          # Componente principal
-│   ├── style.ts           # Estilos específicos
+│   ├── index.tsx
+│   ├── style.ts
 │   └── components/        # Componentes da rota
 │      └── comp1/
-│         ├── index.tsx    # Componente comp1
-│         └── style.ts     # Estilos do comp1
+│         ├── index.tsx
+│         └── style.ts
 └── README.md              # Documentação
 
 ```
