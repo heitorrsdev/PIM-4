@@ -5,18 +5,11 @@ Este é um aplicativo móvel desenvolvido em React Native com Expo para gerencia
 ## Estrutura do Projeto
 
 ```
-components/            # Componentes globais
-├── divisaoLogica/     # 1 componente apenas
-│   └── componenteEx1/
-│      ├── componenteEx1.tsx
-│      └── style.ts
-├── divisaoLogica/     # 2 ou + componentes
-│   ├── index.tsx       # Exports
-│   ├── componenteEx2/  
-│   │   ├── componenteEx2.tsx
-│   │   └── style.ts
-│   └── componenteEx3/  
-│       ├── componenteEx3.tsx
+components/                # Componentes globais
+├── divisaoLogica/
+│   ├── index.tsx          # Exports
+│   └── componenteEx/
+│       ├── index.tsx
 │       └── style.ts
 app/
 ├── index.tsx              # Rota '/'
