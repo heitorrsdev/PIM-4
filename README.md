@@ -1,6 +1,6 @@
 # TechSupport App - React Native com Expo
 
-Este é um aplicativo móvel desenvolvido em React Native Web + Expo para gerenciamento de chamados técnicos. O app permite que usuários abram chamados sobre problemas tecnológicos, que serão respondidos inicialmente por IA e, caso necessário, por técnicos humanos.
+Este é um aplicativo móvel desenvolvido em React Native Web + Expo para gerenciamento de chamados técnicos. O app permite que usuários abram chamados sobre problemas tecnológicos, que serão respondidos inicialmente por IA e, caso necessário, por técnicos humanos
 
 ## Estrutura do Projeto
 
