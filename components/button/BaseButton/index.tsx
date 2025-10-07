@@ -7,7 +7,7 @@ export default function BaseButton({
   children,
 }: {
   disabled?: boolean;
-  onPress: () => void;
+  onPress?: () => void;
   children: React.ReactNode;
 }) {
   return (
