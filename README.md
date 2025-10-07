@@ -21,6 +21,8 @@ app/
 │      └── comp1/
 │         ├── index.tsx
 │         └── style.ts
+utils/
+├── algoUtil.ts            # Funções utilitárias separadas por assunto
 README.md              # Documentação
 
 ```
