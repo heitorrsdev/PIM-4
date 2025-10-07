@@ -21,7 +21,7 @@ app/
 │      └── comp1/
 │         ├── index.tsx
 │         └── style.ts
-└── README.md              # Documentação
+README.md              # Documentação
 
 ```
 
