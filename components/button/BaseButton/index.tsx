@@ -17,7 +17,6 @@ export default function BaseButton({
       style={({ pressed, hovered }) => [
         styles.button,
         disabled && styles.disabled,
-        disabled && { cursor: 'not-allowed' } as any, // React Native não suporta 'cursor', por isso o 'as any'
         pressed && !disabled && styles.pressed,
         hovered && !disabled && styles.hovered,
       ]}

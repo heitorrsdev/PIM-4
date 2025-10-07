@@ -16,7 +16,9 @@ const styles = StyleSheet.create({
   },
   disabled: {
     backgroundColor: '#ccc',
-  },
+    cursor: 'not-allowed',
+    pointerEvents: 'auto',
+  } as any, // React Native não suporta 'cursor', por isso o 'as any'
   text: {
     color: 'white',
     fontWeight: '600',
