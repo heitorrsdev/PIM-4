@@ -6,7 +6,7 @@ export default function BaseForm({
   children,
   onSubmit,
   submitLabel,
-  isValid,
+  isValid = true,
 }: {
   children: React.ReactNode;
   onSubmit: () => void;
