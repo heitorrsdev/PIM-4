@@ -14,7 +14,7 @@ export default function FormField({
   onChangeText: (text: string) => void;
   placeholder?: string;
   secureTextEntry?: boolean;
-  error?: string;
+  error?: string | null;
 }) {
   return (
     <View style={styles.container}>
@@ -30,4 +30,3 @@ export default function FormField({
     </View>
   );
 }
-
