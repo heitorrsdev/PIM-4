@@ -1,9 +1,12 @@
-import { View, Text } from 'react-native';
-import styles from './style';
-export default function Login() {
+import { View } from 'react-native';
+import styles from '../sytyle';
+import RegisterForm from './components/registerForm';
+
+export default function Register() {
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tela de Registro</Text>
+      <RegisterForm />
     </View>
   );
 }

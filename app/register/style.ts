@@ -6,10 +6,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 22,
-    fontWeight: 'bold'
-  }
 });
 
 export default styles;
