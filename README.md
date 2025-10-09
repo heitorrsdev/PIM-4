@@ -63,4 +63,3 @@ README.md              # Documentação
 - As telas de login e registro estão funcionais em termos de interface, mas as chamadas para a API ainda precisam ser implementadas
 - O projeto está estruturado de forma modular para facilitar a manutenção e expansão
 - Todos os estilos seguem boas práticas de design mobile com foco na experiência do usuário
-
