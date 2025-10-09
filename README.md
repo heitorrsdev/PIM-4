@@ -64,3 +64,4 @@ README.md              # Documentação
 - O projeto está estruturado de forma modular para facilitar a manutenção e expansão
 - Todos os estilos seguem boas práticas de design mobile com foco na experiência do usuário
 
+
