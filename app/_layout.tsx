@@ -3,9 +3,7 @@ import Header from '../components/header/header';
 
 export default function RootLayout() {
   return (
-    <>
-      <Header />
-      <Stack />
-    </>
+    <Stack screenOptions={{ headerShown: true, header: () => <Header />, }}>
+    </Stack>
   );
 }
