@@ -1,20 +1,18 @@
 import { BaseButton } from '@/components/button';
-import { View } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 import styles from './style';
 
-export default function BaseForm({
-  children,
-  onSubmit,
-  submitLabel,
-  isValid = true,
-}: {
+interface BaseFormProps {
   children: React.ReactNode;
   onSubmit: () => void;
   submitLabel: string;
   isValid?: boolean;
-}) {
+  style?: StyleProp<ViewStyle>;
+}
+
+export default function BaseForm({ children, onSubmit, submitLabel, isValid = true, style }: BaseFormProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       {children}
       <BaseButton onPress={onSubmit} disabled={!isValid}>
         {submitLabel}
