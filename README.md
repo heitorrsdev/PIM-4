@@ -7,7 +7,7 @@ Este é um aplicativo móvel desenvolvido em React Native Web + Expo para gerenc
 ```
 components/                # Componentes globais
 ├── divisaoLogica/
-│   ├── index.tsx          # Exportações
+│   ├── index.ts          # Exportações
 │   └── componenteEx/
 │       ├── index.tsx
 │       └── style.ts
