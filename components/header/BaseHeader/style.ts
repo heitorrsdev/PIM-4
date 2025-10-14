@@ -2,38 +2,26 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'flex-start',
+    alignItems: 'center',
     backgroundColor: '#3d50fdff',
-    paddingTop: 8,
+    justifyContent: 'flex-start',
     paddingBottom: 9,
     paddingLeft: 50,
-    alignItems: 'center',
+    paddingTop: 8,
   },
 
-  ul: {
-    gap: 50,
+  lista: {
     alignItems: 'center',
     flexDirection: 'row',
+    gap: 50,
   },
 
   link: {
     color: '#ffffffff',
-    textDecorationLine: 'underline',
-    fontWeight: 'bold',
     fontSize: 20,
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
   },
 });
 
 export default styles;
-
-
-
-
-
-
-
-
-
-
-
-

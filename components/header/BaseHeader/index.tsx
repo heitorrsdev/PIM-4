@@ -5,8 +5,8 @@ import styles from './style';
 
 const Header: React.FC = () => {
   return (
-    <View style={[styles.container, { flexDirection: 'row' }]}>
-      <View style={styles.ul}>
+    <View style={[styles.container]}>
+      <View style={styles.lista}>
         <Pressable>
           <Link href="/" asChild>
             <Text style={styles.link}>Home</Text>
