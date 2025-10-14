@@ -1,30 +1,20 @@
-import { Text, TextInput, View } from 'react-native';
+import React from 'react';
+import { StyleProp, Text, TextInput, TextInputProps, TextStyle, View } from 'react-native';
 import styles from './style';
 
-export default function FormField({
-  label,
-  value,
-  onChangeText,
-  placeholder,
-  secureTextEntry,
-  error,
-}: {
+interface FormFieldProps extends TextInputProps {
   label: string;
-  value: string;
-  onChangeText: (text: string) => void;
-  placeholder?: string;
-  secureTextEntry?: boolean;
   error?: string | null;
-}) {
+  style?: StyleProp<TextStyle>;
+}
+
+export default function FormField({ label, error, style, ...rest }: FormFieldProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container]}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
-        style={[styles.input, error && styles.inputError]}
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={placeholder}
-        secureTextEntry={secureTextEntry}
+        style={[styles.input, error && styles.inputError, style]}
+        {...rest}
       />
       {error && <Text style={styles.error}>{error}</Text>}
     </View>
