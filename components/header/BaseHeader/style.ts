@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 6,
+    paddingVertical: 4,
     paddingHorizontal: 10,
   },
 
@@ -33,6 +33,9 @@ const styles = StyleSheet.create({
 
   pressed: {
     backgroundColor: '#7381fdff',
+    borderRadius: 15,
+    borderColor: '#ffffff',
+    borderWidth: 1,
   },
 });
 
