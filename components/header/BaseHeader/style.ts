@@ -2,19 +2,19 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 4,
     paddingHorizontal: 10,
+    paddingVertical: 4,
   },
 
   hovered: {
-    borderRadius: 15,
-    borderColor: '#ffffff',
-    borderWidth: 1,
     backgroundColor: '#5061ffff',
+    borderColor: '#ffffff',
+    borderRadius: 15,
+    borderWidth: 1,
     transform: [{ scale: 1.04 }],
   },
 
-  lista: {
+  list: {
     flexDirection: 'row',
     gap: 50,
   },
@@ -26,15 +26,15 @@ const styles = StyleSheet.create({
   },
 
   linkContainer: {
-    padding: 10,
-    height: 50,
     borderRadius: 10,
+    height: 50,
+    padding: 10,
   },
 
   pressed: {
     backgroundColor: '#7381fdff',
-    borderRadius: 15,
     borderColor: '#ffffff',
+    borderRadius: 15,
     borderWidth: 1,
   },
 });

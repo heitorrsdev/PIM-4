@@ -15,7 +15,7 @@ const Header: React.FC = () => {
     >
     <SafeAreaView edges={['top']} style={{ backgroundColor: 'transparent' }}>
         <View style={[styles.container]}>
-          <View style={styles.lista}>
+          <View style={styles.list}>
             <Pressable
             style={({ pressed, hovered }) => [
                 styles.linkContainer,
