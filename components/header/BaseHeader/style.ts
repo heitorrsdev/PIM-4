@@ -2,16 +2,19 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    backgroundColor: '#3d50fdff',
-    justifyContent: 'flex-start',
-    paddingBottom: 9,
-    paddingLeft: 50,
-    paddingTop: 8,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+  },
+
+  hovered: {
+    borderRadius: 15,
+    borderColor: '#ffffff',
+    borderWidth: 1,
+    backgroundColor: '#5061ffff',
+    transform: [{ scale: 1.04 }],
   },
 
   lista: {
-    alignItems: 'center',
     flexDirection: 'row',
     gap: 50,
   },
@@ -20,7 +23,16 @@ const styles = StyleSheet.create({
     color: '#ffffffff',
     fontSize: 20,
     fontWeight: 'bold',
-    textDecorationLine: 'underline',
+  },
+
+  linkContainer: {
+    padding: 10,
+    height: 50,
+    borderRadius: 10,
+  },
+
+  pressed: {
+    backgroundColor: '#7381fdff',
   },
 });
 
