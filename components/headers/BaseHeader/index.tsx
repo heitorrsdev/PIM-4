@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './style';
-import { LinkButton } from '../../button';
+import { LinkButton } from '../../buttons';
 import { HeaderItem } from './type';
 import { Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';

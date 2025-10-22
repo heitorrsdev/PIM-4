@@ -1,4 +1,4 @@
-import { BaseForm, FormField } from '@/components/form';
+import { BaseForm, FormField } from '@/components/forms';
 import { isValidEmail } from '@/utils/validation';
 import { useState } from 'react';
 import { View } from 'react-native';

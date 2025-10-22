@@ -1,4 +1,4 @@
-import { BaseButton } from '@/components/button';
+import { BaseButton } from '@/components/buttons';
 import { StyleProp, View, ViewStyle } from 'react-native';
 import styles from './style';
 
