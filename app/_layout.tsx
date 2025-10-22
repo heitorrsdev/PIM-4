@@ -1,5 +1,5 @@
-import BaseHeader from '../components/header/BaseHeader';
-import { HeaderItem } from '@/components/header/BaseHeader/type';
+import BaseHeader from '../components/headers/BaseHeader';
+import { HeaderItem } from '@/components/headers/BaseHeader/type';
 import { Stack } from 'expo-router';
 
 const defaultHeaderItems: HeaderItem[] = [
