@@ -1,6 +1,6 @@
 import React from 'react';
-import { Pressable, PressableProps, StyleProp, Text, ViewStyle } from 'react-native';
 import styles from './style';
+import { Pressable, PressableProps, StyleProp, Text, ViewStyle } from 'react-native';
 
 // Pressable é baseado em View, então a prop `style` recebe estilos de View.
 interface BaseButtonProps extends PressableProps {
