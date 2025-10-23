@@ -5,23 +5,29 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   label: {
-    color: '#333',
-    fontSize: 14,
+    color: '#111827',
+    fontSize: 18,
+    fontWeight: '700',
     marginBottom: 4,
   },
   input: {
     borderColor: '#ccc',
     borderRadius: 8,
     borderWidth: 1,
-    fontSize: 16,
+    color: '#4B5563',
+    fontFamily: 'System',
+    fontSize: 14,
+    fontWeight: '500',
     padding: 12,
   },
   inputError: {
     borderColor: 'red',
   },
   error: {
-    color: 'red',
+    color: '#DC2626',
+    fontFamily: 'System',
     fontSize: 12,
+    fontWeight: '400',
     marginTop: 4,
   },
 });

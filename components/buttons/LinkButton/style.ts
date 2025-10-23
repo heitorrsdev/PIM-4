@@ -12,8 +12,9 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
+    fontFamily: 'System',
+    fontSize: 18,
+    fontWeight: '500',
     letterSpacing: 0.8,
     textTransform: 'uppercase',
   },
