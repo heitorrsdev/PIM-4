@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '@/styles';
+import {typography} from '@/styles';
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    width: '100%',
-    backgroundColor: '#0A2E50',
+    backgroundColor: colors.primary,
     borderBottomLeftRadius: 14,
     borderBottomRightRadius: 14,
     elevation: 6,
@@ -22,9 +22,9 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#ffffff',
-    fontFamily: 'System',
-    fontSize: 24,
-    fontWeight: '700',
+    fontFamily: typography.fontFamily,
+    fontSize: typography.fontSize.title,
+    fontWeight: typography.fontWeight.bold as '700',
     letterSpacing: 1,
   },
   list: {

@@ -1,18 +1,19 @@
+import { colors, typography } from '@/styles';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#607D88',
+    backgroundColor: colors.background,
     flex: 1,
     gap: 20,
     justifyContent: 'center',
   },
   title: {
-    color: '#111827',
-    fontFamily: 'System',
-    fontSize: 24,
-    fontWeight: '700',
+    color: colors.textPrimary,
+    fontFamily: typography.fontFamily,
+    fontSize: typography.fontSize.title,
+    fontWeight: typography.fontWeight.bold as '700',
   },
 });
 
