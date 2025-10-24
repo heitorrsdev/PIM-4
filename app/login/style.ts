@@ -1,3 +1,4 @@
+import { typography } from '@/styles';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -7,8 +8,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 22,
-    fontWeight: 'bold',
+    fontSize: typography.fontSize.title,
+    fontWeight: typography.fontWeight.bold as '700',
   }
 });
 

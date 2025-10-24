@@ -1,27 +1,35 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '@/styles';
+import { typography } from '@/styles';
 
 const styles = StyleSheet.create({
   container: {
     marginBottom: 16,
   },
   label: {
-    color: '#333',
-    fontSize: 14,
+    color: colors.textPrimary,
+    fontSize: typography.fontSize.large,
+    fontWeight: typography.fontWeight.bold as '700',
     marginBottom: 4,
   },
   input: {
     borderColor: '#ccc',
     borderRadius: 8,
     borderWidth: 1,
-    fontSize: 16,
+    color: colors.textSecondary,
+    fontFamily: typography.fontFamily,
+    fontSize: typography.fontSize.normal,
+    fontWeight: typography.fontWeight.regular as '500',
     padding: 12,
   },
   inputError: {
-    borderColor: 'red',
+    borderColor: colors.error,
   },
   error: {
-    color: 'red',
-    fontSize: 12,
+    color: colors.error,
+    fontFamily: typography.fontFamily,
+    fontSize: typography.fontSize.small,
+    fontWeight: typography.fontWeight.regular as '400',
     marginTop: 4,
   },
 });

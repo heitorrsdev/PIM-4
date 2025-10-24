@@ -1,3 +1,4 @@
+import { typography } from '@/styles';
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -12,8 +13,9 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
+    fontFamily: typography.fontFamily,
+    fontSize: typography.fontSize.large,
+    fontWeight: typography.fontWeight.medium as '500',
     letterSpacing: 0.8,
     textTransform: 'uppercase',
   },
