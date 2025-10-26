@@ -1,4 +1,4 @@
-import { request } from '../utils';
+import { request } from '@/utils';
 
 export function createCRUD<TPayload, TResponse>(baseUrl: string) {
   return {
