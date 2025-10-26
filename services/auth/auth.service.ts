@@ -1,5 +1,6 @@
-import { LoginPayload, LoginResponse } from './auth.types';
 import { request } from '@/utils';
+
+import { LoginPayload, LoginResponse } from './auth.types';
 
 export const AuthService = {
   login: (payload: LoginPayload) => {

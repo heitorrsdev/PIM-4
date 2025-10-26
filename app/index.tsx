@@ -1,5 +1,6 @@
-import styles from './sytyle';
 import { Text, View } from 'react-native';
+
+import styles from './sytyle';
 
 export default function Home() {
   return (

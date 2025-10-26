@@ -1,5 +1,6 @@
-import { ChamadoPayload, ChamadoResponse } from './chamado.types';
 import { request } from '@/utils';
+
+import { ChamadoPayload, ChamadoResponse } from './chamado.types';
 
 export const addChamado = async (payload: ChamadoPayload): Promise<ChamadoResponse> => {
   return request<ChamadoResponse>('post', '/chamados/Adicionar', payload);

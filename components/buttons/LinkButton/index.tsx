@@ -1,8 +1,10 @@
-import BaseButton from '../BaseButton';
+import { Href,Link } from 'expo-router';
 import React from 'react';
-import styles from './style';
-import { Link, Href } from 'expo-router';
 import { Text } from 'react-native';
+
+import BaseButton from '@/components/buttons/BaseButton';
+
+import styles from './style';
 
 interface LinkButtonProps extends React.ComponentProps<typeof BaseButton> {
   children: React.ReactNode;

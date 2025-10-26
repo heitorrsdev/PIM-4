@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleProp, Text, TextInput, TextInputProps, TextStyle, View } from 'react-native';
+
 import styles from './style';
 
 interface FormFieldProps extends TextInputProps {

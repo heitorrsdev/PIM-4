@@ -1,9 +1,11 @@
+import { useState } from 'react';
+import { Alert,View } from 'react-native';
+
 import { BaseForm, FormField } from '@/components/forms';
-import { isValidEmail } from '@/utils/validation';
 import { UsuarioService } from '@/services';
 import { UsuarioPayload } from '@/services/usuarios/usuario.types';
-import { useState } from 'react';
-import { View, Alert } from 'react-native';
+import { isValidEmail } from '@/utils/validation';
+
 import styles from './styles';
 
 export default function RegisterForm() {
