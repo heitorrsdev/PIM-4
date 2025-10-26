@@ -23,6 +23,13 @@ app/
 │         └── style.ts
 utils/
 ├── algoUtil.ts            # Funções utilitárias separadas por assunto
+services/
+├── api.ts
+├── index.ts
+├── entidadeEx/
+│   ├── entidadeEx.service.ts
+│   ├── entidadeEx.types.ts
+│   └── index.ts
 README.md                  # Documentação
 
 ```
