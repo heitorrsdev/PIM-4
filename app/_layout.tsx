@@ -1,6 +1,8 @@
-import BaseHeader from '../components/headers/BaseHeader';
-import { HeaderItem } from '@/components/headers/BaseHeader/type';
 import { Stack } from 'expo-router';
+
+import { HeaderItem } from '@/components/headers/BaseHeader/type';
+
+import BaseHeader from '../components/headers/BaseHeader';
 
 const defaultHeaderItems: HeaderItem[] = [
   { href: '/', label: 'Home' },
