@@ -1,7 +1,7 @@
 import { request } from '@/utils';
 
-import { TecnicoResponse } from './tecnico.types';
+import { TecnicoType } from './tecnico.types';
 
 export const TecnicoService = {
-  list: () => request<TecnicoResponse[]>('get', '/tecnico/Listar'),
+  list: () => request<string | TecnicoType[]>('get', '/tecnico/Listar'),
 };

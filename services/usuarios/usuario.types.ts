@@ -6,15 +6,15 @@ export interface UsuarioBasePayload {
   telefone: string;
 }
 
-export interface UsuarioBaseResponse extends UsuarioBasePayload {
-  id: string;
-}
-
 /** Tipos específicos para o Usuário comum */
 export interface UsuarioPayload extends UsuarioBasePayload {
   setor: string;
 }
 
-export interface UsuarioResponse extends UsuarioBaseResponse {
-  setor: string;
+export interface UsuarioType {
+  Nome: string,
+  Email: string,
+  Senha: string,
+  Setor: string,
+  Telefone: string,
 }
