@@ -2,6 +2,7 @@ import { Stack } from 'expo-router';
 
 import BaseHeader from '@/components/headers/BaseHeader';
 import { HeaderItem } from '@/components/headers/BaseHeader/type';
+import { AuthProvider } from '@/contexts';
 
 const defaultHeaderItems: HeaderItem[] = [
   { href: '/', label: 'Home' },
@@ -11,11 +12,13 @@ const defaultHeaderItems: HeaderItem[] = [
 
 export default function RootLayout() {
   return (
-    <Stack
-      screenOptions={{
-        headerShown: true,
-        header: () => <BaseHeader items={defaultHeaderItems} title='Suptech' />,
-      }}
-    />
+    <AuthProvider>
+      <Stack
+        screenOptions={{
+          headerShown: true,
+          header: () => <BaseHeader items={defaultHeaderItems} title='Suptech' />,
+        }}
+      />
+    </AuthProvider>
   );
 }
