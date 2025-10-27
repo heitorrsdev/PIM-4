@@ -1,5 +1,23 @@
-import { createCRUD } from '@/utils/crudFactory';
+import { request } from '@/utils';
 
-import { UsuarioPayload, UsuarioResponse } from './usuario.types';
+import { UsuarioPayload, UsuarioType } from './usuario.types';
 
-export const UsuarioService = createCRUD<UsuarioPayload, UsuarioResponse>('/Usuario');
+const BASE_URL = '/Usuario';
+
+export const UsuarioService = {
+  list(): Promise<UsuarioType[] | string> {
+    return request('get', `${BASE_URL}/Listar`);
+  },
+
+  add(payload: UsuarioPayload): Promise<string> {
+    return request('post', `${BASE_URL}/Adicionar`, payload);
+  },
+
+  edit(id: string, payload: UsuarioPayload): Promise<string> {
+    return request('put', `${BASE_URL}/Editar/${id}`, payload);
+  },
+
+  remove(id: string): Promise<string> {
+    return request('delete', `${BASE_URL}/Excluir/${id}`);
+  },
+};
