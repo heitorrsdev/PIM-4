@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import { BaseForm, FormField } from '@/components/forms';
 import { useAuth } from '@/hooks';
+import { showAlert } from '@/utils/notifications';
 import { isValidEmail } from '@/utils/validation';
 
 import styles from './styles';
@@ -45,10 +46,9 @@ export default function LoginForm() {
     setIsLoading(true);
     try {
       await login({ email: form.email, senha: form.senha });
-      console.log('Login realizado com sucesso');
+      showAlert('Sucesso', 'Login realizado com sucesso');
     } catch (error: any) {
-      console.error('Erro ao realizar login:', error);
-      setErrors({ senha: 'Email ou senha inválidos' });
+      showAlert('Erro', 'Email ou senha inválidos');
     } finally {
       setIsLoading(false);
     }

@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Alert,View } from 'react-native';
+import { View } from 'react-native';
 
 import { BaseForm, FormField } from '@/components/forms';
 import { UsuarioService } from '@/services';
 import { UsuarioPayload } from '@/services/usuarios/usuario.types';
+import { showAlert } from '@/utils/notifications';
 import { isValidEmail } from '@/utils/validation';
 
 import styles from './styles';
@@ -36,7 +37,7 @@ export default function RegisterForm() {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+};
 
   const handleSubmit = async () => {
     if (!validate()) return;
@@ -44,11 +45,11 @@ export default function RegisterForm() {
     setIsLoading(true);
     try {
       const response = await UsuarioService.add(form);
-      Alert.alert('Sucesso', `Usuário ${response.nome} cadastrado com sucesso!`);
+      showAlert('Sucesso', response);
       console.log('Usuário registrado com sucesso:', response);
     } catch (error: any) {
       console.error('Erro ao registrar usuário:', error);
-      Alert.alert('Erro', 'Não foi possível registrar o usuário.');
+      showAlert('Erro', 'Não foi possível registrar o usuário.');
     } finally {
       setIsLoading(false);
     }
