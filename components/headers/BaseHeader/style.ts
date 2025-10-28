@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
+import { colors, typography } from '@/styles';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(20, 30, 48, 0.9)',
+    backgroundColor: colors.primary,
     borderBottomLeftRadius: 14,
     borderBottomRightRadius: 14,
     elevation: 6,
@@ -16,19 +17,20 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   header: {
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
     justifyContent: 'space-between',
   },
   title: {
     color: '#ffffff',
-    fontSize: 18,
-    fontWeight: '700',
+    fontFamily: typography.fontFamily,
+    fontSize: typography.fontSize.title,
+    fontWeight: typography.fontWeight.bold,
     letterSpacing: 1,
   },
   list: {
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
   },
 });
 
