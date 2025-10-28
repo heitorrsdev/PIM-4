@@ -3,62 +3,74 @@ import { View } from 'react-native';
 
 import { BaseForm, FormField } from '@/components/forms';
 import { useAuth } from '@/hooks';
+import { showAlert } from '@/utils/notifications';
 import { isValidEmail } from '@/utils/validation';
 
 import styles from './styles';
 
-interface LoginErrors {
-  email?: string;
-  password?: string;
+interface LoginPayload {
+  email: string;
+  senha: string;
 }
 
 export default function LoginForm() {
   const { login } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState<LoginErrors>({});
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async () => {
-    const newErrors: LoginErrors = {};
+  const [form, setForm] = useState<LoginPayload>({
+    email: '',
+    senha: '',
+  });
 
-    if (!email.trim()) newErrors.email = 'Email é obrigatório';
-    else if (!isValidEmail(email)) newErrors.email = 'Email inválido';
+  const [errors, setErrors] = useState<Partial<Record<keyof LoginPayload, string>>>({});
+  const [isLoading, setIsLoading] = useState(false);
 
-    if (!password.trim()) newErrors.password = 'Senha é obrigatória';
+  const handleChange = (key: keyof LoginPayload, value: string) => {
+    setForm(prev => ({ ...prev, [key]: value }));
+  };
+
+  const validate = (): boolean => {
+    const newErrors: Partial<Record<keyof LoginPayload, string>> = {};
+
+    if (!form.email.trim()) newErrors.email = 'Email é obrigatório';
+    else if (!isValidEmail(form.email)) newErrors.email = 'Email inválido';
+
+    if (!form.senha.trim()) newErrors.senha = 'Senha é obrigatória';
 
     setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
-    if (Object.keys(newErrors).length !== 0) return;
+  const handleSubmit = async (): Promise<void> => {
+    if (!validate()) return;
 
+    setIsLoading(true);
     try {
-      setLoading(true);
-      await login({ email, senha: password });
-      console.log('Login realizado com sucesso');
+      await login({ email: form.email, senha: form.senha });
+      showAlert('Sucesso', 'Login realizado com sucesso');
     } catch (error: any) {
-      setErrors({ password: 'Email ou senha inválidos' });
+      showAlert('Erro', 'Email ou senha inválidos');
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   return (
     <View style={styles.container}>
-      <BaseForm onSubmit={handleSubmit} submitLabel={loading ? 'Entrando...' : 'Entrar'}>
+      <BaseForm onSubmit={handleSubmit} submitLabel={isLoading ? 'Entrando...' : 'Entrar'}>
         <FormField
           label="Email"
-          value={email}
-          onChangeText={setEmail}
+          value={form.email}
+          onChangeText={value => handleChange('email', value)}
           placeholder="Digite seu email"
           error={errors.email}
         />
         <FormField
           label="Senha"
-          value={password}
-          onChangeText={setPassword}
+          value={form.senha}
+          onChangeText={value => handleChange('senha', value)}
           placeholder="Digite sua senha"
           secureTextEntry
-          error={errors.password}
+          error={errors.senha}
         />
       </BaseForm>
     </View>
