@@ -1,6 +1,6 @@
 import api from '@/services/api';
 
-async function request<T>(
+export async function request<T>(
   method: 'get' | 'post' | 'put' | 'delete',
   url: string,
   payload?: any
@@ -8,4 +8,3 @@ async function request<T>(
   const { data } = await api[method]<T>(url, payload);
   return data;
 };
-export default request;
