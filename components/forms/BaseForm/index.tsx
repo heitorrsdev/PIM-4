@@ -1,5 +1,7 @@
-import { BaseButton } from '@/components/buttons';
 import { StyleProp, View, ViewStyle } from 'react-native';
+
+import { BaseButton } from '@/components/buttons';
+
 import styles from './style';
 
 interface BaseFormProps {

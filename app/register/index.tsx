@@ -1,4 +1,5 @@
 import { View } from 'react-native';
+
 import styles from '../sytyle';
 import RegisterForm from './components/registerForm';
 
