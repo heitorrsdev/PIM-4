@@ -1,5 +1,5 @@
 const typography = {
-  fontFamily: 'System',
+  fontFamily: 'Inter',
   fontSize: {
     small: 12,
     normal: 14,
