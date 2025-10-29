@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { BaseForm, FormField } from '@/components/forms';
 import { UsuarioService } from '@/services';
 import { UsuarioPayload } from '@/services/usuarios/usuario.types';
-import { showAlert } from '@/utils/notifications';
+import { showAlert } from '@/utils';
 import { isValidEmail } from '@/utils/validation';
 
 import styles from './styles';

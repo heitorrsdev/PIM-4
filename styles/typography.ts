@@ -1,5 +1,5 @@
 const typography = {
-  fontFamily: 'System',
+  fontFamily: 'Inter, system-ui, sans-serif',
   fontSize: {
     small: 12,
     normal: 14,
@@ -10,7 +10,7 @@ const typography = {
     bold: '700',
     medium: '500',
     regular: '400',
-  },
+  } as const, // Transforma fontWeight em um tipo literal ao invés de string genérica
 };
 
 export default typography;

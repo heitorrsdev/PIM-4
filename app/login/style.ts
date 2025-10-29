@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+import { typography } from '@/styles';
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -7,8 +9,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   title: {
-    fontSize: 22,
-    fontWeight: 'bold',
+    fontSize: typography.fontSize.title,
+    fontWeight: typography.fontWeight.bold,
   }
 });
 
