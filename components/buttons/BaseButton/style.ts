@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+import { colors, typography } from '@/styles';
+
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: '#0051a8',
+    backgroundColor: colors.primary,
     borderRadius: 6,
     paddingHorizontal: 20,
     paddingVertical: 12,
@@ -15,14 +17,15 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
   disabled: {
-    backgroundColor: '#ccc',
+    backgroundColor: colors.primary,
     cursor: 'not-allowed',
     pointerEvents: 'auto',
   } as any, // React Native não suporta 'cursor', por isso o 'as any'
   text: {
     color: 'white',
-    fontWeight: '600',
-    fontSize: 16,
+    fontFamily: typography.fontFamily,
+    fontSize: typography.fontSize.large,
+    fontWeight: typography.fontWeight.medium,
   },
 });
 

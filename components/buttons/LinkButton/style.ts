@@ -1,9 +1,11 @@
 import { StyleSheet } from 'react-native';
 
+import { colors, typography } from '@/styles';
+
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: 'transparent',
+    backgroundColor: colors.primary,
     borderRadius: 10,
     justifyContent: 'center',
     marginHorizontal: 6,
@@ -12,8 +14,9 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
+    fontFamily: typography.fontFamily,
+    fontSize: typography.fontSize.large,
+    fontWeight: typography.fontWeight.medium,
     letterSpacing: 0.8,
     textTransform: 'uppercase',
   },
