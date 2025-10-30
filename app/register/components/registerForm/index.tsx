@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View } from 'react-native';
 
 import { BaseForm } from '@/components/forms';
-import { FormField } from '@/components/inputs';
+import { TextField } from '@/components/inputs';
 import { UsuarioService } from '@/services';
 import { UsuarioPayload } from '@/services/usuarios/usuario.types';
 import { showAlert } from '@/utils';
@@ -59,21 +59,21 @@ export default function RegisterForm() {
   return (
     <View style={styles.container}>
       <BaseForm onSubmit={handleSubmit} submitLabel={isLoading ? 'Enviando...' : 'Registrar'}>
-        <FormField
+        <TextField
           label="Nome"
           value={form.nome}
           onChangeText={value => handleChange('nome', value)}
           placeholder="Digite seu nome"
           error={errors.nome}
         />
-        <FormField
+        <TextField
           label="Email"
           value={form.email}
           onChangeText={value => handleChange('email', value)}
           placeholder="Digite seu email"
           error={errors.email}
         />
-        <FormField
+        <TextField
           label="Senha"
           value={form.senha}
           onChangeText={value => handleChange('senha', value)}
@@ -81,7 +81,7 @@ export default function RegisterForm() {
           secureTextEntry
           error={errors.senha}
         />
-        <FormField
+        <TextField
           label="Telefone"
           value={form.telefone}
           onChangeText={value => handleChange('telefone', value)}
@@ -89,7 +89,7 @@ export default function RegisterForm() {
           keyboardType="phone-pad"
           error={errors.telefone}
         />
-        <FormField
+        <TextField
           label="Setor"
           value={form.setor}
           onChangeText={value => handleChange('setor', value)}

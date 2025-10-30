@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View } from 'react-native';
 
 import { BaseForm } from '@/components/forms';
-import { FormField } from '@/components/inputs';
+import { TextField } from '@/components/inputs';
 import { useAuth } from '@/hooks';
 import { showAlert } from '@/utils';
 import { isValidEmail } from '@/utils/validation';
@@ -58,14 +58,14 @@ export default function LoginForm() {
   return (
     <View style={styles.container}>
       <BaseForm onSubmit={handleSubmit} submitLabel={isLoading ? 'Entrando...' : 'Entrar'}>
-        <FormField
+        <TextField
           label="Email"
           value={form.email}
           onChangeText={value => handleChange('email', value)}
           placeholder="Digite seu email"
           error={errors.email}
         />
-        <FormField
+        <TextField
           label="Senha"
           value={form.senha}
           onChangeText={value => handleChange('senha', value)}
