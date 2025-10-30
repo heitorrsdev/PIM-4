@@ -1,20 +1,16 @@
 /** Base usada por qualquer tipo de usuário do sistema */
-export interface UsuarioBasePayload {
-  nome: string;
+export interface BaseUserPayload {
   email: string;
+  nome: string;
   senha: string;
   telefone: string;
 }
 
 /** Tipos específicos para o Usuário comum */
-export interface UsuarioPayload extends UsuarioBasePayload {
+export interface UsuarioPayload extends BaseUserPayload {
   setor: string;
 }
 
-export interface UsuarioType {
-  Nome: string,
-  Email: string,
-  Senha: string,
-  Setor: string,
-  Telefone: string,
+export interface Usuario extends UsuarioPayload {
+  usuarioID: string,
 }

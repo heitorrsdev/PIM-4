@@ -1,11 +1,11 @@
 import { request } from '@/utils';
 
-import { UsuarioPayload, UsuarioType } from './usuario.types';
+import { Usuario, UsuarioPayload } from './usuario.types';
 
 const BASE_URL = '/Usuario';
 
 export const UsuarioService = {
-  list(): Promise<UsuarioType[] | string> {
+  list(): Promise<Usuario[] | string> {
     return request('get', `${BASE_URL}/Listar`);
   },
 
