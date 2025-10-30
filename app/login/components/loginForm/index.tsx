@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { BaseForm, FormField } from '@/components/forms';
+import { BaseForm } from '@/components/forms';
+import { FormField } from '@/components/inputs';
 import { useAuth } from '@/hooks';
 import { showAlert } from '@/utils';
 import { isValidEmail } from '@/utils/validation';

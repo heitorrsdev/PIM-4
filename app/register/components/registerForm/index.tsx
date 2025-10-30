@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 
-import { BaseForm, FormField } from '@/components/forms';
+import { BaseForm } from '@/components/forms';
+import { FormField } from '@/components/inputs';
 import { UsuarioService } from '@/services';
 import { UsuarioPayload } from '@/services/usuarios/usuario.types';
 import { showAlert } from '@/utils';
