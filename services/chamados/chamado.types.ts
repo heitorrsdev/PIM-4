@@ -1,5 +1,5 @@
-import { TecnicoResponse } from '../tecnicos/tecnico.types';
-import { UsuarioResponse } from '../usuarios/usuario.types';
+import { Tecnico } from '../tecnicos/tecnico.types';
+import { Usuario } from '../usuarios/usuario.types';
 
 export interface ChamadoPayload {
   titulo: string;
@@ -8,12 +8,12 @@ export interface ChamadoPayload {
   usuarioId: string;
 }
 
-export interface ChamadoResponse {
+export interface Chamado {
   id: string;
   titulo: string;
   descricao: string;
   tecnicoId: string;
-  tecnico: TecnicoResponse;
+  tecnico: Tecnico;
   usuarioId: string;
-  usuario: UsuarioResponse;
+  usuario: Usuario;
 }

@@ -1,11 +1,11 @@
 import { request } from '@/utils';
 
-import { ChamadoPayload, ChamadoResponse } from './chamado.types';
+import { Chamado, ChamadoPayload } from './chamado.types';
 
-export const addChamado = async (payload: ChamadoPayload): Promise<ChamadoResponse> => {
-  return request<ChamadoResponse>('post', '/chamados/Adicionar', payload);
+export const addChamado = async (payload: ChamadoPayload): Promise<Chamado> => {
+  return request<Chamado>('post', '/chamados/Adicionar', payload);
 };
 
-export const listChamados = async (): Promise<ChamadoResponse[]> => {
-  return request<ChamadoResponse[]>('get', '/chamados/Listar');
+export const listChamados = async (): Promise<Chamado[]> => {
+  return request<Chamado[]>('get', '/chamados/Listar');
 };
