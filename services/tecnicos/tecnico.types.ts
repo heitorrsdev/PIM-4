@@ -1,13 +1,9 @@
-import { UsuarioBasePayload } from '../usuarios/usuario.types';
+import { BaseUserPayload } from '../usuarios/usuario.types';
 
-export interface TecnicoPayload extends UsuarioBasePayload {
+export interface TecnicoPayload extends BaseUserPayload {
   especialidade: string;
 }
 
-export interface TecnicoType {
-  Nome: string,
-  Email: string,
-  Senha: string,
-  Especialidade: string,
-  Telefone: string,
+export interface Tecnico extends TecnicoPayload {
+  tecnicoID: string,
 }
