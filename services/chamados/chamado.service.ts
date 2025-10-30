@@ -2,10 +2,20 @@ import { request } from '@/utils';
 
 import { Chamado, ChamadoPayload } from './chamado.types';
 
-export const addChamado = async (payload: ChamadoPayload): Promise<Chamado> => {
-  return request<Chamado>('post', '/chamados/Adicionar', payload);
-};
+export const ChamadoService = {
+  add(payload: ChamadoPayload): Promise<string> {
+    return request('post', '/chamados/Adicionar', payload);
+  },
 
-export const listChamados = async (): Promise<Chamado[]> => {
-  return request<Chamado[]>('get', '/chamados/Listar');
+  list(): Promise<Chamado[]> {
+    return request('get', '/chamados/Listar');
+  },
+
+  edit(id: string, payload: ChamadoPayload): Promise<string> {
+    return request('put', `/chamados/Editar/${id}`, payload);
+  },
+
+  remove(id: string): Promise<string> {
+    return request('delete', `/chamados/Excluir/${id}`);
+  },
 };
