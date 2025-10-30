@@ -47,7 +47,7 @@ export default function LoginForm() {
     try {
       await login({ email: form.email, senha: form.senha });
       showAlert('Sucesso', 'Login realizado com sucesso');
-    } catch (error: any) {
+    } catch (error: unknown) {
       showAlert('Erro', 'Email ou senha inválidos');
     } finally {
       setIsLoading(false);
