@@ -3,13 +3,13 @@ import { StyleProp, Text, TextInput, TextInputProps, TextStyle, View } from 'rea
 
 import styles from './style';
 
-interface FormFieldProps extends TextInputProps {
+interface TextFieldProps extends TextInputProps {
   label: string;
   error?: string | null;
   style?: StyleProp<TextStyle>;
 }
 
-export default function FormField({ label, error, style, ...rest }: FormFieldProps) {
+export default function TextField({ label, error, style, ...rest }: TextFieldProps) {
   return (
     <View style={[styles.container]}>
       <Text style={styles.label}>{label}</Text>

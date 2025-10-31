@@ -1,72 +1,89 @@
-# TechSupport App - React Native com Expo
+# TechSupport App - Frontend (PIM-4)
 
-Este é um aplicativo móvel desenvolvido em React Native Web + Expo para gerenciamento de chamados técnicos. O app permite que usuários abram chamados sobre problemas tecnológicos, que serão respondidos inicialmente por IA e, caso necessário, por técnicos humanos.
+<!-- BADGES SECTION -->
+[![Status do Projeto](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)](https://github.com/heitorrsdev/PIM-4)
+[![Licença](https://img.shields.io/github/license/heitorrsdev/PIM-4)](LICENSE)
+[![Tecnologia Principal](https://img.shields.io/badge/Frontend-React%20Native%20Web-61DAFB?logo=react&logoColor=white)](https://reactnative.dev/)
+[![Backend Integrado](https://img.shields.io/badge/Backend-ASP.NET%20Core%20(.NET%209)-512BD4?logo=dotnet&logoColor=white)](https://github.com/enricochicot/API-MVC-Suptech)
 
-## Estrutura do Projeto
+## 🎓 Contexto do Projeto (Trabalho de Conclusão de Curso - TCC)
+
+Este repositório contém o código-fonte do **Frontend** do projeto **TechSupport App**, desenvolvido como parte do Trabalho de Conclusão de Curso (TCC). O objetivo é criar uma aplicação móvel e web para o **gerenciamento de chamados técnicos**, com um diferencial na triagem inicial via **Inteligência Artificial (IA)** antes de encaminhar para técnicos humanos.
+
+O projeto é dividido em dois repositórios:
+
+1.  **Frontend (Este Repositório):** Aplicação móvel e web desenvolvida com React Native Web e Expo.
+2.  **Backend (API):** [API-MVC-Suptech](https://github.com/enricochicot/API-MVC-Suptech), desenvolvida em ASP.NET Core (.NET 9) para gerenciar usuários e chamados.
+
+## ✨ Funcionalidades (Visão Geral)
+
+O aplicativo final terá as seguintes funcionalidades:
+
+*   **Abertura de Chamados:** Usuários podem registrar problemas técnicos.
+*   **Triagem por IA:** Resposta inicial e classificação do chamado por um chatbot de IA.
+*   **Gerenciamento de Usuários:** Cadastro e autenticação de Administradores, Gerentes, Técnicos e Usuários.
+*   **Visualização de Chamados:** Listagem e detalhamento dos chamados abertos.
+*   **Interface Multiplataforma:** Acesso via dispositivos móveis e navegadores web.
+
+## 💻 Tecnologias Utilizadas
+
+| Categoria | Tecnologia | Descrição |
+| :--- | :--- | :--- |
+| **Framework** | React Native Web | Permite o desenvolvimento de aplicações nativas (iOS/Android) e web a partir de uma única base de código. |
+| **Ambiente** | Expo | Conjunto de ferramentas e serviços para facilitar o desenvolvimento, build e deploy de apps React Native. |
+| **Navegação** | React Navigation | Solução de roteamento e navegação para aplicações React Native. |
+| **Linguagem** | TypeScript | Linguagem de programação principal, oferecendo tipagem estática para maior robustez. |
+| **Backend** | ASP.NET Core (.NET 9) | Framework utilizado para a construção da API RESTful de suporte. |
+
+## 🚧 Estado Atual e Próximos Passos
+
+O projeto está em fase de desenvolvimento. O foco atual é a implementação da interface e a integração com a API.
+
+Os próximos passos são: finalizar o desenvolvimento da tela de chamados, integrar o frontend com a IA que responderá os chamados e implementar design responsivo, moderno e minimalista.
+
+## 📁 Estrutura do Projeto
+
+A estrutura do projeto segue um padrão modular para facilitar a manutenção e a expansão:
 
 ```
-components/                # Componentes globais
-├── divisaoLogica/
-│   ├── index.ts           # Exportações
-│   └── componenteEx/
-│       ├── index.tsx
-│       └── style.ts
-app/
-├── index.tsx              # Rota '/'
-├── style.ts               # Estilos da rota '/'
-├── rotaGenerica/
-│   ├── index.tsx
-│   ├── style.ts
-│   └── components/        # Componentes da rota
-│      └── comp1/
-│         ├── index.tsx
-│         └── style.ts
-utils/
-├── algoUtil.ts            # Funções utilitárias separadas por assunto
-services/
-├── api.ts
-├── index.ts
-├── entidadeEx/
-│   ├── entidadeEx.service.ts
-│   ├── entidadeEx.types.ts
-│   └── index.ts
-README.md                  # Documentação
-
+.
+├── app/                  # Rotas e Telas da Aplicação
+├── components/           # Componentes globais reutilizáveis
+├── contexts/             # Gerenciamento de Estado Global (Context API)
+├── hooks/                # Hooks customizados
+├── services/             # Lógica de consumo da API e serviços
+├── styles/               # Estilos globais e temas
+├── utils/                # Funções utilitárias
+└── README.md
 ```
 
-## Próximos Passos
+## 🛠️ Como Executar Localmente
 
-1. **Funcionalidades básicas de autenticação**
-   - Telas de login e registro funcionais com dados mockados
-2. **Telas Adicionais**: Implementar telas para
-   - Dashboard principal
-   - Lista de chamados
-   - Criação de novos chamados
-   - Chat com IA e técnicos
-   - Perfil do usuário
-3. **Componentes**: Criar componentes reutilizáveis como:
-   - Header personalizado
-   - Cards de chamados
-   - Componente de chat
-4. **Navegação**: Configurar navegação completa entre todas as telas
-5. **Estado Global**: Implementar gerenciamento de estado (Context API ou Redux)
-6. **Integração com API .NET**: Implementar chamadas reais à API
+1.  **Instale o Expo CLI:**
+    ```shell
+    npm install -g expo-cli
+    ```
+2.  **Clone o repositório:**
+    ```shell
+    git clone https://github.com/heitorrsdev/PIM-4.git
+    cd PIM-4
+    ```
+3.  **Instale as dependências:**
+    ```shell
+    npm install
+    ```
+4.  **Inicie o servidor de desenvolvimento:**
+    ```shell
+    expo start
+    ```
+5.  **Acesse a Aplicação:**
+    *   Use o aplicativo **Expo Go** no seu dispositivo móvel para escanear o QR Code.
+    *   Pressione `w` no terminal para abrir a versão web no seu navegador.
 
-## Tecnologias Utilizadas
+## 🤝 Como Contribuir
 
-- React Native Web
-- Expo
-- React Navigation (para navegação entre telas)
-- TypeScript ES6+
+Contribuições são bem-vindas, especialmente para o TCC! Por favor, siga o guia de commits [COMMIT_GUIDE.md](COMMIT_GUIDE.md) e abra um Pull Request.
 
-## Como Executar
+## 📄 Licença
 
-1. Certifique-se de ter o Expo CLI instalado
-2. Execute `expo start` na pasta do projeto
-3. Use o aplicativo Expo Go no seu dispositivo ou um emulador
-
-## Observações
-
-- As telas de login e registro estão funcionais em termos de interface, mas as chamadas para a API ainda precisam ser implementadas
-- O projeto está estruturado de forma modular para facilitar a manutenção e expansão
-- Todos os estilos seguem boas práticas de design mobile com foco na experiência do usuário
+Este projeto está licenciado sob a [Licença MIT](LICENSE).
