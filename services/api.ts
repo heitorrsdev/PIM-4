@@ -3,6 +3,12 @@ import axios from 'axios';
 import { getToken } from '@/services/auth/storage';
 import { showAlert } from '@/utils/notifications';
 
+let logoutCallback: (() => Promise<void>) | null = null;
+
+export const registerLogoutCallback = (fn: () => Promise<void>) => {
+  logoutCallback = fn;
+};
+
 const api = axios.create({
   baseURL: 'http://localhost:5165/api',
   timeout: 10000,
@@ -40,6 +46,10 @@ api.interceptors.response.use(
     }
 
     showAlert('Sessão expirada', 'Por favor, faça login novamente.');
+
+    if (logoutCallback) {
+      await logoutCallback();
+    }
 
     return Promise.reject(error);
   }

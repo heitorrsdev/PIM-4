@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 
-import { AuthService , LoginPayload } from '@/services';
-import api from '@/services/api';
-import { getToken } from '@/services/auth';
+import { AuthService, LoginPayload } from '@/services';
+import { registerLogoutCallback } from '@/services/api';
+import { getToken, removeToken, saveToken } from '@/services/auth/storage';
 
 interface AuthContextProps {
   token: string | null;
@@ -24,31 +24,32 @@ interface AuthProviderProps {
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string | null>(null);
-
   const isAuthenticated = !!token;
 
   useEffect(() => {
-    const loadToken = async () => {
+    (async () => {
       const storedToken = await getToken();
       if (storedToken) {
         setToken(storedToken);
-        api.defaults.headers.Authorization = `Bearer ${storedToken}`;
       }
-    };
-    loadToken();
+    })();
   }, []);
 
-  const login = async (payload: LoginPayload) => {
+  const login = async (payload: LoginPayload): Promise<void> => {
     const data = await AuthService.login(payload);
-    setToken(data.token);
-    api.defaults.headers.Authorization = `Bearer ${data.token}`;
+    await saveToken(data.token); // armazena o token no storage
+    setToken(data.token); // atualiza o estado do token
   };
 
-  const logout = async () => {
-    await AuthService.logout();
+  const logout = async (): Promise<void> => {
+    await removeToken();
     setToken(null);
-    delete api.defaults.headers.Authorization;
   };
+
+  // registra o logout global para ser usado pelo interceptor
+  useEffect(() => {
+    registerLogoutCallback(logout);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ token, isAuthenticated, login, logout }}>
