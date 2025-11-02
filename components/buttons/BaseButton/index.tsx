@@ -14,10 +14,9 @@ export default function BaseButton({ children, disabled, style, ...rest }: BaseB
   return (
     <Pressable
       disabled={disabled}
-      style={({ pressed, hovered }) => [
+      style={({ hovered }) => [
         styles.button,
         disabled && styles.disabled,
-        pressed && !disabled && styles.pressed,
         hovered && !disabled && styles.hovered,
         style,
       ]}
