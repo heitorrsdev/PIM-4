@@ -25,7 +25,7 @@ export default function LoginForm() {
   const [errors, setErrors] = useState<Partial<Record<keyof LoginPayload, string>>>({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (key: keyof LoginPayload, value: string) => {
+  const handleChange = (key: keyof LoginPayload, value: string): void => {
     setForm(prev => ({ ...prev, [key]: value }));
   };
 

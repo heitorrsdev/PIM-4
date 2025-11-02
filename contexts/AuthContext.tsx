@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const isAuthenticated = !!token;
 
   useEffect(() => {
-    (async () => {
+    (async (): Promise<void> => {
       const storedToken = await getToken();
       if (storedToken) {
         setToken(storedToken);
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   // registra o logout global para ser usado pelo interceptor
-  useEffect(() => {
+  useEffect((): void => {
     registerLogoutCallback(logout);
   }, []);
 
