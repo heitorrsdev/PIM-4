@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 
 const TOKEN_KEY = 'Suptech_token';
 
-export const saveToken = async (token: string) => {
+export const saveToken = async (token: string): Promise<void> => {
   if (Platform.OS === 'web') {
     localStorage.setItem(TOKEN_KEY, token);
   } else {
@@ -19,7 +19,7 @@ export const getToken = async (): Promise<string | null> => {
   }
 };
 
-export const removeToken = async () => {
+export const removeToken = async (): Promise<void> => {
   if (Platform.OS === 'web') {
     localStorage.removeItem(TOKEN_KEY);
   } else {

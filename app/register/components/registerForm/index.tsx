@@ -22,7 +22,7 @@ export default function RegisterForm() {
   const [errors, setErrors] = useState<Partial<Record<keyof UsuarioPayload, string>>>({});
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (key: keyof UsuarioPayload, value: string) => {
+  const handleChange = (key: keyof UsuarioPayload, value: string): void => {
     setForm(prev => ({ ...prev, [key]: value }));
   };
 
@@ -40,7 +40,7 @@ export default function RegisterForm() {
     return Object.keys(newErrors).length === 0;
 };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (): Promise<void> => {
     if (!validate()) return;
 
     setIsLoading(true);
