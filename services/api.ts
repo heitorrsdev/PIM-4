@@ -6,7 +6,7 @@ import { showAlert } from '@/utils/notifications';
 const api = axios.create({
   baseURL: 'http://localhost:5165/api',
   timeout: 10000,
-} );
+});
 
 // Adiciona token de autenticação às requisições
 api.interceptors.request.use(
