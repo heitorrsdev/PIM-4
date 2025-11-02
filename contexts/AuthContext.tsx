@@ -46,6 +46,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setToken(null);
   };
 
+  // registra o logout global para ser usado pelo interceptor
+  useEffect(() => {
+    registerLogoutCallback(logout);
+  }, []);
+
   return (
     <AuthContext.Provider value={{ token, isAuthenticated, login, logout }}>
       {children}
