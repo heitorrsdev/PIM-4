@@ -5,12 +5,12 @@ import { Usuario, UsuarioPayload } from './usuario.types';
 const BASE_URL = '/Usuario';
 
 export const UsuarioService = {
-  list(): Promise<Usuario[] | string> {
-    return request('get', `${BASE_URL}/Listar`);
-  },
-
   add(payload: UsuarioPayload): Promise<string> {
     return request('post', `${BASE_URL}/Adicionar`, payload);
+  },
+
+  list(): Promise<Usuario[] | string> {
+    return request('get', `${BASE_URL}/Listar`);
   },
 
   edit(id: string, payload: UsuarioPayload): Promise<string> {
