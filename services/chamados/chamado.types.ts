@@ -4,6 +4,7 @@ export interface ChamadoPayload {
   nomeDoUsuario: string,
   prioridade: string,
   setorDoUsuario: string,
+  status: string,
   título: string,
 }
 
