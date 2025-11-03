@@ -2,7 +2,7 @@ import { request } from '@/utils';
 
 import { Chamado, ChamadoPayload } from './chamado.types';
 
-const BASE_URL = '/chamados';
+const BASE_URL = '/Chamados';
 
 export const ChamadoService = {
   add(payload: ChamadoPayload): Promise<string> {
