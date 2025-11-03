@@ -4,7 +4,7 @@ export interface ChamadoPayload {
   nomeDoUsuario: string,
   prioridade: string,
   setorDoUsuario: string,
-  titulo: string,
+  título: string,
 }
 
 export interface Chamado extends ChamadoPayload {
