@@ -47,7 +47,7 @@ export default function RegisterForm() {
     try {
       const response = await UsuarioService.add(form);
       showAlert('Sucesso', response);
-    } catch (error: unknown) {
+    } catch {
       showAlert('Erro', 'Não foi possível registrar o usuário.');
     } finally {
       setIsLoading(false);
