@@ -4,11 +4,17 @@ export enum ChamadoStatus {
   Pendente = 'Pendente',
 }
 
+export enum ChamadoPrioridade {
+  Baixa = 'Baixa',
+  Média = 'Média',
+  Alta = 'Alta',
+}
+
 export interface ChamadoPayload {
   descricao: string,
   emailDoUsuario: string,
   nomeDoUsuario: string,
-  prioridade: string,
+  prioridade: ChamadoPrioridade,
   setorDoUsuario: string,
   status: ChamadoStatus,
   título: string,
