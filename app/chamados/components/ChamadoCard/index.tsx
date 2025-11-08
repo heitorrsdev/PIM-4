@@ -12,7 +12,7 @@ interface Props {
 export function ChamadoCard({ chamado }: Props) {
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>{chamado.título}</Text>
+      <Text style={styles.title}>{chamado.titulo}</Text>
       <Text style={styles.desc}>{chamado.descricao}</Text>
       <Text style={styles.meta}>
         Prioridade: {chamado.prioridade} | Status: {chamado.status}

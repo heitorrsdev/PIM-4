@@ -17,7 +17,7 @@ export interface ChamadoPayload {
   prioridade: ChamadoPrioridade,
   setorDoUsuario: string,
   status: ChamadoStatus,
-  título: string,
+  titulo: string,
 }
 
 export interface Chamado extends ChamadoPayload {
