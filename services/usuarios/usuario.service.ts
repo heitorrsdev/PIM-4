@@ -13,6 +13,10 @@ export const UsuarioService = {
     return request('get', `${BASE_URL}/Listar`);
   },
 
+  getById(id: string): Promise<Usuario | string> {
+    return request('get', `${BASE_URL}/Obter/${id}`);
+  },
+
   edit(id: string, payload: UsuarioPayload): Promise<string> {
     return request('put', `${BASE_URL}/Editar/${id}`, payload);
   },
