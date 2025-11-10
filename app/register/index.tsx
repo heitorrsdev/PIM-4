@@ -1,6 +1,6 @@
 import { View } from 'react-native';
 
-import styles from '../sytyle';
+import styles from '../style';
 import RegisterForm from './components/registerForm';
 
 export default function RegisterScreen() {
