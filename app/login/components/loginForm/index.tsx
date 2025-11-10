@@ -7,7 +7,7 @@ import { useAuth } from '@/hooks';
 import { showAlert } from '@/utils';
 import { isValidEmail } from '@/utils/validation';
 
-import styles from './styles';
+import styles from './style';
 
 interface LoginPayload {
   email: string;

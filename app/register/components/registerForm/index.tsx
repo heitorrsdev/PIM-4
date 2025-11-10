@@ -8,7 +8,7 @@ import { UsuarioPayload } from '@/services/usuarios/usuario.types';
 import { showAlert } from '@/utils';
 import { isValidEmail } from '@/utils/validation';
 
-import styles from './styles';
+import styles from './style';
 
 export default function RegisterForm() {
   const [form, setForm] = useState<UsuarioPayload>({
