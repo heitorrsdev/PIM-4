@@ -8,4 +8,8 @@ export const TecnicoService = {
   list(): Promise<Tecnico[] | string> {
     return request<string | Tecnico[]>('get', `${BASE_URL}/Listar`);
   },
+
+  getById(id: string): Promise<Tecnico | string> {
+    return request<string | Tecnico>('get', `${BASE_URL}/Obter/${id}`);
+  },
 };

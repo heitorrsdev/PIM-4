@@ -13,6 +13,10 @@ export const ChamadoService = {
     return request('get', `${BASE_URL}/Listar`);
   },
 
+  getById(id: string): Promise<Chamado> {
+    return request('get', `${BASE_URL}/Obter/${id}`);
+  },
+
   edit(id: string, payload: ChamadoPayload): Promise<string> {
     return request('put', `${BASE_URL}/Editar/${id}`, payload);
   },
