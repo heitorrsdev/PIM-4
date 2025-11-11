@@ -1,8 +1,10 @@
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
+import { useAuth } from '@/hooks';
 import { UsuarioService } from '@/services';
 import { UsuarioPayload } from '@/services/usuarios/usuario.types';
 import { showAlert } from '@/utils';
@@ -11,6 +13,7 @@ import { isValidEmail } from '@/utils/validation';
 import styles from './style';
 
 export default function RegisterForm() {
+  const { login } = useAuth();
   const [form, setForm] = useState<UsuarioPayload>({
     nome: '',
     email: '',
@@ -45,8 +48,12 @@ export default function RegisterForm() {
 
     setIsLoading(true);
     try {
-      const response = await UsuarioService.add(form);
+      const response: string = await UsuarioService.add(form);
       showAlert('Sucesso', response);
+
+      await login({ email: form.email, senha: form.senha });
+
+      router.replace('/(private)/chamados');
     } catch {
       showAlert('Erro', 'Não foi possível registrar o usuário.');
     } finally {
