@@ -15,7 +15,7 @@ export default function LinkButton({ href, children, ...rest }: LinkButtonProps)
   return (
     <Link href={href} asChild>
       <BaseButton style={styles.button} {...rest}>
-        <Text style={styles.text}>{children}</Text>
+        <Text>{children}</Text>
       </BaseButton>
     </Link>
   );
