@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 
-import styles from '../../style';
 import LoginForm from './components/loginForm';
+import styles from './style';
 
 export default function LoginScreen() {
 
