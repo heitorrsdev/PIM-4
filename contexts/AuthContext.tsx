@@ -7,6 +7,7 @@ import { getToken, removeToken, saveToken } from '@/services/auth/storage';
 interface AuthContextProps {
   token: string | null;
   isAuthenticated: boolean;
+  isLoading: boolean;
   login: (payload: LoginPayload) => Promise<void>;
   logout: () => Promise<void>;
 }
@@ -16,6 +17,7 @@ export const AuthContext = createContext<AuthContextProps>({
   isAuthenticated: false,
   login: async () => {},
   logout: async () => {},
+  isLoading: true,
 });
 
 interface AuthProviderProps {
@@ -25,6 +27,7 @@ interface AuthProviderProps {
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [token, setToken] = useState<string | null>(null);
   const isAuthenticated = !!token;
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async (): Promise<void> => {
@@ -32,6 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       if (storedToken) {
         setToken(storedToken);
       }
+      setIsLoading(false); // indica que o contexto terminou de carregar
     })();
   }, []);
 
@@ -52,7 +56,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ token, isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ token, isAuthenticated, isLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

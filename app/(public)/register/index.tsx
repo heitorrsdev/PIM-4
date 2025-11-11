@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 
-import styles from '../style';
 import RegisterForm from './components/registerForm';
+import styles from './style';
 
 export default function RegisterScreen() {
 
