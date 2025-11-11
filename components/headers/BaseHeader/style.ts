@@ -32,6 +32,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  logoutButton: {
+    backgroundColor: '#48495593',
+  },
 });
 
 export default styles;
