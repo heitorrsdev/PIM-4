@@ -17,7 +17,7 @@ const api = axios.create({
 // Adiciona token de autenticação às requisições
 api.interceptors.request.use(
   async (config) => {
-    const token = await getToken();
+    const token: string | null = await getToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -37,8 +37,8 @@ api.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    const status = response.status;
-    const message = response.data?.message || 'Ocorreu um erro inesperado. Tente novamente.';
+    const status: number = response.status;
+    const message: string = response.data?.message || 'Ocorreu um erro inesperado. Tente novamente.';
 
     if (status !== 401) {
       showAlert('Erro', message);
