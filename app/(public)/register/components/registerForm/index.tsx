@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
@@ -51,6 +52,8 @@ export default function RegisterForm() {
       showAlert('Sucesso', response);
 
       await login({ email: form.email, senha: form.senha });
+
+      router.replace('/(private)/chamados');
     } catch {
       showAlert('Erro', 'Não foi possível registrar o usuário.');
     } finally {

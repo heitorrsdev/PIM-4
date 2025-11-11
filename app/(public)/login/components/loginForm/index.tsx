@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import { useState } from 'react';
 import { View } from 'react-native';
 
@@ -48,6 +49,8 @@ export default function LoginForm() {
     try {
       await login({ email: form.email, senha: form.senha });
       showAlert('Sucesso', 'Login realizado com sucesso');
+
+      router.replace('/(private)/chamados');
     } catch {
       showAlert('Erro', 'Email ou senha inválidos');
     } finally {
