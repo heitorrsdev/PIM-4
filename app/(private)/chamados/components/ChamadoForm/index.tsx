@@ -4,8 +4,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
-import { ChamadoService } from '@/services/chamados';
-import { ChamadoPayload, ChamadoPrioridade, ChamadoStatus } from '@/services/chamados/chamado.types';
+import { ChamadoPayload, ChamadoPrioridade, ChamadoService , ChamadoStatus } from '@/services/chamados';
 import { showAlert } from '@/utils';
 
 import styles from './style';
