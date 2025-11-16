@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     (async (): Promise<void> => {
       const storedToken = await getToken();
       if (storedToken) {
-        setToken(storedToken);
+        setToken(storedToken); // restaura a sessão se o token existir no storage
       }
       setIsLoading(false); // indica que o contexto terminou de carregar
     })();
