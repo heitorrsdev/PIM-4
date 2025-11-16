@@ -6,6 +6,6 @@ const BASE_URL = '/Auth';
 
 export const AuthService = {
   async login(payload: LoginPayload): Promise<LoginResponse> {
-    return request<LoginResponse>('post', `${BASE_URL}/login`, payload);
+    return request<LoginResponse>('post', `${BASE_URL}/LoginWeb`, payload);
   },
 };
