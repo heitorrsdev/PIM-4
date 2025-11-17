@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 import { useAuth } from '@/hooks';
-import { Usuario } from '@/services';
+import { AuthService, Usuario } from '@/services';
+import { Email } from '@/services/auth';
 import { UsuarioService } from '@/services/usuarios/usuario.service';
 import { showAlert } from '@/utils';
 
@@ -22,11 +23,14 @@ export const UserContext = createContext<UserContextProps>({
 });
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const { token, email, isAuthenticated } = useAuth();
+  const { token, isAuthenticated } = useAuth();
   const [user, setUser] = useState<Usuario | null>(null);
   const [loadingUser, setLoadingUser] = useState(true);
 
   const fetchUser = async (): Promise<void> => {
+    const response: Email | string = token ? await AuthService.getEmailByToken(token) : '';
+    const email = typeof response === 'string' ? null : response.email;
+
     if (!isAuthenticated || !token || !email) {
       setUser(null);
       setLoadingUser(false);
@@ -49,7 +53,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   useEffect(() => {
     fetchUser();
-  }, [token, email, isAuthenticated]);
+  }, [token, isAuthenticated]);
 
   return (
     <UserContext.Provider value={{ user, loadingUser, refreshUser: fetchUser }}>
