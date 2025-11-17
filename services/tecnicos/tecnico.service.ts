@@ -6,10 +6,10 @@ const BASE_URL = '/Tecnico';
 
 export const TecnicoService = {
   list(): Promise<Tecnico[] | string> {
-    return request<string | Tecnico[]>('get', `${BASE_URL}/Listar`);
+    return request<Tecnico[] | string>('get', `${BASE_URL}/Listar`);
   },
 
   getByEmail(email: string): Promise<Tecnico | string> {
-    return request<string | Tecnico>('get', `${BASE_URL}/ObterPorEmail/${email}`);
+    return request<Tecnico | string>('get', `${BASE_URL}/ObterPorEmail/${email}`);
   },
 };
