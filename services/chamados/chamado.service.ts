@@ -9,8 +9,8 @@ export const ChamadoService = {
     return request<string>('post', `${BASE_URL}/Adicionar`, payload);
   },
 
-  getByEmail(email: string): Promise<Chamado> {
-    return request<Chamado>('get', `${BASE_URL}/Obter/${email}`);
+  getByEmail(email: string): Promise<Chamado[]> {
+    return request<Chamado[]>('get', `${BASE_URL}/Obter/${email}`);
   },
 
   edit(id: string, payload: ChamadoPayload): Promise<string> {
