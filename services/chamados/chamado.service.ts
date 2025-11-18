@@ -21,21 +21,9 @@ export const ChamadoService = {
     return request<string>('put', `${BASE_URL}/Editar/${id}`, payload);
   },
 
-  respond(id: string, chamado: Chamado, respostaTecnico: string): Promise<string> {
-    const payload: ChamadoPayload = {
-      descricao: chamado.descricao,
-      emailDoUsuario: chamado.emailDoUsuario,
-      nomeDoUsuario: chamado.nomeDoUsuario,
-      prioridade: chamado.prioridade as ChamadoPrioridade,
-      setorDoUsuario: chamado.setorDoUsuario,
-      status: ChamadoStatus.Fechado,
-      titulo: chamado.titulo,
-    };
-    
-    return request('put', `${BASE_URL}/Editar/${id}`, {
-      ...payload,
-      respostaTecnico,
-    });
+  respond(id: string, payload: Chamado): Promise<string> {
+    const { chamadoID, ...apiPayload } = payload;
+    return request('put', `${BASE_URL}/Editar/${id}`, apiPayload);
   },
 
   remove(id: string): Promise<string> {
