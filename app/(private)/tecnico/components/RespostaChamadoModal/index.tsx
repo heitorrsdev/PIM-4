@@ -32,7 +32,7 @@ export function RespostaChamadoModal({ visible, onClose, chamado, onSuccess }: P
 
     setLoading(true);
     try {
-      await ChamadoService.responder(chamado.chamadoID, chamado, resposta);
+      await ChamadoService.respond(chamado.chamadoID, chamado, resposta);
       
       showAlert('Sucesso', 'Chamado respondido com sucesso!');
       resetForm();

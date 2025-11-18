@@ -21,7 +21,7 @@ export const ChamadoService = {
     return request<string>('put', `${BASE_URL}/Editar/${id}`, payload);
   },
 
-  responder(id: string, chamado: Chamado, respostaTecnico: string): Promise<string> {
+  respond(id: string, chamado: Chamado, respostaTecnico: string): Promise<string> {
     const payload: ChamadoPayload = {
       descricao: chamado.descricao,
       emailDoUsuario: chamado.emailDoUsuario,

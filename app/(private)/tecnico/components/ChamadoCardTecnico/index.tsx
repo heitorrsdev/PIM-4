@@ -9,7 +9,7 @@ import styles from './style';
 
 interface Props {
   chamado: Chamado;
-  onResponder: () => void;
+  onRespond: () => void;
 }
 
 function getPriorityColor(prioridade: string): string {
@@ -20,7 +20,7 @@ function getPriorityColor(prioridade: string): string {
   return '#6b7280';
 }
 
-export function ChamadoCardTecnico({ chamado, onResponder }: Props) {
+export function ChamadoCardTecnico({ chamado, onRespond }: Props) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
@@ -51,7 +51,7 @@ export function ChamadoCardTecnico({ chamado, onResponder }: Props) {
           >
             Ver Detalhes
           </BaseButton>
-          <BaseButton onPress={onResponder} style={styles.respondButton}>
+          <BaseButton onPress={onRespond} style={styles.respondButton}>
             Responder
           </BaseButton>
         </View>

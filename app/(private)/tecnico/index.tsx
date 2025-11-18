@@ -45,7 +45,7 @@ export default function TecnicoScreen() {
     await fetchChamadosPendentes();
   };
 
-  const handleResponder = (chamado: Chamado) => {
+  const handleRespond = (chamado: Chamado) => {
     setSelectedChamado(chamado);
     setModalVisible(true);
   };
@@ -88,7 +88,7 @@ export default function TecnicoScreen() {
             <ChamadoCardTecnico
               key={chamado.chamadoID}
               chamado={chamado}
-              onResponder={() => handleResponder(chamado)}
+              onRespond={() => handleRespond(chamado)}
             />
           ))
         )}
