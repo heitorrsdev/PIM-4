@@ -5,7 +5,7 @@ import { Chamado, ChamadoService, ChamadoStatus } from '@/services/chamados';
 import { showAlert } from '@/utils';
 
 import { ChamadoCardTecnico } from './components/ChamadoCardTecnico';
-import { RespostaChamadoModal } from './components/RespostaChamadoModal';
+import { TicketResponseModal } from './components/TicketResponseModal';
 import styles from './style';
 
 export default function TecnicoScreen() {
@@ -96,7 +96,7 @@ export default function TecnicoScreen() {
         )}
       </ScrollView>
 
-      <RespostaChamadoModal
+      <TicketResponseModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         chamado={selectedChamado}
