@@ -17,22 +17,22 @@ interface Props {
 }
 
 export function RespostaChamadoModal({ visible, onClose, chamado, onSuccess }: Props) {
-  const [resposta, setResposta] = useState('');
+  const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const resetForm = () => {
-    setResposta('');
+    setResponse('');
     setError(null);
   };
 
   const handleSubmit = async (): Promise<void> => {
-    if (!resposta.trim()) return setError('A resposta é obrigatória');
+    if (!response.trim()) return setError('A resposta é obrigatória');
     if (!chamado) return;
 
     setLoading(true);
     try {
-      await ChamadoService.respond(chamado.chamadoID, chamado, resposta);
+      await ChamadoService.respond(chamado.chamadoID, chamado, response);
       
       showAlert('Sucesso', 'Chamado respondido com sucesso!');
       resetForm();
@@ -51,7 +51,7 @@ export function RespostaChamadoModal({ visible, onClose, chamado, onSuccess }: P
   };
 
   const handleChangeText = (text: string) => {
-    setResposta(text);
+    setResponse(text);
     if (error) setError(null);
   };
 
@@ -76,7 +76,7 @@ export function RespostaChamadoModal({ visible, onClose, chamado, onSuccess }: P
         >
           <TextField
             label="Resposta do Técnico"
-            value={resposta}
+            value={response}
             onChangeText={handleChangeText}
             placeholder="Digite sua resposta detalhada para o chamado..."
             multiline
