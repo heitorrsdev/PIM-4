@@ -10,7 +10,7 @@ export const ChamadoService = {
   },
 
   getByEmail(email: string): Promise<Chamado[]> {
-    return request<Chamado[]>('get', `${BASE_URL}/Obter/${email}`);
+    return request<Chamado[]>('get', `${BASE_URL}/ObterChamadoPorEmail/${email}`);
   },
 
   edit(id: string, payload: ChamadoPayload): Promise<string> {
