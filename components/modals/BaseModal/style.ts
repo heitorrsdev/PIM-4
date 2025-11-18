@@ -5,11 +5,12 @@ import { theme } from '@/styles';
 export default StyleSheet.create({
   closeButton: {
     alignItems: 'center',
+    backgroundColor: 'transparent',
     height: 32,
     justifyContent: 'center',
     width: 32,
   },
-  closeText: {
+  closeButtonText: {
     color: theme.colors.textSecondary,
     fontSize: 24,
     fontWeight: theme.typography.fontWeight.bold,

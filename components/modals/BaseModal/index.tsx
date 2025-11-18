@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Pressable, ScrollView, Text, View } from 'react-native';
 
+import { BaseButton } from '@/components/buttons';
 import styles from './style';
 
 interface BaseModalProps {
@@ -22,9 +23,9 @@ export default function BaseModal({ visible, onClose, title, children }: BaseMod
         <Pressable style={styles.modalContainer} onPress={(e) => e.stopPropagation()}>
           <View style={styles.header}>
             <Text style={styles.title}>{title}</Text>
-            <Pressable onPress={onClose} style={styles.closeButton}>
-              <Text style={styles.closeText}>✕</Text>
-            </Pressable>
+            <BaseButton onPress={onClose} style={styles.closeButton}>
+              <Text style={styles.closeButtonText}>✕</Text>
+            </BaseButton>
           </View>
           <ScrollView style={styles.content}>
             {children}
