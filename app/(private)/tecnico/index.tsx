@@ -21,11 +21,11 @@ export default function TecnicoScreen() {
       
       // TODO: Remover este filtro assim que possível. Por enquanto usaremos isso, mas o Enrico está criando um endpoint de filtragem de entidade que fará isso para nós.
       //é apenas uma solução provisória.
-      // Filtrar apenas chamados com status Pendente ou Aberto
+      // Filtrar apenas chamados com status Pendente
       const pendentes = data.filter(
         (chamado) => {
           const status = chamado.status?.trim();
-          return status === ChamadoStatus.Pendente || status === ChamadoStatus.Aberto;
+          return status === ChamadoStatus.Pendente;
         }
       );
       
