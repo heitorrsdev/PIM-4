@@ -19,6 +19,8 @@ export default function TecnicoScreen() {
     try {
       const data = await ChamadoService.list();
       
+      // TODO: Remover este filtro assim que possível. Por enquanto usaremos isso, mas o Enrico está criando um endpoint de filtragem de entidade que fará isso para nós.
+      //é apenas uma solução provisória.
       // Filtrar apenas chamados com status Pendente ou Aberto
       const pendentes = data.filter(
         (chamado) => {
