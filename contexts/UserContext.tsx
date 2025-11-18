@@ -33,7 +33,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
     if (!isAuthenticated || !token || !email) {
       setUser(null);
-      setLoadingUser(false);
       return;
     }
 
