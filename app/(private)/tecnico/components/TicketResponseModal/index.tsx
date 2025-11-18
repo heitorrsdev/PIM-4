@@ -16,7 +16,7 @@ interface Props {
   onSuccess: () => void;
 }
 
-export function RespostaChamadoModal({ visible, onClose, chamado, onSuccess }: Props) {
+export function TicketResponseModal({ visible, onClose, chamado, onSuccess }: Props) {
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
