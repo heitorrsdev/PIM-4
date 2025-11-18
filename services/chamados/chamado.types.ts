@@ -21,5 +21,11 @@ export interface ChamadoPayload {
 }
 
 export interface Chamado extends ChamadoPayload {
-  chamadoID: string
+  chamadoID: string,
+  respostaTecnico?: string,
+}
+
+export interface RespostaChamadoPayload {
+  respostaTecnico: string,
+  status: ChamadoStatus,
 }
