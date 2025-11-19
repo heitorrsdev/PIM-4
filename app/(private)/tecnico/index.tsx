@@ -90,7 +90,7 @@ export default function TecnicoScreen() {
             <ChamadoCardTecnico
               key={chamado.chamadoID}
               chamado={chamado}
-              onRespond={() => handleRespond(chamado)}
+              onSubmit={() => handleRespond(chamado)}
             />
           ))
         )}
