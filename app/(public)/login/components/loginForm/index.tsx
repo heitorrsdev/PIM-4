@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
@@ -60,6 +60,12 @@ export default function LoginForm() {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.formTitle}>Acesse sua conta</Text>
+      <Text style={styles.formDescription}>
+        Informe suas credenciais para acessar o sistema
+      </Text>
+      
+      <View style={styles.formContent}>
       <BaseForm onSubmit={handleSubmit} submitLabel={isLoading ? 'Entrando...' : 'Entrar'}>
         <TextField
           label="Email"
@@ -77,6 +83,7 @@ export default function LoginForm() {
           error={errors.senha}
         />
       </BaseForm>
+      </View>
     </View>
   );
 }
