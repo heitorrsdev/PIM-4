@@ -74,7 +74,7 @@ A estrutura do projeto segue um padrão modular para facilitar a manutenção e 
     ```
 4.  **Inicie o servidor de desenvolvimento:**
     ```shell
-    expo start
+    npx expo start
     ```
 5.  **Acesse a Aplicação:**
     *   Use o aplicativo **Expo Go** no seu dispositivo móvel para escanear o QR Code.
