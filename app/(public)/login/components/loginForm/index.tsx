@@ -66,23 +66,27 @@ export default function LoginForm() {
       </Text>
       
       <View style={styles.formContent}>
-      <BaseForm onSubmit={handleSubmit} submitLabel={isLoading ? 'Entrando...' : 'Entrar'}>
-        <TextField
-          label="Email"
-          value={form.email}
-          onChangeText={value => handleChange('email', value)}
-          placeholder="Digite seu email"
-          error={errors.email}
-        />
-        <TextField
-          label="Senha"
-          value={form.senha}
-          onChangeText={value => handleChange('senha', value)}
-          placeholder="Digite sua senha"
-          secureTextEntry
-          error={errors.senha}
-        />
-      </BaseForm>
+        <BaseForm onSubmit={handleSubmit} submitLabel={isLoading ? 'Entrando...' : 'Entrar'}>
+          <TextField
+            label="Email"
+            value={form.email}
+            onChangeText={value => handleChange('email', value)}
+            placeholder="Digite seu email"
+            error={errors.email}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            autoCorrect={false}
+          />
+          <TextField
+            label="Senha"
+            value={form.senha}
+            onChangeText={value => handleChange('senha', value)}
+            placeholder="Digite sua senha"
+            secureTextEntry
+            error={errors.senha}
+            autoCapitalize="none"
+          />
+        </BaseForm>
       </View>
     </View>
   );
