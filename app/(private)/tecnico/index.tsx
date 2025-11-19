@@ -18,7 +18,7 @@ export default function TecnicoScreen() {
   const fetchChamadosPendentes = async () => {
     try {
       const data = await ChamadoService.list();
-      
+
       // Remover este filtro assim que possível. Por enquanto usaremos isso, mas o Enrico está criando um endpoint de filtragem de entidade que fará isso para nós. É apenas uma solução provisória.
       const pendentes = data.filter(
         (chamado) => {
@@ -26,9 +26,9 @@ export default function TecnicoScreen() {
           return status === ChamadoStatus.Pendente;
         }
       );
-      
+
       setChamados(pendentes);
-    } catch (error) {
+    } catch {
       showAlert('Erro', 'Não foi possível buscar chamados pendentes');
     } finally {
       setLoading(false);
