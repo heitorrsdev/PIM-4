@@ -1,6 +1,6 @@
 import { request } from '@/utils';
 
-import { Chamado, ChamadoPayload, ChamadoPrioridade, ChamadoStatus } from './chamado.types';
+import { Chamado, ChamadoPayload } from './chamado.types';
 
 const BASE_URL = '/Chamado';
 
