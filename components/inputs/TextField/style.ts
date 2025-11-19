@@ -4,33 +4,37 @@ import { colors, typography } from '@/styles';
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 16,
+    marginBottom: 20,
   },
   label: {
     color: colors.textPrimary,
-    fontSize: typography.fontSize.large,
-    fontWeight: typography.fontWeight.bold,
-    marginBottom: 4,
+    fontSize: typography.fontSize.normal,
+    fontWeight: typography.fontWeight.medium,
+    marginBottom: 8,
+    letterSpacing: 0.3,
   },
   input: {
-    borderColor: '#ccc',
-    borderRadius: 8,
-    borderWidth: 1,
-    color: colors.textSecondary,
+    borderColor: '#D1D5DB',
+    borderRadius: 12,
+    borderWidth: 1.5,
+    color: colors.textPrimary,
     fontFamily: typography.fontFamily,
     fontSize: typography.fontSize.normal,
     fontWeight: typography.fontWeight.regular,
-    padding: 12,
+    padding: 16,
+    backgroundColor: '#F9FAFB',
   },
   inputError: {
     borderColor: colors.error,
+    backgroundColor: '#FEF2F2',
   },
   error: {
     color: colors.error,
     fontFamily: typography.fontFamily,
     fontSize: typography.fontSize.small,
     fontWeight: typography.fontWeight.regular,
-    marginTop: 4,
+    marginTop: 6,
+    marginLeft: 4,
   },
 });
 
