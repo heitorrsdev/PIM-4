@@ -6,23 +6,34 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: colors.primary,
-    borderRadius: 6,
-    paddingHorizontal: 20,
-    paddingVertical: 12,
+    borderRadius: 12,
+    paddingHorizontal: 24,
+    paddingVertical: 16,
+    shadowColor: colors.primary,
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
   },
   hovered: {
     opacity: 0.9,
   },
   disabled: {
-    backgroundColor: colors.primary,
+    backgroundColor: '#9CA3AF',
     cursor: 'not-allowed',
     pointerEvents: 'auto',
+    shadowOpacity: 0.1,
   } as any, // React Native não suporta 'cursor', por isso o 'as any'
   text: {
     color: 'white',
     fontFamily: typography.fontFamily,
-    fontSize: typography.fontSize.large,
-    fontWeight: typography.fontWeight.medium,
+    fontSize: typography.fontSize.normal,
+    fontWeight: typography.fontWeight.bold,
+    letterSpacing: 0.5,
+    textTransform: 'uppercase',
   },
 });
 
