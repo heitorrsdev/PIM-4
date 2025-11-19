@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Pressable, ScrollView, Text, View } from 'react-native';
 
 import { BaseButton } from '@/components/buttons';
+
 import styles from './style';
 
 interface BaseModalProps {

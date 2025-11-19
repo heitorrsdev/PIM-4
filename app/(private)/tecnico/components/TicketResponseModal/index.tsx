@@ -34,7 +34,7 @@ export function TicketResponseModal({ visible, onClose, chamado, onSuccess }: Pr
     try {
       const updatedChamado = { ...chamado, respostaTecnico: response, status: ChamadoStatus.Fechado };
       await ChamadoService.respond(chamado.chamadoID, updatedChamado);
-      
+
       showAlert('Sucesso', 'Chamado respondido com sucesso!');
       resetForm();
       onSuccess();

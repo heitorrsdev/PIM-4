@@ -32,9 +32,9 @@ export function ChamadoCardTecnico({ chamado, onSubmit }: Props) {
             <Text style={styles.badgeText}>{chamado.prioridade}</Text>
           </View>
         </View>
-        
+
         <Text style={styles.desc} numberOfLines={2}>{chamado.descricao}</Text>
-        
+
         <View style={styles.metaContainer}>
           <Text style={styles.meta}>
             Usuário: {chamado.nomeDoUsuario}
@@ -45,8 +45,8 @@ export function ChamadoCardTecnico({ chamado, onSubmit }: Props) {
         </View>
 
         <View style={styles.actions}>
-          <BaseButton 
-            onPress={() => setShowDetails(true)} 
+          <BaseButton
+            onPress={() => setShowDetails(true)}
             style={styles.detailsButton}
           >
             Ver Detalhes
