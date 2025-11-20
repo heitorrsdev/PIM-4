@@ -45,7 +45,7 @@ export default function TecnicoScreen() {
     await fetchChamadosPendentes();
   };
 
-  const handleRespond = (chamado: Chamado) => {
+  const handleSubmit = (chamado: Chamado) => {
     setSelectedChamado(chamado);
     setModalVisible(true);
   };
@@ -82,12 +82,12 @@ export default function TecnicoScreen() {
             Todos os chamados foram atendidos.
           </Text>
         </View>
-      ) : (
+        ) : (
         chamados.map((chamado) => (
           <ChamadoCardTecnico
             key={chamado.chamadoID}
             chamado={chamado}
-            onSubmit={() => handleRespond(chamado)}
+            onSubmit={() => handleSubmit(chamado)}
           />
         ))
       )}
