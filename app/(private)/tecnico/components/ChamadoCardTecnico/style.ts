@@ -67,7 +67,7 @@ export default StyleSheet.create({
     gap: 4,
     marginTop: 8,
   },
-  respondButton: {
+  submitButton: {
     flex: 1,
   },
   title: {

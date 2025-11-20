@@ -50,7 +50,7 @@ export function ChamadoCardTecnico({ chamado, onSubmit }: Props) {
         >
           Ver Detalhes
         </BaseButton>
-        <BaseButton onPress={onSubmit} style={styles.respondButton}>
+        <BaseButton onPress={onSubmit} style={styles.submitButton}>
           Responder
         </BaseButton>
       </View>
