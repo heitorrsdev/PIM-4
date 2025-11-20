@@ -21,11 +21,6 @@ export const ChamadoService = {
     return request<string>('put', `${BASE_URL}/Editar/${id}`, payload);
   },
 
-  respond(id: string, payload: Chamado): Promise<string> {
-    const { chamadoID, ...apiPayload } = payload;
-    return request('put', `${BASE_URL}/Editar/${id}`, apiPayload);
-  },
-
   remove(id: string): Promise<string> {
     return request<string>('delete', `${BASE_URL}/Deletar/${id}`);
   },
