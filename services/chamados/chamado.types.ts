@@ -22,10 +22,10 @@ export interface ChamadoPayload {
 
 export interface Chamado extends ChamadoPayload {
   chamadoID: string,
-  respostaTecnico?: string,
+  resposta?: string,
 }
 
 export interface RespostaChamadoPayload {
-  respostaTecnico: string,
+  resposta: string,
   status: ChamadoStatus,
 }
