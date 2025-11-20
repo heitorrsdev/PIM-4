@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, Text } from 'react-native';
 
+import { useUser } from '@/hooks';
 import { ChamadoService } from '@/services/chamados';
 import { Chamado } from '@/services/chamados/chamado.types';
 import { showAlert } from '@/utils';
@@ -13,10 +14,12 @@ export default function ChamadosScreen() {
   const [chamados, setChamados] = useState<Chamado[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const { user, loadingUser } = useUser();
+  const userEmail = user?.email || '';
 
   const fetchChamados = async () => {
     try {
-      const data = await ChamadoService.list();
+      const data = await ChamadoService.getByEmail(userEmail);
       setChamados(data);
     } catch {
       showAlert('Erro', 'Não foi possível buscar chamados');
@@ -26,16 +29,19 @@ export default function ChamadosScreen() {
     }
   };
 
-  useEffect(() => {
+useEffect(() => {
+  if (!loadingUser && userEmail) {
     fetchChamados();
-  }, []);
+  }
+}, [loadingUser, userEmail]);
+
 
   const handleRefresh = async () => {
     setRefreshing(true);
     await fetchChamados();
   };
 
-  if (loading) return <Text style={styles.empty}>Carregando...</Text>;
+  if (loading || loadingUser) return <Text style={styles.empty}>Carregando...</Text>;
 
   return (
     <ScrollView
