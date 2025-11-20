@@ -19,7 +19,7 @@ export default function ChamadosScreen() {
 
   const fetchChamados = async () => {
     try {
-      const data = await ChamadoService.getByEmail(userEmail);
+      const data = await ChamadoService.search(userEmail);
       setChamados(data);
     } catch {
       showAlert('Erro', 'Não foi possível buscar chamados');
