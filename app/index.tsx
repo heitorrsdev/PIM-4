@@ -1,5 +1,5 @@
-import { Text, View, Image } from 'react-native';
 import { router } from 'expo-router';
+import { Image,Text, View } from 'react-native';
 
 import { BaseButton } from '@/components/buttons';
 
@@ -13,17 +13,17 @@ export default function Home() {
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        <Image 
+        <Image
           source={require('@/assets/images/logo.png')}
           style={styles.logo}
           resizeMode="contain"
         />
       </View>
-      
+
       <Text style={styles.title}>Suptech</Text>
       <Text style={styles.subtitle}>Software & Innovation</Text>
       <Text style={styles.description}>Sistema de Gerenciamento de Chamados</Text>
-      
+
       <View style={styles.buttonContainer}>
         <BaseButton onPress={handleNavigateToLogin}>
           Acessar Sistema
