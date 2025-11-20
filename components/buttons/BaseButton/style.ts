@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     paddingHorizontal: 20,
     paddingVertical: 12,
-  },
+    cursor: 'pointer',
+  } as any,
   hovered: {
     opacity: 0.9,
   },
