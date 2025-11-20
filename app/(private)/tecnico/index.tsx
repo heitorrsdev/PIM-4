@@ -63,36 +63,34 @@ export default function TecnicoScreen() {
   }
 
   return (
-    <>
-      <ScrollView
-        contentContainerStyle={styles.container}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
-      >
-        <View style={styles.header}>
-          <Text style={styles.pageTitle}>Chamados Pendentes</Text>
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>{chamados.length}</Text>
-          </View>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+    >
+      <View style={styles.header}>
+        <Text style={styles.pageTitle}>Chamados Pendentes</Text>
+        <View style={styles.badge}>
+          <Text style={styles.badgeText}>{chamados.length}</Text>
         </View>
+      </View>
 
-        {chamados.length === 0 ? (
-          <View style={styles.emptyContainer}>
-            <Text style={styles.emptyText}>🎉</Text>
-            <Text style={styles.emptyTitle}>Nenhum chamado pendente!</Text>
-            <Text style={styles.emptySubtitle}>
-              Todos os chamados foram atendidos.
-            </Text>
-          </View>
-        ) : (
-          chamados.map((chamado) => (
-            <ChamadoCardTecnico
-              key={chamado.chamadoID}
-              chamado={chamado}
-              onSubmit={() => handleRespond(chamado)}
-            />
-          ))
-        )}
-      </ScrollView>
+      {chamados.length === 0 ? (
+        <View style={styles.emptyContainer}>
+          <Text style={styles.emptyText}>🎉</Text>
+          <Text style={styles.emptyTitle}>Nenhum chamado pendente!</Text>
+          <Text style={styles.emptySubtitle}>
+            Todos os chamados foram atendidos.
+          </Text>
+        </View>
+      ) : (
+        chamados.map((chamado) => (
+          <ChamadoCardTecnico
+            key={chamado.chamadoID}
+            chamado={chamado}
+            onSubmit={() => handleRespond(chamado)}
+          />
+        ))
+      )}
 
       <TicketResponseModal
         visible={modalVisible}
@@ -100,6 +98,6 @@ export default function TecnicoScreen() {
         chamado={selectedChamado}
         onSuccess={handleRespostaSuccess}
       />
-    </>
+    </ScrollView>
   );
 }

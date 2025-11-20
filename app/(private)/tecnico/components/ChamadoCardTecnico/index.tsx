@@ -24,37 +24,35 @@ export function ChamadoCardTecnico({ chamado, onSubmit }: Props) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
-    <>
-      <View style={styles.card}>
-        <View style={styles.header}>
-          <Text style={styles.title}>{chamado.titulo}</Text>
-          <View style={[styles.badge, { backgroundColor: getPriorityColor(chamado.prioridade) }]}>
-            <Text style={styles.badgeText}>{chamado.prioridade}</Text>
-          </View>
+    <View style={styles.card}>
+      <View style={styles.header}>
+        <Text style={styles.title}>{chamado.titulo}</Text>
+        <View style={[styles.badge, { backgroundColor: getPriorityColor(chamado.prioridade) }]}>
+          <Text style={styles.badgeText}>{chamado.prioridade}</Text>
         </View>
+      </View>
 
-        <Text style={styles.desc} numberOfLines={2}>{chamado.descricao}</Text>
+      <Text style={styles.desc} numberOfLines={2}>{chamado.descricao}</Text>
 
-        <View style={styles.metaContainer}>
-          <Text style={styles.meta}>
-            Usuário: {chamado.nomeDoUsuario}
-          </Text>
-          <Text style={styles.meta}>
-            Setor: {chamado.setorDoUsuario}
-          </Text>
-        </View>
+      <View style={styles.metaContainer}>
+        <Text style={styles.meta}>
+          Usuário: {chamado.nomeDoUsuario}
+        </Text>
+        <Text style={styles.meta}>
+          Setor: {chamado.setorDoUsuario}
+        </Text>
+      </View>
 
-        <View style={styles.actions}>
-          <BaseButton
-            onPress={() => setShowDetails(true)}
-            style={styles.detailsButton}
-          >
-            Ver Detalhes
-          </BaseButton>
-          <BaseButton onPress={onSubmit} style={styles.respondButton}>
-            Responder
-          </BaseButton>
-        </View>
+      <View style={styles.actions}>
+        <BaseButton
+          onPress={() => setShowDetails(true)}
+          style={styles.detailsButton}
+        >
+          Ver Detalhes
+        </BaseButton>
+        <BaseButton onPress={onSubmit} style={styles.respondButton}>
+          Responder
+        </BaseButton>
       </View>
 
       <BaseModal
@@ -85,6 +83,6 @@ export function ChamadoCardTecnico({ chamado, onSubmit }: Props) {
           <Text style={styles.detailValue}>{chamado.setorDoUsuario}</Text>
         </View>
       </BaseModal>
-    </>
+    </View>
   );
 }
