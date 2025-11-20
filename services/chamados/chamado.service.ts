@@ -9,6 +9,10 @@ export const ChamadoService = {
     return request<string>('post', `${BASE_URL}/Adicionar`, payload);
   },
 
+  list(): Promise<Chamado[]> {
+    return request<Chamado[]>('get', `${BASE_URL}/ListarChamados`);
+  },
+
   getByEmail(email: string): Promise<Chamado[]> {
     return request<Chamado[]>('get', `${BASE_URL}/ObterChamadoPorEmail/${email}`);
   },
