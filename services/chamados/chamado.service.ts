@@ -13,8 +13,8 @@ export const ChamadoService = {
     return request<Chamado[]>('get', `${BASE_URL}/ListarChamados`);
   },
 
-  getByEmail(email: string): Promise<Chamado[]> {
-    return request<Chamado[]>('get', `${BASE_URL}/ObterChamadoPorEmail/${email}`);
+  search(query: string): Promise<Chamado[]> {
+    return request<Chamado[]>('get', `${BASE_URL}/BuscarChamados/${query}`);
   },
 
   edit(id: string, payload: ChamadoPayload): Promise<string> {
