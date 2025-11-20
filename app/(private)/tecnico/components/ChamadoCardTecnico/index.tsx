@@ -44,10 +44,7 @@ export function ChamadoCardTecnico({ chamado, onSubmit }: Props) {
       </View>
 
       <View style={styles.actions}>
-        <BaseButton
-          onPress={() => setShowDetails(true)}
-          style={styles.detailsButton}
-        >
+        <BaseButton onPress={() => setShowDetails(true)} style={styles.detailsButton}>
           Ver Detalhes
         </BaseButton>
         <BaseButton onPress={onSubmit} style={styles.submitButton}>
@@ -55,11 +52,7 @@ export function ChamadoCardTecnico({ chamado, onSubmit }: Props) {
         </BaseButton>
       </View>
 
-      <BaseModal
-        visible={showDetails}
-        onClose={() => setShowDetails(false)}
-        title="Detalhes do Chamado"
-      >
+      <BaseModal visible={showDetails} onClose={() => setShowDetails(false)} title="Detalhes do Chamado">
         <View style={styles.detailsContent}>
           <Text style={styles.detailLabel}>Título:</Text>
           <Text style={styles.detailValue}>{chamado.titulo}</Text>
