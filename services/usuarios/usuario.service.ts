@@ -5,7 +5,7 @@ import { Usuario, UsuarioPayload } from './usuario.types';
 const BASE_URL = '/Usuario';
 
 export const UsuarioService = {
-  add(payload: UsuarioPayload): Promise<string> {
+  create(payload: UsuarioPayload): Promise<string> {
     return request<string>('post', `${BASE_URL}/Adicionar`, payload);
   },
 
@@ -13,7 +13,7 @@ export const UsuarioService = {
     return request<Usuario | string>('get', `${BASE_URL}/ObterPorEmail/${email}`);
   },
 
-  edit(id: string, payload: UsuarioPayload): Promise<string> {
+  update(id: string, payload: UsuarioPayload): Promise<string> {
     return request<string>('put', `${BASE_URL}/Editar/${id}`, payload);
   },
 };

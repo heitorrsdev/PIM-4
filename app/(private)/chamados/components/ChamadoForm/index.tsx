@@ -56,7 +56,7 @@ export function ChamadoForm({ onSuccess }: Props) {
 
     setLoading(true);
     try {
-      await ChamadoService.add(form);
+      await ChamadoService.create(form);
       showAlert('Sucesso', 'Chamado criado com sucesso!');
       onSuccess();
       setForm(defaultForm);

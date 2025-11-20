@@ -48,7 +48,7 @@ export default function RegisterForm() {
 
     setIsLoading(true);
     try {
-      const response: string = await UsuarioService.add(form);
+      const response: string = await UsuarioService.create(form);
       showAlert('Sucesso', response);
 
       await login({ email: form.email, senha: form.senha });

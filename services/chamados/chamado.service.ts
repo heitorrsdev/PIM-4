@@ -5,11 +5,11 @@ import { Chamado, ChamadoPayload } from './chamado.types';
 const BASE_URL = '/Chamado';
 
 export const ChamadoService = {
-  add(payload: ChamadoPayload): Promise<string> {
+  create(payload: ChamadoPayload) {
     return request<string>('post', `${BASE_URL}/Adicionar`, payload);
   },
 
-  list(): Promise<Chamado[]> {
+  getAll() {
     return request<Chamado[]>('get', `${BASE_URL}/ListarChamados`);
   },
 
@@ -17,11 +17,11 @@ export const ChamadoService = {
     return request<Chamado[]>('get', `${BASE_URL}/BuscarChamados/${query}`);
   },
 
-  edit(id: string, payload: ChamadoPayload): Promise<string> {
+  update(id: string, payload: ChamadoPayload) {
     return request<string>('put', `${BASE_URL}/Editar/${id}`, payload);
   },
 
-  remove(id: string): Promise<string> {
+  delete(id: string) {
     return request<string>('delete', `${BASE_URL}/Deletar/${id}`);
   },
 };
