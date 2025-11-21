@@ -39,7 +39,7 @@ export default function ChamadosScreen() {
 
     if (userType !== 'Usuario') {
       showAlert('Erro', 'Apenas usuários podem acessar essa tela.');
-        router.replace('/(public)/login');
+      router.replace('/(public)/login');
       return;
     }
 
