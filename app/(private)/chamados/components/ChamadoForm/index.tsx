@@ -29,9 +29,9 @@ export function ChamadoForm({ onSuccess }: Props) {
     titulo: '',
   };
 
+  const [errors, setErrors] = useState<Record<string, string | null>>({});
   const [form, setForm] = useState<ChamadoPayload>(defaultForm);
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string | null>>({});
 
   const handleChange = (key: keyof ChamadoPayload, value: string) => {
     setForm({ ...form, [key]: value });
