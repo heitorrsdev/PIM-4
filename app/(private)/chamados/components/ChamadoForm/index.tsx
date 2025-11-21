@@ -4,6 +4,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
+import { useUser } from '@/hooks';
 import { ChamadoPayload, ChamadoPrioridade, ChamadoService , ChamadoStatus } from '@/services/chamados';
 import { showAlert } from '@/utils';
 
@@ -14,12 +15,14 @@ interface Props {
 }
 
 export function ChamadoForm({ onSuccess }: Props) {
+  const { user } = useUser();
+
   const defaultForm: ChamadoPayload = {
     descricao: '',
-    emailDoUsuario: '',
-    nomeDoUsuario: '',
+    emailDoUsuario: user?.email || '',
+    nomeDoUsuario: user?.nome || '',
     prioridade: ChamadoPrioridade.Baixa,
-    setorDoUsuario: '',
+    setorDoUsuario: user?.setor || '',
     status: ChamadoStatus.Aberto,
     titulo: '',
   };
@@ -48,85 +51,63 @@ export function ChamadoForm({ onSuccess }: Props) {
     return isValid;
   };
 
-  const handleSubmit = async (): Promise<void> => {
-    if (!validateForm(form)) {
-      showAlert('Campos obrigatórios', 'Preencha todos os campos antes de continuar.');
-      return;
-    }
+    const handleSubmit = async (): Promise<void> => {
+      if (!validateForm(form)) {
+        showAlert('Campos obrigatórios', 'Preencha todos os campos antes de continuar.');
+        return;
+      }
 
-    setLoading(true);
-    try {
-      await ChamadoService.create(form);
-      showAlert('Sucesso', 'Chamado criado com sucesso!');
-      onSuccess();
-      setForm(defaultForm);
-    } catch {
-      showAlert('Erro', 'Não foi possível criar o chamado.');
-    } finally {
-      setLoading(false);
-    }
-  };
+      setLoading(true);
+      try {
+        await ChamadoService.add(form);
+        showAlert('Sucesso', 'Chamado criado com sucesso!');
+        onSuccess();
+        setForm(defaultForm);
+      } catch {
+        showAlert('Erro', 'Não foi possível criar o chamado.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const prioridadeOptions = Object.values(ChamadoPrioridade).map((p) => ({
-    label: p,
-    value: p,
-  }));
+    const prioridadeOptions = Object.values(ChamadoPrioridade).map((p) => ({
+      label: p,
+      value: p,
+    }));
 
-  return (
-    <BaseForm
-      onSubmit={handleSubmit}
-      isValid={!loading}
-      submitLabel={loading ? 'Enviando...' : 'Criar chamado'}
-    >
-      <TextField
-        label="Título"
-        value={form.titulo}
-        onChangeText={(v) => handleChange('titulo', v)}
-        error={errors.titulo}
-      />
+    return (
+      <BaseForm
+        onSubmit={handleSubmit}
+        isValid={!loading}
+        submitLabel={loading ? 'Enviando...' : 'Criar chamado'}
+      >
+        <TextField
+          label="Título"
+          value={form.titulo}
+          onChangeText={(v) => handleChange('titulo', v)}
+          error={errors.titulo}
+        />
 
-      <TextField
-        label="Descrição"
-        value={form.descricao}
-        onChangeText={(v) => handleChange('descricao', v)}
-        error={errors.descricao}
-        multiline
-        numberOfLines={2}
-      />
+        <TextField
+          label="Descrição"
+          value={form.descricao}
+          onChangeText={(v) => handleChange('descricao', v)}
+          error={errors.descricao}
+          multiline
+          numberOfLines={2}
+        />
 
-      <TextField
-        label="Nome do Usuário"
-        value={form.nomeDoUsuario}
-        onChangeText={(v) => handleChange('nomeDoUsuario', v)}
-        error={errors.nomeDoUsuario}
-      />
-
-      <TextField
-        label="E-mail"
-        value={form.emailDoUsuario}
-        onChangeText={(v) => handleChange('emailDoUsuario', v)}
-        keyboardType="email-address"
-        error={errors.emailDoUsuario}
-      />
-
-      <TextField
-        label="Setor do Usuário"
-        value={form.setorDoUsuario}
-        onChangeText={(v) => handleChange('setorDoUsuario', v)}
-        error={errors.setorDoUsuario}
-      />
-
-      <Text style={styles.label}>Prioridade</Text>
-      <Dropdown
-        containerStyle={styles.dropdownContainer}
-        data={prioridadeOptions}
-        labelField="label"
-        onChange={(item) => handleChange('prioridade', item.value)}
-        placeholder="Selecione a prioridade"
-        style={styles.dropdown}
-        value={form.prioridade}
-        valueField="value"
-      />
-    </BaseForm>
-  );
+        <Text style={styles.label}>Prioridade</Text>
+        <Dropdown
+          containerStyle={styles.dropdownContainer}
+          data={prioridadeOptions}
+          labelField="label"
+          onChange={(item) => handleChange('prioridade', item.value)}
+          placeholder="Selecione a prioridade"
+          style={styles.dropdown}
+          value={form.prioridade}
+          valueField="value"
+        />
+      </BaseForm>
+    );
 }

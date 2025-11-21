@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { View, Text } from 'react-native';
+import { Text, View } from 'react-native';
 
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
@@ -64,7 +64,7 @@ export default function LoginForm() {
       <Text style={styles.formDescription}>
         Informe suas credenciais para acessar o sistema
       </Text>
-      
+
       <View style={styles.formContent}>
         <BaseForm onSubmit={handleSubmit} submitLabel={isLoading ? 'Entrando...' : 'Entrar'}>
           <TextField
