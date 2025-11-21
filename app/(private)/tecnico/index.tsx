@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, Text, View } from 'react-native';
 
 import { useUser } from '@/hooks';
-import { Chamado, ChamadoService, ChamadoStatus } from '@/services/chamados';
+import { Chamado, ChamadoService } from '@/services/chamados';
 import { showAlert } from '@/utils';
 
 import { ChamadoCardTecnico } from './components/ChamadoCardTecnico';
@@ -20,15 +20,7 @@ export default function TecnicoScreen() {
 
   const fetchChamadosPendentes = async () => {
     try {
-      const data = await ChamadoService.getAll();
-
-      // Remover este filtro assim que possível. Por enquanto usaremos isso, mas o Enrico está criando um endpoint de filtragem de entidade que fará isso para nós. É apenas uma solução provisória.
-      const pendentes = data.filter(
-        (chamado) => {
-          const status = chamado.status?.trim();
-          return status === ChamadoStatus.Pendente;
-        }
-      );
+      const pendentes = await ChamadoService.getByStatus('Pendente');
 
       setChamados(pendentes);
     } catch {

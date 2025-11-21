@@ -13,8 +13,12 @@ export const ChamadoService = {
     return request<Chamado[]>('get', `${BASE_URL}/ListarChamados`);
   },
 
-  search(query: string): Promise<Chamado[]> {
-    return request<Chamado[]>('get', `${BASE_URL}/BuscarChamados/${query}`);
+  getByEmail(email: string): Promise<Chamado[]> {
+    return request<Chamado[]>('get', `${BASE_URL}/BuscarChamadosPorEmail/${email}`);
+  },
+
+  getByStatus(status: string): Promise<Chamado[]> {
+    return request<Chamado[]>('get', `${BASE_URL}/BuscarChamadosPorStatus/${status}`);
   },
 
   update(id: string, payload: ChamadoPayload) {
