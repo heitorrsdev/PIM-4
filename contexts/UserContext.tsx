@@ -8,9 +8,9 @@ import { showAlert } from '@/utils';
 
 interface UserContextProps {
   user: Usuario | Tecnico | null;
-  loadingUser: boolean;
+  userLoading: boolean;
   refreshUser: () => Promise<void>;
-  userType?: 'Usuario' | 'Tecnico' | null;
+  userType: 'Usuario' | 'Tecnico' | null;
 }
 
 interface UserProviderProps {
@@ -19,49 +19,62 @@ interface UserProviderProps {
 
 export const UserContext = createContext<UserContextProps>({
   user: null,
-  loadingUser: true,
+  userLoading: true,
   refreshUser: async () => {},
   userType: null,
 });
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const [loadingUser, setLoadingUser] = useState(true);
-  const [user, setUser] = useState<Usuario |  Tecnico | null>(null);
+  const [userLoading, setUserLoading] = useState(true);
+  const [user, setUser] = useState<Usuario | Tecnico | null>(null);
   const [userType, setUserType] = useState<'Usuario' | 'Tecnico' | null>(null);
+
   const { token } = useAuth();
 
-  const fetchUser = async (): Promise<void> => {
-    const response: Email | string = token ? await AuthService.getEmailByToken(token) : '';
-    const email = typeof response === 'string' ? null : response.email;
+  const loadUser = async (): Promise<void> => {
+    setUserLoading(true);
 
-    if (!token || !email) {
+    if (!token) {
       setUser(null);
+      setUserType(null);
+      setUserLoading(false);
       return;
     }
 
     try {
-      const userResponse: Usuario = await UsuarioService.getByEmail(email);
-      let tecnicoResponse: Tecnico | null = null;
+      const emailResponse: Email | string = await AuthService.getEmailByToken(token);
+      const email = typeof emailResponse === 'string' ? null : emailResponse.email;
 
-      if (!userResponse) {
-        tecnicoResponse = await TecnicoService.getByEmail(email);
+      if (!email) {
+        setUser(null);
+        setUserType(null);
+        setUserLoading(false);
+        return;
       }
 
-      setUserType(!!tecnicoResponse ? 'Tecnico' : 'Usuario');
-      setUser(userResponse || tecnicoResponse || null);
+      const usuario: Usuario | null = await UsuarioService.getByEmail(email).catch(() => null);
+
+      const tecnico: Tecnico | null = usuario
+        ? null
+        : await TecnicoService.getByEmail(email).catch(() => null);
+
+      const resolvedUser = usuario || tecnico || null;
+
+      setUser(resolvedUser);
+      setUserType(tecnico ? 'Tecnico' : usuario ? 'Usuario' : null);
     } catch {
       showAlert('Erro', 'Não foi possível carregar os dados do usuário.');
     } finally {
-      setLoadingUser(false);
+      setUserLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchUser();
+    if (token) loadUser();
   }, [token]);
 
   return (
-    <UserContext.Provider value={{ user, userType, loadingUser, refreshUser: fetchUser }}>
+    <UserContext.Provider value={{ user, userType, userLoading: userLoading, refreshUser: loadUser }}>
       {children}
     </UserContext.Provider>
   );

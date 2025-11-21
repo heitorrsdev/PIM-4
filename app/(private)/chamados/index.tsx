@@ -15,7 +15,7 @@ export default function ChamadosScreen() {
   const [chamados, setChamados] = useState<Chamado[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const { user, loadingUser } = useUser();
+  const { user, userLoading } = useUser();
   const userEmail = user?.email || '';
   const { userType } = useUser();
 
@@ -32,7 +32,7 @@ export default function ChamadosScreen() {
   };
 
   useEffect(() => {
-    if (loadingUser) return;
+    if (userLoading) return;
 
     if (userType !== 'Usuario') {
       showAlert('Erro', 'Apenas usuários podem acessar essa tela.');
@@ -43,14 +43,14 @@ export default function ChamadosScreen() {
     if (userEmail) {
       fetchChamados();
     }
-  }, [loadingUser, userType, userEmail]);
+  }, [userLoading, userType, userEmail]);
 
   const handleRefresh = async () => {
     setRefreshing(true);
     await fetchChamados();
   };
 
-  if (loading || loadingUser) return <Text style={styles.empty}>Carregando...</Text>;
+  if (loading || userLoading) return <Text style={styles.empty}>Carregando...</Text>;
 
   return (
     <ScrollView
