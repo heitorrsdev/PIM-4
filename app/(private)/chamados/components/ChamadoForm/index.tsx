@@ -40,77 +40,74 @@ export function ChamadoForm({ onSuccess }: Props) {
     const newErrors: Record<string, string | null> = {};
     let isValid: boolean = true;
 
-    if (!f.titulo?.trim()) {
-      newErrors.titulo = 'Campo obrigatório';
-      isValid = false;
-    }
-
-    if (!f.descricao?.trim()) {
-      newErrors.descricao = 'Campo obrigatório';
-      isValid = false;
+    for (const [key, value] of Object.entries(f)) {
+      if (!value?.trim()) {
+        newErrors[key] = 'Campo obrigatório';
+        isValid = false;
+      }
     }
 
     setErrors(newErrors);
     return isValid;
   };
 
-  const handleSubmit = async (): Promise<void> => {
-    if (!validateForm(form)) {
-      showAlert('Campos obrigatórios', 'Preencha todos os campos antes de continuar.');
-      return;
-    }
+    const handleSubmit = async (): Promise<void> => {
+      if (!validateForm(form)) {
+        showAlert('Campos obrigatórios', 'Preencha todos os campos antes de continuar.');
+        return;
+      }
 
-    setLoading(true);
-    try {
-      await ChamadoService.add(form);
-      showAlert('Sucesso', 'Chamado criado com sucesso!');
-      onSuccess();
-      setForm(defaultForm);
-    } catch {
-      showAlert('Erro', 'Não foi possível criar o chamado.');
-    } finally {
-      setLoading(false);
-    }
-  };
+      setLoading(true);
+      try {
+        await ChamadoService.add(form);
+        showAlert('Sucesso', 'Chamado criado com sucesso!');
+        onSuccess();
+        setForm(defaultForm);
+      } catch {
+        showAlert('Erro', 'Não foi possível criar o chamado.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const prioridadeOptions = Object.values(ChamadoPrioridade).map((p) => ({
-    label: p,
-    value: p,
-  }));
+    const prioridadeOptions = Object.values(ChamadoPrioridade).map((p) => ({
+      label: p,
+      value: p,
+    }));
 
-  return (
-    <BaseForm
-      onSubmit={handleSubmit}
-      isValid={!loading}
-      submitLabel={loading ? 'Enviando...' : 'Criar chamado'}
-    >
-      <TextField
-        label="Título"
-        value={form.titulo}
-        onChangeText={(v) => handleChange('titulo', v)}
-        error={errors.titulo}
-      />
+    return (
+      <BaseForm
+        onSubmit={handleSubmit}
+        isValid={!loading}
+        submitLabel={loading ? 'Enviando...' : 'Criar chamado'}
+      >
+        <TextField
+          label="Título"
+          value={form.titulo}
+          onChangeText={(v) => handleChange('titulo', v)}
+          error={errors.titulo}
+        />
 
-      <TextField
-        label="Descrição"
-        value={form.descricao}
-        onChangeText={(v) => handleChange('descricao', v)}
-        error={errors.descricao}
-        multiline
-        numberOfLines={2}
-      />
+        <TextField
+          label="Descrição"
+          value={form.descricao}
+          onChangeText={(v) => handleChange('descricao', v)}
+          error={errors.descricao}
+          multiline
+          numberOfLines={2}
+        />
 
-      <Text style={styles.label}>Prioridade</Text>
-      <Dropdown
-        containerStyle={styles.dropdownContainer}
-        data={prioridadeOptions}
-        labelField="label"
-        onChange={(item) => handleChange('prioridade', item.value)}
-        placeholder="Selecione a prioridade"
-        style={styles.dropdown}
-        value={form.prioridade}
-        valueField="value"
-      />
-    </BaseForm>
-  );
+        <Text style={styles.label}>Prioridade</Text>
+        <Dropdown
+          containerStyle={styles.dropdownContainer}
+          data={prioridadeOptions}
+          labelField="label"
+          onChange={(item) => handleChange('prioridade', item.value)}
+          placeholder="Selecione a prioridade"
+          style={styles.dropdown}
+          value={form.prioridade}
+          valueField="value"
+        />
+      </BaseForm>
+    );
 }
