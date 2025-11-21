@@ -28,13 +28,13 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [loadingUser, setLoadingUser] = useState(true);
   const [user, setUser] = useState<Usuario |  Tecnico | null>(null);
   const [userType, setUserType] = useState<'Usuario' | 'Tecnico' | null>(null);
-  const { token, isAuthenticated } = useAuth();
+  const { token } = useAuth();
 
   const fetchUser = async (): Promise<void> => {
     const response: Email | string = token ? await AuthService.getEmailByToken(token) : '';
     const email = typeof response === 'string' ? null : response.email;
 
-    if (!isAuthenticated || !token || !email) {
+    if (!token || !email) {
       setUser(null);
       return;
     }
@@ -58,7 +58,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   useEffect(() => {
     fetchUser();
-  }, [token, isAuthenticated]);
+  }, [token]);
 
   return (
     <UserContext.Provider value={{ user, userType, loadingUser, refreshUser: fetchUser }}>

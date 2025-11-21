@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useEffect, useState } from 'react';
 
 import { AuthService, LoginPayload } from '@/services';
 import { registerLogoutCallback } from '@/services/api';
@@ -6,18 +6,16 @@ import { getToken, removeToken, saveToken } from '@/services/auth/storage';
 
 interface AuthContextProps {
   token: string | null;
-  isAuthenticated: boolean;
-  isLoading: boolean;
+  authLoading: boolean;
   login: (payload: LoginPayload) => Promise<void>;
   logout: () => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
   token: null,
-  isAuthenticated: false,
+  authLoading: true,
   login: async () => {},
   logout: async () => {},
-  isLoading: true,
 });
 
 interface AuthProviderProps {
@@ -25,39 +23,43 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState<string | null>(null);
-  const isAuthenticated = !!token;
+  const [authLoading, setAuthLoading] = useState(true);
 
+  // Recupera o token na inicialização
   useEffect(() => {
-    (async (): Promise<void> => {
+    (async () => {
       const storedToken = await getToken();
       if (storedToken) {
-        setToken(storedToken); // restaura a sessão se o token existir no storage
+        setToken(storedToken);
       }
-      setIsLoading(false); // indica que o contexto terminou de carregar
+      setAuthLoading(false);
     })();
   }, []);
 
-  const login = async (payload: LoginPayload): Promise<void> => {
-    const data = await AuthService.login(payload);
-
-    await saveToken(data.token); // armazena o token no storage
-    setToken(data.token); // atualiza o estado do token
-  };
-
-  const logout = async (): Promise<void> => {
-    await removeToken();
-    setToken(null);
-  };
-
-  // registra o logout global para ser usado pelo interceptor
-  useEffect((): void => {
-    registerLogoutCallback(logout);
+  const login = useCallback(async (payload: LoginPayload): Promise<void> => {
+    try {
+      const data = await AuthService.login(payload);
+      await saveToken(data.token);
+      setToken(data.token);
+    } catch (err) {
+      console.error('Login failed:', err);
+      throw err;
+    }
   }, []);
 
+  const logout = useCallback(async (): Promise<void> => {
+    await removeToken();
+    setToken(null);
+  }, []);
+
+  // Registra o callback de logout no serviço de API
+  useEffect(() => {
+    registerLogoutCallback(logout);
+  }, [logout]);
+
   return (
-    <AuthContext.Provider value={{ token, isAuthenticated, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ token, authLoading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

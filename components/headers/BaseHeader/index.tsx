@@ -13,7 +13,7 @@ interface BaseHeaderProps {
 }
 
 export default function BaseHeader({ title, ...rest }: BaseHeaderProps) {
-  const { logout, isAuthenticated } = useAuth();
+  const { logout, authLoading } = useAuth();
 
   async function handleLogout(): Promise<void> {
     await logout();
@@ -24,7 +24,7 @@ export default function BaseHeader({ title, ...rest }: BaseHeaderProps) {
     <SafeAreaView edges={['top']} style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
-        {isAuthenticated &&
+        {authLoading &&
           <BaseButton onPress={handleLogout} style={styles.logoutButton}>
             Sair
           </BaseButton>
