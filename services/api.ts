@@ -40,18 +40,20 @@ api.interceptors.response.use(
     const status: number = response.status;
     const message: string = response.data?.message || 'Ocorreu um erro inesperado. Tente novamente.';
 
-    if (status !== 401) {
-      showAlert('Erro', message);
-      return Promise.reject(error);
+    if (status === 401) {
+      showAlert('Sessão expirada', 'Por favor, faça login novamente.');
+
+      if (logoutCallback) {
+        await logoutCallback();
+      }
     }
 
-    showAlert('Sessão expirada', 'Por favor, faça login novamente.');
 
-    if (logoutCallback) {
-      await logoutCallback();
-    }
-
-    return Promise.reject(error);
+    return Promise.reject({
+      status,
+      message,
+      original: error,
+    });
   }
 );
 
