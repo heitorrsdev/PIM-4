@@ -42,11 +42,14 @@ export function ChamadoForm({ onSuccess }: Props) {
     const newErrors: Record<string, string | null> = {};
     let isValid: boolean = true;
 
-    for (const [key, value] of Object.entries(f)) {
-      if (!value?.trim()) {
-        newErrors[key] = 'Campo obrigatório';
-        isValid = false;
-      }
+    if (!f.titulo?.trim()) {
+      newErrors.titulo = 'Campo obrigatório';
+      isValid = false;
+    }
+
+    if (!f.descricao?.trim()) {
+      newErrors.descricao = 'Campo obrigatório';
+      isValid = false;
     }
 
     setErrors(newErrors);
