@@ -1,15 +1,16 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 import { useAuth } from '@/hooks';
-import { AuthService, Usuario } from '@/services';
+import { AuthService, Tecnico, TecnicoService, Usuario } from '@/services';
 import { Email } from '@/services/auth';
 import { UsuarioService } from '@/services/usuarios/usuario.service';
 import { showAlert } from '@/utils';
 
 interface UserContextProps {
-  user: Usuario | null;
+  user: Usuario | Tecnico | null;
   loadingUser: boolean;
   refreshUser: () => Promise<void>;
+  userType?: 'Usuario' | 'Tecnico' | null;
 }
 
 interface UserProviderProps {
@@ -20,11 +21,13 @@ export const UserContext = createContext<UserContextProps>({
   user: null,
   loadingUser: true,
   refreshUser: async () => {},
+  userType: null,
 });
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [loadingUser, setLoadingUser] = useState(true);
   const [user, setUser] = useState<Usuario |  Tecnico | null>(null);
+  const [userType, setUserType] = useState<'Usuario' | 'Tecnico' | null>(null);
   const { token, isAuthenticated } = useAuth();
 
   const fetchUser = async (): Promise<void> => {
@@ -37,12 +40,15 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     }
 
     try {
-      const response: Usuario | string = await UsuarioService.getByEmail(email);
-      if (typeof response === 'string') {
-        throw new Error(response);
+      const userResponse: Usuario = await UsuarioService.getByEmail(email);
+      let tecnicoResponse: Tecnico | null = null;
+
+      if (!userResponse) {
+        tecnicoResponse = await TecnicoService.getByEmail(email);
       }
 
-      setUser(response);
+      setUserType(!!tecnicoResponse ? 'Tecnico' : 'Usuario');
+      setUser(userResponse || tecnicoResponse || null);
     } catch {
       showAlert('Erro', 'Não foi possível carregar os dados do usuário.');
     } finally {
@@ -55,7 +61,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, [token, isAuthenticated]);
 
   return (
-    <UserContext.Provider value={{ user, loadingUser, refreshUser: fetchUser }}>
+    <UserContext.Provider value={{ user, userType, loadingUser, refreshUser: fetchUser }}>
       {children}
     </UserContext.Provider>
   );
