@@ -4,6 +4,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
+import { useUser } from '@/hooks';
 import { ChamadoPayload, ChamadoPrioridade, ChamadoService , ChamadoStatus } from '@/services/chamados';
 import { showAlert } from '@/utils';
 
@@ -14,12 +15,14 @@ interface Props {
 }
 
 export function ChamadoForm({ onSuccess }: Props) {
+  const { user } = useUser();
+
   const defaultForm: ChamadoPayload = {
     descricao: '',
-    emailDoUsuario: '',
-    nomeDoUsuario: '',
+    emailDoUsuario: user?.email || '',
+    nomeDoUsuario: user?.nome || '',
     prioridade: ChamadoPrioridade.Baixa,
-    setorDoUsuario: '',
+    setorDoUsuario: user?.setor || '',
     status: ChamadoStatus.Aberto,
     titulo: '',
   };
@@ -37,11 +40,14 @@ export function ChamadoForm({ onSuccess }: Props) {
     const newErrors: Record<string, string | null> = {};
     let isValid: boolean = true;
 
-    for (const [key, value] of Object.entries(f)) {
-      if (!value?.trim()) {
-        newErrors[key] = 'Campo obrigatório';
-        isValid = false;
-      }
+    if (!f.titulo?.trim()) {
+      newErrors.titulo = 'Campo obrigatório';
+      isValid = false;
+    }
+
+    if (!f.descricao?.trim()) {
+      newErrors.descricao = 'Campo obrigatório';
+      isValid = false;
     }
 
     setErrors(newErrors);
@@ -92,28 +98,6 @@ export function ChamadoForm({ onSuccess }: Props) {
         error={errors.descricao}
         multiline
         numberOfLines={2}
-      />
-
-      <TextField
-        label="Nome do Usuário"
-        value={form.nomeDoUsuario}
-        onChangeText={(v) => handleChange('nomeDoUsuario', v)}
-        error={errors.nomeDoUsuario}
-      />
-
-      <TextField
-        label="E-mail"
-        value={form.emailDoUsuario}
-        onChangeText={(v) => handleChange('emailDoUsuario', v)}
-        keyboardType="email-address"
-        error={errors.emailDoUsuario}
-      />
-
-      <TextField
-        label="Setor do Usuário"
-        value={form.setorDoUsuario}
-        onChangeText={(v) => handleChange('setorDoUsuario', v)}
-        error={errors.setorDoUsuario}
       />
 
       <Text style={styles.label}>Prioridade</Text>
