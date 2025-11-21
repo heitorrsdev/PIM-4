@@ -11,8 +11,8 @@ import styles from './style';
 export default function TecnicoScreen() {
   const [chamados, setChamados] = useState<Chamado[]>([]);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [selectedChamado, setSelectedChamado] = useState<Chamado | null>(null);
 
   const fetchChamadosPendentes = async () => {

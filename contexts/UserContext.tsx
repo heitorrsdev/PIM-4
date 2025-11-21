@@ -23,9 +23,9 @@ export const UserContext = createContext<UserContextProps>({
 });
 
 export const UserProvider = ({ children }: UserProviderProps) => {
-  const { token, isAuthenticated } = useAuth();
-  const [user, setUser] = useState<Usuario | null>(null);
   const [loadingUser, setLoadingUser] = useState(true);
+  const [user, setUser] = useState<Usuario |  Tecnico | null>(null);
+  const { token, isAuthenticated } = useAuth();
 
   const fetchUser = async (): Promise<void> => {
     const response: Email | string = token ? await AuthService.getEmailByToken(token) : '';
