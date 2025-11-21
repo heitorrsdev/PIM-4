@@ -25,9 +25,9 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [isLoading, setIsLoading] = useState(true);
   const [token, setToken] = useState<string | null>(null);
   const isAuthenticated = !!token;
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async (): Promise<void> => {

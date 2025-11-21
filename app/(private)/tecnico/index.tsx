@@ -1,6 +1,8 @@
+import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, Text, View } from 'react-native';
 
+import { useUser } from '@/hooks';
 import { Chamado, ChamadoService, ChamadoStatus } from '@/services/chamados';
 import { showAlert } from '@/utils';
 
@@ -11,13 +13,14 @@ import styles from './style';
 export default function TecnicoScreen() {
   const [chamados, setChamados] = useState<Chamado[]>([]);
   const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [selectedChamado, setSelectedChamado] = useState<Chamado | null>(null);
+  const { loadingUser, userType } = useUser();
 
   const fetchChamadosPendentes = async () => {
     try {
-      const data = await ChamadoService.list();
+      const data = await ChamadoService.getAll();
 
       // Remover este filtro assim que possível. Por enquanto usaremos isso, mas o Enrico está criando um endpoint de filtragem de entidade que fará isso para nós. É apenas uma solução provisória.
       const pendentes = data.filter(
@@ -37,8 +40,16 @@ export default function TecnicoScreen() {
   };
 
   useEffect(() => {
+    if (loadingUser) return;
+
+    if (userType !== 'Tecnico') {
+      showAlert('Erro', 'Apenas técnicos podem acessar essa tela.');
+      router.replace('/(public)/login');
+      return;
+    }
+
     fetchChamadosPendentes();
-  }, []);
+  }, [loadingUser, userType]);
 
   const handleRefresh = async () => {
     setRefreshing(true);

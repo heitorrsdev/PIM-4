@@ -1,15 +1,15 @@
-import { View, Image, Text, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform, ScrollView, Text, View } from 'react-native';
 
 import LoginForm from './components/loginForm';
 import styles from './style';
 
 export default function LoginScreen() {
   return (
-    <KeyboardAvoidingView 
-      style={styles.container} 
+    <KeyboardAvoidingView
+      style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
-      <ScrollView 
+      <ScrollView
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
@@ -17,7 +17,7 @@ export default function LoginScreen() {
         <View style={styles.contentWrapper}>
           <View style={styles.headerSection}>
             <View style={styles.logoContainer}>
-              <Image 
+              <Image
                 source={require('@/assets/images/logo.png')}
                 style={styles.logo}
                 resizeMode="contain"

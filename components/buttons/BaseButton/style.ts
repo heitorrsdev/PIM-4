@@ -7,16 +7,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.primary,
     borderRadius: 12,
+    cursor: 'pointer',
+    elevation: 6,
     paddingHorizontal: 24,
     paddingVertical: 16,
     shadowColor: colors.primary,
     shadowOffset: {
-      width: 0,
       height: 4,
-    },
+      width: 0,
+    } as any, // React Native não suporta 'cursor', por isso o 'as any'
     shadowOpacity: 0.3,
     shadowRadius: 8,
-    elevation: 6,
   },
   hovered: {
     opacity: 0.9,
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     cursor: 'not-allowed',
     pointerEvents: 'auto',
     shadowOpacity: 0.1,
-  } as any, // React Native não suporta 'cursor', por isso o 'as any'
+  } as any,
   text: {
     color: 'white',
     fontFamily: typography.fontFamily,

@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, Text } from 'react-native';
 
@@ -16,10 +17,11 @@ export default function ChamadosScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const { user, loadingUser } = useUser();
   const userEmail = user?.email || '';
+  const { userType } = useUser();
 
   const fetchChamados = async () => {
     try {
-      const data = await ChamadoService.getByEmail(userEmail);
+      const data = await ChamadoService.search(userEmail);
       setChamados(data);
     } catch {
       showAlert('Erro', 'Não foi possível buscar chamados');
@@ -29,12 +31,19 @@ export default function ChamadosScreen() {
     }
   };
 
-useEffect(() => {
-  if (!loadingUser && userEmail) {
-    fetchChamados();
-  }
-}, [loadingUser, userEmail]);
+  useEffect(() => {
+    if (loadingUser) return;
 
+    if (userType !== 'Usuario') {
+      showAlert('Erro', 'Apenas usuários podem acessar essa tela.');
+      router.replace('/(public)/login');
+      return;
+    }
+
+    if (userEmail) {
+      fetchChamados();
+    }
+  }, [loadingUser, userType, userEmail]);
 
   const handleRefresh = async () => {
     setRefreshing(true);
