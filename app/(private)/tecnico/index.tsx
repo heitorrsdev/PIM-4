@@ -16,7 +16,7 @@ export default function TecnicoScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [selectedChamado, setSelectedChamado] = useState<Chamado | null>(null);
-  const { loadingUser, userType } = useUser();
+  const { userLoading, userType } = useUser();
 
   const fetchChamadosPendentes = async () => {
     try {
@@ -32,7 +32,7 @@ export default function TecnicoScreen() {
   };
 
   useEffect(() => {
-    if (loadingUser) return;
+    if (userLoading) return;
 
     if (userType !== 'Tecnico') {
       showAlert('Erro', 'Apenas técnicos podem acessar essa tela.');
@@ -41,7 +41,7 @@ export default function TecnicoScreen() {
     }
 
     fetchChamadosPendentes();
-  }, [loadingUser, userType]);
+  }, [userLoading, userType]);
 
   const handleRefresh = async () => {
     setRefreshing(true);
