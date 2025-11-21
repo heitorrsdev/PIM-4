@@ -9,8 +9,8 @@ export const UsuarioService = {
     return request<string>('post', `${BASE_URL}/Adicionar`, payload);
   },
 
-  getByEmail(email: string): Promise<Usuario | string> {
-    return request<Usuario | string>('get', `${BASE_URL}/ObterPorEmail/${email}`);
+  getByEmail(email: string): Promise<Usuario> {
+    return request<Usuario>('get', `${BASE_URL}/ObterPorEmail/${email}`);
   },
 
   update(id: string, payload: UsuarioPayload): Promise<string> {

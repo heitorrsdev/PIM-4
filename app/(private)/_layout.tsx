@@ -5,14 +5,14 @@ import BaseHeader from '@/components/headers/BaseHeader';
 import { useAuth } from '@/hooks';
 
 export default function PrivateLayout() {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { token, authLoading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && !isAuthenticated) {
+    if (!authLoading && !token) {
       router.replace('/(public)/login');
     }
-  }, [isAuthenticated, isLoading, router]);
+  }, [token, authLoading, router]);
 
   return (
     <Stack
