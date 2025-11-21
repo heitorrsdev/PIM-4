@@ -1,7 +1,9 @@
 import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
-import { RefreshControl, ScrollView, Text } from 'react-native';
+import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-native';
 
+import { BaseButton } from '@/components/buttons';
+import { BaseModal } from '@/components/modals';
 import { useUser } from '@/hooks';
 import { ChamadoService } from '@/services/chamados';
 import { Chamado } from '@/services/chamados/chamado.types';
@@ -15,6 +17,7 @@ export default function ChamadosScreen() {
   const [chamados, setChamados] = useState<Chamado[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
   const { user, userLoading } = useUser();
   const userEmail = user?.email || '';
   const { userType } = useUser();
@@ -36,7 +39,9 @@ export default function ChamadosScreen() {
 
     if (userType !== 'Usuario') {
       showAlert('Erro', 'Apenas usuários podem acessar essa tela.');
-      router.replace('/(public)/login');
+      setTimeout(() => {
+        router.replace('/(public)/login');
+      }, 100);
       return;
     }
 
@@ -50,19 +55,58 @@ export default function ChamadosScreen() {
     await fetchChamados();
   };
 
-  if (loading || userLoading) return <Text style={styles.empty}>Carregando...</Text>;
+  const handleSuccessCreate = () => {
+    setModalVisible(false);
+    fetchChamados();
+  };
+
+  if (loading || userLoading) {
+    return (
+      <View style={styles.centerContainer}>
+        <ActivityIndicator size="large" color="#0A2E50" />
+        <Text style={styles.loadingText}>Carregando...</Text>
+      </View>
+    );
+  }
 
   return (
-    <ScrollView
-      contentContainerStyle={styles.container}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
-    >
-      <ChamadoForm onSuccess={fetchChamados} />
-      {chamados.length === 0 ? (
-        <Text style={styles.empty}>Nenhum chamado encontrado.</Text>
-      ) : (
-        chamados.map((c) => <ChamadoCard key={c.chamadoID} chamado={c} />)
-      )}
-    </ScrollView>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View style={styles.headerRow}>
+          <Text style={styles.pageTitle}>Chamados</Text>
+          <BaseButton onPress={() => setModalVisible(true)} style={styles.addButton}>
+            <Text style={styles.addButtonText}>+</Text>
+          </BaseButton>
+        </View>
+      </View>
+
+      <View style={styles.contentWrapper}>
+        <FlatList
+          data={chamados}
+          keyExtractor={(item) => item.chamadoID}
+          renderItem={({ item }) => <ChamadoCard chamado={item} />}
+          contentContainerStyle={styles.listContent}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <Text style={styles.emptyIcon}>📋</Text>
+              <Text style={styles.emptyTitle}>Nenhum chamado</Text>
+              <Text style={styles.emptySubtitle}>
+                Clique no botão + para abrir um novo chamado
+              </Text>
+            </View>
+          }
+        />
+      </View>
+
+      <BaseModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        title="Novo Chamado"
+      >
+        <ChamadoForm onSuccess={handleSuccessCreate} />
+      </BaseModal>
+    </View>
   );
 }
