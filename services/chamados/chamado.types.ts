@@ -18,6 +18,7 @@ export interface ChamadoPayload {
   setorDoUsuario: string,
   status: ChamadoStatus,
   titulo: string,
+  resposta?: string | null,
 }
 
 export interface Chamado extends ChamadoPayload {
