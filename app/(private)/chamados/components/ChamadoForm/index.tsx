@@ -5,6 +5,7 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
 import { useUser } from '@/hooks';
+import { Usuario } from '@/services';
 import { ChamadoPayload, ChamadoPrioridade, ChamadoService , ChamadoStatus } from '@/services/chamados';
 import { showAlert } from '@/utils';
 
@@ -16,20 +17,21 @@ interface Props {
 
 export function ChamadoForm({ onSuccess }: Props) {
   const { user } = useUser();
+  const userData: Usuario = user as Usuario; // necessário pois user pode ser Tecnico também
 
   const defaultForm: ChamadoPayload = {
     descricao: '',
-    emailDoUsuario: user?.email || '',
-    nomeDoUsuario: user?.nome || '',
+    emailDoUsuario: userData?.email || '',
+    nomeDoUsuario: userData?.nome || '',
     prioridade: ChamadoPrioridade.Baixa,
-    setorDoUsuario: user?.setor || '',
+    setorDoUsuario: userData?.setor || '',
     status: ChamadoStatus.Aberto,
     titulo: '',
   };
 
+  const [errors, setErrors] = useState<Record<string, string | null>>({});
   const [form, setForm] = useState<ChamadoPayload>(defaultForm);
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string | null>>({});
 
   const handleChange = (key: keyof ChamadoPayload, value: string) => {
     setForm({ ...form, [key]: value });
@@ -59,7 +61,7 @@ export function ChamadoForm({ onSuccess }: Props) {
 
       setLoading(true);
       try {
-        await ChamadoService.add(form);
+        await ChamadoService.create(form);
         showAlert('Sucesso', 'Chamado criado com sucesso!');
         onSuccess();
         setForm(defaultForm);

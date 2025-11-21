@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, Text, View } from 'react-native';
 
 import { useUser } from '@/hooks';
-import { Chamado, ChamadoService, ChamadoStatus } from '@/services/chamados';
+import { Chamado, ChamadoService } from '@/services/chamados';
 import { showAlert } from '@/utils';
 
 import { ChamadoCardTecnico } from './components/ChamadoCardTecnico';
@@ -16,19 +16,11 @@ export default function TecnicoScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [selectedChamado, setSelectedChamado] = useState<Chamado | null>(null);
-  const { loadingUser, userType } = useUser();
+  const { userLoading, userType } = useUser();
 
   const fetchChamadosPendentes = async () => {
     try {
-      const data = await ChamadoService.getAll();
-
-      // Remover este filtro assim que possível. Por enquanto usaremos isso, mas o Enrico está criando um endpoint de filtragem de entidade que fará isso para nós. É apenas uma solução provisória.
-      const pendentes = data.filter(
-        (chamado) => {
-          const status = chamado.status?.trim();
-          return status === ChamadoStatus.Pendente;
-        }
-      );
+      const pendentes = await ChamadoService.getByStatus('Pendente');
 
       setChamados(pendentes);
     } catch {
@@ -40,7 +32,7 @@ export default function TecnicoScreen() {
   };
 
   useEffect(() => {
-    if (loadingUser) return;
+    if (userLoading) return;
 
     if (userType !== 'Tecnico') {
       showAlert('Erro', 'Apenas técnicos podem acessar essa tela.');
@@ -49,7 +41,7 @@ export default function TecnicoScreen() {
     }
 
     fetchChamadosPendentes();
-  }, [loadingUser, userType]);
+  }, [userLoading, userType]);
 
   const handleRefresh = async () => {
     setRefreshing(true);
