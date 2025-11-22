@@ -28,7 +28,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [userLoading, setUserLoading] = useState(true);
   const [user, setUser] = useState<Usuario | Tecnico | null>(null);
   const [userType, setUserType] = useState<'Usuario' | 'Tecnico' | null>(null);
-
   const { token } = useAuth();
 
   const loadUser = async (): Promise<void> => {

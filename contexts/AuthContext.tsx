@@ -43,7 +43,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       await saveToken(data.token);
       setToken(data.token);
     } catch (err) {
-      console.error('Login failed:', err);
       throw err;
     }
   }, []);
