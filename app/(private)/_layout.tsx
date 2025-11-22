@@ -18,7 +18,7 @@ export default function PrivateLayout() {
     <Stack
       screenOptions={{
         headerShown: true,
-        header: () => <BaseHeader title="Suptech" />,
+        header: () => <BaseHeader title="Suptech" showLogout={true} />,
       }}
     />
   );
