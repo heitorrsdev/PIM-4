@@ -10,9 +10,10 @@ import styles from './style';
 
 interface BaseHeaderProps {
   title: string;
+  showLogout?: boolean;
 }
 
-export default function BaseHeader({ title, ...rest }: BaseHeaderProps) {
+export default function BaseHeader({ title, showLogout = false, ...rest }: BaseHeaderProps) {
   const { logout, token } = useAuth();
 
   async function handleLogout(): Promise<void> {
@@ -24,7 +25,7 @@ export default function BaseHeader({ title, ...rest }: BaseHeaderProps) {
     <SafeAreaView edges={['top']} style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
-        {token &&
+        {showLogout && token &&
           <BaseButton onPress={handleLogout} style={styles.logoutButton}>
             Sair
           </BaseButton>
