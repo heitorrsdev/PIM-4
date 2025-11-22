@@ -17,7 +17,7 @@ export default StyleSheet.create({
     fontWeight: theme.typography.fontWeight.bold,
   },
   content: {
-    maxHeight: '80%',
+    maxHeight: 500,
     padding: 20,
     cursor: 'default',
   } as any,
@@ -34,7 +34,6 @@ export default StyleSheet.create({
   modalContainer: {
     backgroundColor: 'white',
     borderRadius: 12,
-    maxHeight: '90%',
     maxWidth: 600,
     width: '90%',
     cursor: 'default',

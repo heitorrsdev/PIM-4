@@ -17,7 +17,7 @@ interface Props {
 
 export function ChamadoForm({ onSuccess }: Props) {
   const { user } = useUser();
-  const userData: Usuario = user as Usuario; // necessário pois user pode ser Tecnico também
+  const userData: Usuario = user as Usuario; // necessário pois user pode ser Tecnico também.
 
   const defaultForm: ChamadoPayload = {
     descricao: '',
@@ -37,6 +37,7 @@ export function ChamadoForm({ onSuccess }: Props) {
     setForm({ ...form, [key]: value });
     setErrors({ ...errors, [key]: null });
   };
+
 
   const validateForm = (f: ChamadoPayload): boolean => {
     const newErrors: Record<string, string | null> = {};
