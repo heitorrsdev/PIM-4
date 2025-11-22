@@ -11,6 +11,7 @@ import { showAlert } from '@/utils';
 
 import { ChamadoCard } from './components/ChamadoCard';
 import { ChamadoForm } from './components/ChamadoForm';
+import { ChatbotModal } from './components/ChatbotModal';
 import styles from './style';
 
 export default function ChamadosScreen() {
@@ -18,6 +19,7 @@ export default function ChamadosScreen() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [chatbotVisible, setChatbotVisible] = useState(false);
   const { user, userLoading } = useUser();
   const userEmail = user?.email || '';
   const { userType } = useUser();
@@ -72,9 +74,14 @@ export default function ChamadosScreen() {
       <View style={styles.header}>
         <View style={styles.headerRow}>
           <Text style={styles.pageTitle}>Chamados</Text>
-          <BaseButton onPress={() => setModalVisible(true)} style={styles.addButton}>
-            <Text style={styles.addButtonText}>+</Text>
-          </BaseButton>
+          <View style={styles.headerButtons}>
+            <BaseButton onPress={() => setChatbotVisible(true)} style={styles.aiButton}>
+              <Text style={styles.aiButtonText}>IA</Text>
+            </BaseButton>
+            <BaseButton onPress={() => setModalVisible(true)} style={styles.addButton}>
+              <Text style={styles.addButtonText}>+</Text>
+            </BaseButton>
+          </View>
         </View>
       </View>
 
@@ -105,6 +112,11 @@ export default function ChamadosScreen() {
       >
         <ChamadoForm onSuccess={handleSuccessCreate} />
       </BaseModal>
+
+      <ChatbotModal
+        visible={chatbotVisible}
+        onClose={() => setChatbotVisible(false)}
+      />
     </View>
   );
 }
