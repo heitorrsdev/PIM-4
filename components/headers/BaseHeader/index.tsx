@@ -21,13 +21,11 @@ export default function BaseHeader({ title, showLogout = false, ...rest }: BaseH
     router.replace('/(public)/login');
   }
 
-  const shouldShowLogoutButton = token && showLogout;
-
   return (
     <SafeAreaView edges={['top']} style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>{title}</Text>
-        {shouldShowLogoutButton &&
+        {showLogout && token &&
           <BaseButton onPress={handleLogout} style={styles.logoutButton}>
             Sair
           </BaseButton>
