@@ -16,10 +16,10 @@ import styles from './style';
 
 export default function ChamadosScreen() {
   const [chamados, setChamados] = useState<Chamado[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
   const [chatbotVisible, setChatbotVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const { user, userLoading } = useUser();
   const userEmail = user?.email || '';
   const { userType } = useUser();
