@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, View, Text, Pressable, Platform, Linking } from 'react-native';
+import { Linking, Modal, Platform, Pressable, Text, View } from 'react-native';
+
 import styles from './style';
 
 interface ChatbotModalProps {
@@ -31,7 +32,7 @@ export function ChatbotModal({ visible, onClose }: ChatbotModalProps) {
               <Text style={styles.closeButtonText}>✕</Text>
             </Pressable>
           </View>
-          
+
           <View style={styles.webviewContainer}>
             <iframe
               src={typebotUrl}
@@ -62,11 +63,11 @@ export function ChatbotModal({ visible, onClose }: ChatbotModalProps) {
           <Text style={styles.mobileDescription}>
             O chatbot será aberto no seu navegador
           </Text>
-          
+
           <Pressable onPress={openInBrowser} style={styles.openButton}>
             <Text style={styles.openButtonText}>Abrir Chatbot</Text>
           </Pressable>
-          
+
           <Pressable onPress={onClose} style={styles.cancelButton}>
             <Text style={styles.cancelButtonText}>Cancelar</Text>
           </Pressable>
