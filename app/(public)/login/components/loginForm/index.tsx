@@ -50,7 +50,7 @@ export default function LoginForm() {
       await login({ email: form.email, senha: form.senha });
       showAlert('Sucesso', 'Login realizado com sucesso');
 
-      router.replace('/(private)/chamados');
+      router.replace('/(private)/redirect');
     } catch {
       showAlert('Erro', 'Email ou senha inválidos');
     } finally {
