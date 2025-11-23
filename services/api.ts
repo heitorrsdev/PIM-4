@@ -10,7 +10,7 @@ export const registerLogoutCallback = (fn: () => Promise<void>) => {
 };
 
 const api = axios.create({
-  baseURL: 'http://localhost:5165/api',
+  baseURL: process.env.EXPO_PUBLIC_API_URL || 'http://localhost:5165/api',
   timeout: 10000,
 });
 
