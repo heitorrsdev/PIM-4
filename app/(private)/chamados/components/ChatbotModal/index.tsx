@@ -8,7 +8,7 @@ interface ChatbotModalProps {
 }
 
 export function ChatbotModal({ visible, onClose }: ChatbotModalProps) {
-  const typebotUrl = 'https://typebot.co/my-typebot-x6bdxm9';
+  const typebotUrl = 'https://typebot.co/suptech-ia-z7eza52';
 
   const openInBrowser = () => {
     Linking.openURL(typebotUrl);
