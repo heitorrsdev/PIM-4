@@ -11,7 +11,10 @@ import { showAlert } from '@/utils';
 
 import { ChamadoCard } from './components/ChamadoCard';
 import { ChamadoForm } from './components/ChamadoForm';
+import { ChamadoInfoModal } from './components/ChamadoInfoModal';
 import { ChatbotModal } from './components/ChatbotModal';
+import { DeleteChamadoModal } from './components/DeleteChamadoModal';
+import { EditChamadoForm } from './components/EditChamadoForm';
 import styles from './style';
 
 export default function ChamadosScreen() {
@@ -19,6 +22,10 @@ export default function ChamadosScreen() {
   const [chatbotVisible, setChatbotVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [infoModalVisible, setInfoModalVisible] = useState(false);
+  const [selectedChamado, setSelectedChamado] = useState<Chamado | null>(null);
   const [refreshing, setRefreshing] = useState(false);
   const { user, userLoading } = useUser();
   const userEmail = user?.email || '';
@@ -60,6 +67,33 @@ export default function ChamadosScreen() {
     fetchChamados();
   };
 
+  const handleEdit = (chamado: Chamado) => {
+    setSelectedChamado(chamado);
+    setEditModalVisible(true);
+  };
+
+  const handleDelete = (chamado: Chamado) => {
+    setSelectedChamado(chamado);
+    setDeleteModalVisible(true);
+  };
+
+  const handleInfo = (chamado: Chamado) => {
+    setSelectedChamado(chamado);
+    setInfoModalVisible(true);
+  };
+
+  const handleSuccessEdit = () => {
+    setEditModalVisible(false);
+    setSelectedChamado(null);
+    fetchChamados();
+  };
+
+  const handleSuccessDelete = () => {
+    setDeleteModalVisible(false);
+    setSelectedChamado(null);
+    fetchChamados();
+  };
+
   if (loading || userLoading) {
     return (
       <View style={styles.centerContainer}>
@@ -89,10 +123,6 @@ export default function ChamadosScreen() {
         <FlatList
           data={chamados}
           keyExtractor={(item) => item.chamadoID}
-          renderItem={({ item }) => <ChamadoCard chamado={item} />}
-          contentContainerStyle={styles.listContent}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
-          showsVerticalScrollIndicator={false}
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
               <Text style={styles.emptyIcon}>📋</Text>
@@ -102,6 +132,17 @@ export default function ChamadosScreen() {
               </Text>
             </View>
           }
+          renderItem={({ item }) => (
+            <ChamadoCard
+              chamado={item}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onInfo={handleInfo}
+            />
+          )}
+          contentContainerStyle={styles.listContent}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+          showsVerticalScrollIndicator={false}
         />
       </View>
 
@@ -116,6 +157,41 @@ export default function ChamadosScreen() {
       <ChatbotModal
         visible={chatbotVisible}
         onClose={() => setChatbotVisible(false)}
+      />
+
+      <BaseModal
+        visible={editModalVisible}
+        onClose={() => {
+          setEditModalVisible(false);
+          setSelectedChamado(null);
+        }}
+        title="Editar Chamado"
+      >
+        {selectedChamado && (
+          <EditChamadoForm
+            chamado={selectedChamado}
+            onSuccess={handleSuccessEdit}
+          />
+        )}
+      </BaseModal>
+
+      <DeleteChamadoModal
+        chamado={selectedChamado}
+        visible={deleteModalVisible}
+        onClose={() => {
+          setDeleteModalVisible(false);
+          setSelectedChamado(null);
+        }}
+        onSuccess={handleSuccessDelete}
+      />
+
+      <ChamadoInfoModal
+        chamado={selectedChamado}
+        visible={infoModalVisible}
+        onClose={() => {
+          setInfoModalVisible(false);
+          setSelectedChamado(null);
+        }}
       />
     </View>
   );

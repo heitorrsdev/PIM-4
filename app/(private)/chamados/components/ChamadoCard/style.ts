@@ -11,11 +11,56 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
+    position: 'relative',
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 4,
   },
   title: {
+    flex: 1,
     fontSize: typography.fontSize.large,
     fontWeight: typography.fontWeight.bold,
-    marginBottom: 4,
+  },
+  menuButton: {
+    padding: 4,
+    marginLeft: 8,
+  },
+  menuButtonText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: colors.textSecondary,
+  },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'transparent',
+  },
+  menuContainer: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 10,
+    minWidth: 160,
+  },
+  menuItem: {
+    padding: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+  },
+  menuItemDelete: {
+    borderBottomWidth: 0,
+  },
+  menuItemText: {
+    fontSize: typography.fontSize.normal,
+    color: colors.textPrimary,
+  },
+  menuItemDeleteText: {
+    color: '#dc3545',
   },
   desc: {
     color: colors.textSecondary,

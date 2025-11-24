@@ -26,6 +26,6 @@ export const ChamadoService = {
   },
 
   delete(id: string) {
-    return request<string>('delete', `${BASE_URL}/Deletar/${id}`);
+    return request<string>('delete', `${BASE_URL}/Excluir/${id}`);
   },
 };
