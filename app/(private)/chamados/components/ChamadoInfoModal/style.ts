@@ -4,7 +4,7 @@ import { colors, typography } from '@/styles';
 
 const styles = StyleSheet.create({
   container: {
-    maxHeight: 500,
+    paddingBottom: 16,
   },
   section: {
     marginBottom: 16,

@@ -31,8 +31,7 @@ export default StyleSheet.create({
   content: {
     maxHeight: 500,
     padding: 20,
-    cursor: 'default',
-  } as any,
+  },
   header: {
     alignItems: 'center',
     borderBottomColor: '#e5e7eb',
@@ -48,15 +47,20 @@ export default StyleSheet.create({
     borderRadius: 12,
     maxWidth: 600,
     width: '90%',
-    cursor: 'default',
-  } as any,
+  },
   overlay: {
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     flex: 1,
     justifyContent: 'center',
-    cursor: 'pointer',
-  } as any,
+  },
+  overlayPress: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
   title: {
     color: theme.colors.textPrimary,
     fontSize: theme.typography.fontSize.large,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 import { BaseModal } from '@/components/modals';
 import { Chamado } from '@/services/chamados';
@@ -17,7 +17,7 @@ export function ChamadoInfoModal({ chamado, visible, onClose }: Props) {
 
   return (
     <BaseModal visible={visible} onClose={onClose} title="Informações do Chamado">
-      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <View style={styles.container}>
         <View style={styles.section}>
           <Text style={styles.label}>ID do Chamado</Text>
           <Text style={styles.value}>{chamado.chamadoID}</Text>
@@ -83,7 +83,7 @@ export function ChamadoInfoModal({ chamado, visible, onClose }: Props) {
             </View>
           </>
         )}
-      </ScrollView>
+      </View>
     </BaseModal>
   );
 }
