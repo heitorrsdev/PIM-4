@@ -1,5 +1,6 @@
 import React from 'react';
-import { Linking, Modal, Platform, Pressable, Text, View } from 'react-native';
+import { Modal, Platform, Pressable, Text, View } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 import styles from './style';
 
@@ -11,12 +12,7 @@ interface ChatbotModalProps {
 export function ChatbotModal({ visible, onClose }: ChatbotModalProps) {
   const typebotUrl = 'https://typebot.co/suptech-ia-z7eza52';
 
-  const openInBrowser = () => {
-    Linking.openURL(typebotUrl);
-    onClose();
-  };
-
-  // Para web, renderizar iframe diretamente
+  // Para web, renderizar iframe
   if (Platform.OS === 'web') {
     return (
       <Modal
@@ -49,28 +45,31 @@ export function ChatbotModal({ visible, onClose }: ChatbotModalProps) {
     );
   }
 
-  // Para mobile, abrir no navegador externo
+  // Para mobile, usar WebView dentro do app
   return (
     <Modal
       visible={visible}
       animationType="slide"
-      transparent={true}
+      transparent={false}
       onRequestClose={onClose}
     >
-      <View style={styles.mobileContainer}>
-        <View style={styles.mobileContent}>
-          <Text style={styles.mobileTitle}>Assistente IA</Text>
-          <Text style={styles.mobileDescription}>
-            O chatbot será aberto no seu navegador
-          </Text>
-
-          <Pressable onPress={openInBrowser} style={styles.openButton}>
-            <Text style={styles.openButtonText}>Abrir Chatbot</Text>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.headerTitle}>Assistente IA</Text>
+          <Pressable onPress={onClose} style={styles.closeButton}>
+            <Text style={styles.closeButtonText}>✕</Text>
           </Pressable>
+        </View>
 
-          <Pressable onPress={onClose} style={styles.cancelButton}>
-            <Text style={styles.cancelButtonText}>Cancelar</Text>
-          </Pressable>
+        <View style={styles.webviewContainer}>
+          <WebView
+            source={{ uri: typebotUrl }}
+            style={styles.webview}
+            javaScriptEnabled={true}
+            domStorageEnabled={true}
+            startInLoadingState={true}
+            scalesPageToFit={true}
+          />
         </View>
       </View>
     </Modal>
