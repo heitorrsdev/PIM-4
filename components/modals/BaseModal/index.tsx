@@ -20,19 +20,26 @@ export default function BaseModal({ visible, onClose, title, children }: BaseMod
       animationType="fade"
       onRequestClose={onClose}
     >
-      <Pressable style={styles.overlay} onPress={onClose}>
-        <Pressable style={styles.modalContainer} onPress={(e) => e.stopPropagation()}>
+      <View style={styles.overlay}>
+        <Pressable style={styles.overlayPress} onPress={onClose} />
+        <View style={styles.modalContainer}>
           <View style={styles.header}>
             <Text style={styles.title}>{title}</Text>
             <BaseButton onPress={onClose} style={styles.closeButton}>
               <Text style={styles.closeButtonText}>✕</Text>
             </BaseButton>
           </View>
-          <ScrollView style={styles.content}>
+          <ScrollView
+            style={styles.content}
+            showsVerticalScrollIndicator={true}
+            nestedScrollEnabled={true}
+            bounces={true}
+            scrollEnabled={true}
+          >
             {children}
           </ScrollView>
-        </Pressable>
-      </Pressable>
+        </View>
+      </View>
     </Modal>
   );
 }
