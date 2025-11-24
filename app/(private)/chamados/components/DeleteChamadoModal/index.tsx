@@ -3,9 +3,9 @@ import { ActivityIndicator, Text, View } from 'react-native';
 
 import { BaseButton } from '@/components/buttons';
 import { BaseModal } from '@/components/modals';
+import { useToast } from '@/hooks';
 import { ChamadoService } from '@/services/chamados';
 import { Chamado } from '@/services/chamados/chamado.types';
-import { showAlert } from '@/utils';
 
 import styles from './style';
 
@@ -18,6 +18,7 @@ interface Props {
 
 export function DeleteChamadoModal({ chamado, visible, onClose, onSuccess }: Props) {
   const [loading, setLoading] = useState(false);
+  const { showToast } = useToast();
 
   const handleDelete = async () => {
     if (!chamado) return;
@@ -25,11 +26,11 @@ export function DeleteChamadoModal({ chamado, visible, onClose, onSuccess }: Pro
     setLoading(true);
     try {
       await ChamadoService.delete(chamado.chamadoID);
-      showAlert('Sucesso', 'Chamado excluído com sucesso!');
+      showToast('Chamado excluído com sucesso!');
       onSuccess();
       onClose();
     } catch {
-      showAlert('Erro', 'Não foi possível excluir o chamado');
+      showToast('Não foi possível excluir o chamado');
     } finally {
       setLoading(false);
     }

@@ -2,9 +2,8 @@ import { router } from 'expo-router';
 import React, { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, Text, View } from 'react-native';
 
-import { useUser } from '@/hooks';
+import { useToast,useUser } from '@/hooks';
 import { Chamado, ChamadoService } from '@/services/chamados';
-import { showAlert } from '@/utils';
 
 import { ChamadoCardTecnico } from './components/ChamadoCardTecnico';
 import { TicketResponseModal } from './components/TicketResponseModal';
@@ -17,14 +16,14 @@ export default function TecnicoScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [selectedChamado, setSelectedChamado] = useState<Chamado | null>(null);
   const { userLoading, userType } = useUser();
+  const { showToast } = useToast();
 
   const fetchChamadosPendentes = async () => {
     try {
       const pendentes = await ChamadoService.getByStatus('Pendente');
-
       setChamados(pendentes);
     } catch {
-      showAlert('Erro', 'Não foi possível buscar chamados pendentes');
+      showToast('Não foi possível buscar chamados pendentes');
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -35,7 +34,7 @@ export default function TecnicoScreen() {
     if (userLoading) return;
 
     if (userType !== 'Tecnico') {
-      showAlert('Erro', 'Apenas técnicos podem acessar essa tela.');
+      showToast('Apenas técnicos podem acessar essa tela.');
       router.replace('/(public)/login');
       return;
     }

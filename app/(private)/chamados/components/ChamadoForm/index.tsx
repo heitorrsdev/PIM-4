@@ -4,10 +4,9 @@ import { Dropdown } from 'react-native-element-dropdown';
 
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
-import { useUser } from '@/hooks';
+import { useToast,useUser } from '@/hooks';
 import { Usuario } from '@/services';
 import { ChamadoPayload, ChamadoPrioridade, ChamadoService , ChamadoStatus } from '@/services/chamados';
-import { showAlert } from '@/utils';
 
 import styles from './style';
 
@@ -18,6 +17,7 @@ interface Props {
 export function ChamadoForm({ onSuccess }: Props) {
   const { user } = useUser();
   const userData: Usuario = user as Usuario; // necessário pois user pode ser Tecnico também.
+  const { showToast } = useToast();
 
   const defaultForm: ChamadoPayload = {
     descricao: '',
@@ -38,7 +38,6 @@ export function ChamadoForm({ onSuccess }: Props) {
     setErrors({ ...errors, [key]: null });
   };
 
-
   const validateForm = (f: ChamadoPayload): boolean => {
     const newErrors: Record<string, string | null> = {};
     let isValid: boolean = true;
@@ -56,18 +55,18 @@ export function ChamadoForm({ onSuccess }: Props) {
 
     const handleSubmit = async (): Promise<void> => {
       if (!validateForm(form)) {
-        showAlert('Campos obrigatórios', 'Preencha todos os campos antes de continuar.');
+        showToast('Preencha todos os campos antes de continuar.');
         return;
       }
 
       setLoading(true);
       try {
         await ChamadoService.create(form);
-        showAlert('Sucesso', 'Chamado criado com sucesso!');
+        showToast('Chamado criado com sucesso!');
         onSuccess();
         setForm(defaultForm);
       } catch {
-        showAlert('Erro', 'Não foi possível criar o chamado.');
+        showToast('Não foi possível criar o chamado.');
       } finally {
         setLoading(false);
       }
