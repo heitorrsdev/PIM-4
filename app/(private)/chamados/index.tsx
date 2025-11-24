@@ -89,10 +89,6 @@ export default function ChamadosScreen() {
         <FlatList
           data={chamados}
           keyExtractor={(item) => item.chamadoID}
-          renderItem={({ item }) => <ChamadoCard chamado={item} />}
-          contentContainerStyle={styles.listContent}
-          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
-          showsVerticalScrollIndicator={false}
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
               <Text style={styles.emptyIcon}>📋</Text>
@@ -102,6 +98,17 @@ export default function ChamadosScreen() {
               </Text>
             </View>
           }
+          renderItem={({ item }) => (
+            <ChamadoCard
+              chamado={item}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onInfo={handleInfo}
+            />
+          )}
+          contentContainerStyle={styles.listContent}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}
+          showsVerticalScrollIndicator={false}
         />
       </View>
 
