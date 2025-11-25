@@ -51,6 +51,10 @@ export default StyleSheet.create({
     backgroundColor: theme.colors.textSecondary,
     flex: 1,
   },
+  fullWidthButton: {
+    backgroundColor: theme.colors.textSecondary,
+    flex: 1,
+  },
   detailsContent: {
     paddingBottom: 20,
   },

@@ -11,6 +11,7 @@ interface Props {
   chamado: Chamado;
   onSubmit: () => void;
   buttonText?: string;
+  showOnlyDetails?: boolean;
 }
 
 function getPriorityColor(prioridade: string): string {
@@ -21,7 +22,7 @@ function getPriorityColor(prioridade: string): string {
   return '#6b7280';
 }
 
-export function ChamadoCardTecnico({ chamado, onSubmit, buttonText = 'Responder' }: Props) {
+export function ChamadoCardTecnico({ chamado, onSubmit, buttonText = 'Responder', showOnlyDetails = false }: Props) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
@@ -45,13 +46,15 @@ export function ChamadoCardTecnico({ chamado, onSubmit, buttonText = 'Responder'
       </View>
 
       <View style={styles.actions}>
-        <BaseButton onPress={() => setShowDetails(true)} style={styles.detailsButton}>
+        <BaseButton onPress={() => setShowDetails(true)} style={showOnlyDetails ? styles.fullWidthButton : styles.detailsButton}>
           Ver Detalhes
         </BaseButton>
 
-        <BaseButton onPress={onSubmit} style={styles.submitButton}>
-          {buttonText}
-        </BaseButton>
+        {!showOnlyDetails && (
+          <BaseButton onPress={onSubmit} style={styles.submitButton}>
+            {buttonText}
+          </BaseButton>
+        )}
       </View>
 
       <BaseModal visible={showDetails} onClose={() => setShowDetails(false)} title="Detalhes do Chamado">
@@ -81,6 +84,13 @@ export function ChamadoCardTecnico({ chamado, onSubmit, buttonText = 'Responder'
 
           <Text style={styles.detailLabel}>Setor:</Text>
           <Text style={styles.detailValue}>{chamado.setorDoUsuario}</Text>
+
+          {chamado.resposta && (
+            <>
+              <Text style={styles.detailLabel}>Resposta do Técnico:</Text>
+              <Text style={styles.detailValue}>{chamado.resposta}</Text>
+            </>
+          )}
         </View>
       </BaseModal>
     </View>

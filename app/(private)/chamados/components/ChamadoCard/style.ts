@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
 import { colors, typography } from '@/styles';
 
@@ -12,6 +12,10 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     position: 'relative',
+    ...(Platform.OS === 'web' && {
+      marginHorizontal: 'auto',
+      width: '30%',
+    }),
   },
   header: {
     flexDirection: 'row',
