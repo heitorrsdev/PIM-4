@@ -1,7 +1,7 @@
 import axios from 'axios';
 
+import { showToastGlobal } from '@/contexts';
 import { getToken } from '@/services/auth/storage';
-import { showAlert } from '@/utils/notifications';
 
 let logoutCallback: (() => Promise<void>) | null = null;
 
@@ -33,21 +33,20 @@ api.interceptors.response.use(
     const response = error.response;
 
     if (!response) {
-      showAlert('Erro de rede', 'Não foi possível se conectar ao servidor.');
+      showToastGlobal('Não foi possível se conectar ao servidor.');
       return Promise.reject(error);
     }
 
     const status: number = response.status;
     const message: string = response.data?.message || 'Ocorreu um erro inesperado. Tente novamente.';
 
-    if (status === 401) {
-      showAlert('Sessão expirada', 'Por favor, faça login novamente.');
+    if (status === 403) {
+      showToastGlobal('Por favor, faça login novamente.');
 
       if (logoutCallback) {
         await logoutCallback();
       }
     }
-
 
     return Promise.reject({
       status,
