@@ -94,9 +94,6 @@ export default function TecnicoScreen() {
         tecnicoResponsavel: tecnico.email,
       };
 
-      console.log('Atualizando chamado:', chamado.chamadoID);
-      console.log('Payload:', payload);
-
       // Atualizar o status do chamado para 'Pendente' e adicionar técnico responsável
       await ChamadoService.update(chamado.chamadoID, payload);
 
@@ -104,8 +101,7 @@ export default function TecnicoScreen() {
       await fetchChamados();
 
       showToast('Chamado escolhido com sucesso!');
-    } catch (error) {
-      console.error('Erro ao escolher chamado:', error);
+    } catch {
       showToast('Não foi possível escolher o chamado');
     }
   };
