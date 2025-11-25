@@ -1,29 +1,32 @@
-# TechSupport App - Frontend (PIM-4)
+# Suptech App - Frontend (Mobile e Web)
 
 <!-- BADGES SECTION -->
-[![Status do Projeto](https://img.shields.io/badge/Status-Em%20Desenvolvimento-yellow)](https://github.com/heitorrsdev/PIM-4)
+[![Status do Projeto](https://img.shields.io/badge/Status-Conclu%C3%ADdo-brightgreen)](https://github.com/heitorrsdev/PIM-4)
 [![Licença](https://img.shields.io/github/license/heitorrsdev/PIM-4)](LICENSE)
 [![Tecnologia Principal](https://img.shields.io/badge/Frontend-React%20Native%20Web-61DAFB?logo=react&logoColor=white)](https://reactnative.dev/)
 [![Backend Integrado](https://img.shields.io/badge/Backend-API--MVC--Suptech%20(.NET%209)-512BD4?logo=dotnet&logoColor=white)](https://github.com/enricochicot/API-MVC-Suptech)
 
 ## 🎓 Contexto do Projeto (Trabalho de Conclusão de Curso - TCC)
 
-Este repositório contém o código-fonte do **Frontend** do projeto **TechSupport App**, desenvolvido como parte do Trabalho de Conclusão de Curso (TCC). O objetivo é criar uma aplicação móvel e web para o **gerenciamento de chamados técnicos**, permitindo que usuários abram chamados que serão gerenciados por técnicos e gerentes.
+Este repositório contém o código-fonte do **Frontend** do projeto **Suptech**, desenvolvido como parte do Trabalho de Conclusão de Curso (TCC). O **Suptech App** é uma aplicação móvel e web para o **gerenciamento de chamados técnicos**, permitindo que usuários abram chamados que são gerenciados por técnicos e gerentes.
 
-O projeto é dividido em repositórios que se comunicam através da API central:
+O sistema **Suptech** é composto por três repositórios principais que se comunicam através da API central:
 
-1.  **Frontend (Este Repositório):** Aplicação móvel e web desenvolvida com React Native Web e Expo para **Usuários e Técnicos**.
-2.  **Frontend Desktop:** [SuptechDESKTOP](https://github.com/LeonardoZanchi/SuptechDESKTOP), aplicação desktop em JavaFX para **Gerentes**.
-3.  **Backend (API):** [API-MVC-Suptech](https://github.com/enricochicot/API-MVC-Suptech), desenvolvida em ASP.NET Core (.NET 9) para gerenciar usuários e chamados.
+| Componente | Tecnologia | Público-Alvo | Repositório |
+| :--- | :--- | :--- | :--- |
+| **Frontend (Este Repositório)** | React Native Web + Expo | Usuários e Técnicos | [heitorrsdev/PIM-4](https://github.com/heitorrsdev/PIM-4) |
+| **Frontend Desktop** | JavaFX 21 | Gerentes | [LeonardoZanchi/SuptechDESKTOP](https://github.com/LeonardoZanchi/SuptechDESKTOP) |
+| **Backend (API Central)** | ASP.NET Core (.NET 9) | - | [API-MVC-Suptech](https://github.com/enricochicot/API-MVC-Suptech) |
 
-## ✨ Funcionalidades (Visão Geral)
+## ✨ Funcionalidades Implementadas
 
-O aplicativo final terá as seguintes funcionalidades:
+O **Suptech App** oferece as seguintes funcionalidades:
 
-*   **Abertura de Chamados:** Usuários podem registrar problemas técnicos.
-*   **Gerenciamento de Usuários:** Cadastro e autenticação de Usuários e Técnicos.
-*   **Visualização de Chamados:** Listagem e detalhamento dos chamados abertos e atribuídos.
-*   **Interface Multiplataforma:** Acesso via dispositivos móveis e navegadores web.
+*   **Abertura de Chamados:** Usuários podem registrar problemas técnicos de forma simples e rápida.
+*   **Gerenciamento de Usuários:** Autenticação de Usuários e Técnicos.
+*   **Visualização de Chamados:** Listagem e detalhamento dos chamados abertos e atribuídos, com filtros por status e prioridade.
+*   **Interface Multiplataforma:** Acesso completo via dispositivos móveis (iOS/Android) e navegadores web.
+*   **Integração Completa:** Comunicação estável e segura com a API central.
 
 ## 💻 Tecnologias Utilizadas
 
@@ -34,16 +37,6 @@ O aplicativo final terá as seguintes funcionalidades:
 | **Navegação** | React Navigation | Solução de roteamento e navegação para aplicações React Native. |
 | **Linguagem** | TypeScript | Linguagem de programação principal, oferecendo tipagem estática para maior robustez. |
 | **Backend** | ASP.NET Core (.NET 9) | Framework utilizado para a construção da API RESTful de suporte. |
-
-## 🚧 Estado Atual e Próximos Passos
-
-O projeto está em fase de desenvolvimento. O foco atual é a implementação da interface e a integração com a API.
-
-| Status Atual | Próximos Passos |
-| :--- | :--- |
-| **Interface:** Telas de login e registro funcionais (em termos de UI). | **Integração com API:** Finalizar a integração com a API para autenticação e CRUD de chamados. |
-| **Estrutura:** Projeto estruturado de forma modular e com gerenciamento de estado (Context API). | **Telas Adicionais:** Finalizar o desenvolvimento da tela de chamados e outras telas necessárias. |
-| **Design:** Implementação de design responsivo, moderno e minimalista. | **Refinamento:** Implementar design responsivo, moderno e minimalista. |
 
 ## 📁 Estrutura do Projeto
 
@@ -63,38 +56,42 @@ A estrutura do projeto segue um padrão modular para facilitar a manutenção e 
 
 ## 🛠️ Como Executar Localmente
 
-1.  **Instale o Expo CLI:**
+Para executar o **Suptech App** em seu ambiente de desenvolvimento, siga os passos abaixo:
+
+1.  **Certifique-se de que a API está rodando:**
+    *   O backend ([API-MVC-Suptech](https://github.com/enricochicot/API-MVC-Suptech)) deve estar em execução para que o frontend funcione corretamente.
+2.  **Instale o Expo CLI:**
     
     ```shell
     npm install -g expo-cli
     ```
     
-2.  **Clone o repositório:**
+3.  **Clone o repositório:**
     
     ```shell
     git clone https://github.com/heitorrsdev/PIM-4.git
     cd PIM-4
     ```
     
-3.  **Instale as dependências:**
+4.  **Instale as dependências:**
     
     ```shell
     npm install
     ```
     
-4.  **Inicie o servidor de desenvolvimento:**
+5.  **Inicie a aplicação:**
     
     ```shell
     npx expo start
     ```
     
-5.  **Acesse a Aplicação:**
+6.  **Acesse a Aplicação:**
     *   Use o aplicativo **Expo Go** no seu dispositivo móvel para escanear o QR Code.
     *   Pressione `w` no terminal para abrir a versão web no seu navegador.
 
-## 🤝 Como Contribuir
+## 🤝 Contribuição e Manutenção
 
-Contribuições são bem-vindas! Por favor, siga o guia de commits [COMMIT\_GUIDE.md](COMMIT_GUIDE.md) e abra um Pull Request.
+O projeto está concluído, mas contribuições para manutenção e melhorias futuras são bem-vindas. Por favor, siga o guia de commits [COMMIT\_GUIDE.md](COMMIT_GUIDE.md) e abra um Pull Request.
 
 ## 📄 Licença
 
