@@ -51,8 +51,8 @@ export default function LoginForm() {
       showToast('Login realizado com sucesso');
 
       router.replace('/(private)/redirect');
-    } catch {
-      showToast('Email ou senha inválidos');
+    } catch (error: any) {
+      if (error.status === 401) showToast('Email ou senha inválidos');
     } finally {
       setIsLoading(false);
     }
