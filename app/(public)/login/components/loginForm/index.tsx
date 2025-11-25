@@ -4,8 +4,7 @@ import { Text, View } from 'react-native';
 
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
-import { useAuth } from '@/hooks';
-import { showAlert } from '@/utils';
+import { useAuth , useToast } from '@/hooks';
 import { isValidEmail } from '@/utils/validation';
 
 import styles from './style';
@@ -17,6 +16,7 @@ interface LoginPayload {
 
 export default function LoginForm() {
   const { login } = useAuth();
+  const { showToast } = useToast();
 
   const [form, setForm] = useState<LoginPayload>({
     email: '',
@@ -48,11 +48,11 @@ export default function LoginForm() {
     setIsLoading(true);
     try {
       await login({ email: form.email, senha: form.senha });
-      showAlert('Sucesso', 'Login realizado com sucesso');
+      showToast('Login realizado com sucesso');
 
       router.replace('/(private)/redirect');
-    } catch {
-      showAlert('Erro', 'Email ou senha inválidos');
+    } catch (error: any) {
+      if (error.status === 401) showToast('Email ou senha inválidos');
     } finally {
       setIsLoading(false);
     }
