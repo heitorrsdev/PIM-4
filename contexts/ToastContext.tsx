@@ -1,5 +1,7 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Snackbar } from 'react-native-paper';
+
+import { registerToast } from './toastController';
 
 interface ToastContetProps {
   showToast: (msg: string) => void;
@@ -17,6 +19,10 @@ export function ToastProvider({ children }: any) {
     setMessage(msg);
     setVisible(true);
   }
+
+  useEffect(() => {
+    registerToast(showToast);
+  }, []);
 
   return (
     <ToastContext.Provider value={{ showToast }}>
