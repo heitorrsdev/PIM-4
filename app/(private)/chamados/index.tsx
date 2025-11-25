@@ -16,22 +16,24 @@ import { DeleteChamadoModal } from './components/DeleteChamadoModal';
 import { EditChamadoForm } from './components/EditChamadoForm';
 import styles from './style';
 
+type StatusFilter = 'Todos' | 'Aberto' | 'Pendente' | 'Fechado';
+
 export default function ChamadosScreen() {
   const [chamados, setChamados] = useState<Chamado[]>([]);
-  const [filteredChamados, setFilteredChamados] = useState<Chamado[]>([]);
-  const [selectedFilter, setSelectedFilter] = useState<'Todos' | 'Aberto' | 'Pendente' | 'Fechado'>('Todos');
   const [chatbotVisible, setChatbotVisible] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
+  const [filteredChamados, setFilteredChamados] = useState<Chamado[]>([]);
+  const [infoModalVisible, setInfoModalVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const [editModalVisible, setEditModalVisible] = useState(false);
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [infoModalVisible, setInfoModalVisible] = useState(false);
-  const [selectedChamado, setSelectedChamado] = useState<Chamado | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [selectedChamado, setSelectedChamado] = useState<Chamado | null>(null);
+  const [selectedFilter, setSelectedFilter] = useState<StatusFilter>('Todos');
   const { user, userLoading } = useUser();
   const userEmail = user?.email || '';
-  const { userType } = useUser();
   const { showToast } = useToast();
+  const { userType } = useUser();
 
   const fetchChamados = async () => {
     try {
@@ -46,7 +48,7 @@ export default function ChamadosScreen() {
     }
   };
 
-  const filterChamados = (data: Chamado[], filter: 'Todos' | 'Aberto' | 'Pendente' | 'Fechado') => {
+  const filterChamados = (data: Chamado[], filter: StatusFilter) => {
     if (filter === 'Todos') {
       setFilteredChamados(data);
     } else {
@@ -55,7 +57,7 @@ export default function ChamadosScreen() {
     }
   };
 
-  const handleFilterChange = (filter: 'Todos' | 'Aberto' | 'Pendente' | 'Fechado') => {
+  const handleFilterChange = (filter: StatusFilter) => {
     setSelectedFilter(filter);
     filterChamados(chamados, filter);
   };
@@ -134,35 +136,35 @@ export default function ChamadosScreen() {
             </BaseButton>
           </View>
         </View>
-        
+
         {/* Filtros por Status */}
         <View style={styles.filterContainer}>
-          <BaseButton 
-            onPress={() => handleFilterChange('Todos')} 
+          <BaseButton
+            onPress={() => handleFilterChange('Todos')}
             style={[styles.filterButton, selectedFilter === 'Todos' && styles.filterButtonActive]}
           >
             <Text style={[styles.filterButtonText, selectedFilter === 'Todos' && styles.filterButtonTextActive]}>
               Todos ({chamados.length})
             </Text>
           </BaseButton>
-          <BaseButton 
-            onPress={() => handleFilterChange('Aberto')} 
+          <BaseButton
+            onPress={() => handleFilterChange('Aberto')}
             style={[styles.filterButton, selectedFilter === 'Aberto' && styles.filterButtonActive]}
           >
             <Text style={[styles.filterButtonText, selectedFilter === 'Aberto' && styles.filterButtonTextActive]}>
               Aberto ({chamados.filter(c => c.status === 'Aberto').length})
             </Text>
           </BaseButton>
-          <BaseButton 
-            onPress={() => handleFilterChange('Pendente')} 
+          <BaseButton
+            onPress={() => handleFilterChange('Pendente')}
             style={[styles.filterButton, selectedFilter === 'Pendente' && styles.filterButtonActive]}
           >
             <Text style={[styles.filterButtonText, selectedFilter === 'Pendente' && styles.filterButtonTextActive]}>
               Pendente ({chamados.filter(c => c.status === 'Pendente').length})
             </Text>
           </BaseButton>
-          <BaseButton 
-            onPress={() => handleFilterChange('Fechado')} 
+          <BaseButton
+            onPress={() => handleFilterChange('Fechado')}
             style={[styles.filterButton, selectedFilter === 'Fechado' && styles.filterButtonActive]}
           >
             <Text style={[styles.filterButtonText, selectedFilter === 'Fechado' && styles.filterButtonTextActive]}>
