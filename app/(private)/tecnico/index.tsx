@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { RefreshControl, ScrollView, Text, View } from 'react-native';
 
 import { useToast,useUser } from '@/hooks';
-import { Chamado, ChamadoService } from '@/services/chamados';
+import { Chamado, ChamadoService, ChamadoStatus } from '@/services/chamados';
 import { Tecnico } from '@/services/tecnicos';
 
 import { ChamadoCardTecnico } from './components/ChamadoCardTecnico';
@@ -88,7 +88,7 @@ export default function TecnicoScreen() {
         nomeDoUsuario: chamado.nomeDoUsuario,
         prioridade: chamado.prioridade,
         setorDoUsuario: chamado.setorDoUsuario,
-        status: 'Pendente' as any,
+        status: ChamadoStatus.Pendente,
         titulo: chamado.titulo,
         resposta: chamado.resposta || null,
         tecnicoResponsavel: tecnico.email,
