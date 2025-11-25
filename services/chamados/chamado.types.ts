@@ -19,11 +19,13 @@ export interface ChamadoPayload {
   status: ChamadoStatus,
   titulo: string,
   resposta?: string | null,
+  tecnicoResponsavel?: string | null,
 }
 
 export interface Chamado extends ChamadoPayload {
   chamadoID: string,
   resposta?: string,
+  tecnicoResponsavel?: string | null,
 }
 
 export interface RespostaChamadoPayload {
