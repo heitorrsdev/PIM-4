@@ -4,12 +4,14 @@ import { RefreshControl, ScrollView, Text, View } from 'react-native';
 
 import { BaseButton } from '@/components/buttons';
 import { useToast,useUser } from '@/hooks';
-import { Chamado, ChamadoService } from '@/services/chamados';
+import { Chamado, ChamadoService, ChamadoStatus } from '@/services/chamados';
 import { Tecnico } from '@/services/tecnicos';
 
 import { ChamadoCardTecnico } from './components/ChamadoCardTecnico';
 import { TicketResponseModal } from './components/TicketResponseModal';
 import styles from './style';
+
+type Filters = 'Todos' | 'Baixa' | 'Média' | 'Alta';
 
 export default function TecnicoScreen() {
   const [chamadosAbertos, setChamadosAbertos] = useState<Chamado[]>([]);
@@ -18,9 +20,9 @@ export default function TecnicoScreen() {
   const [filteredChamadosEscolhidos, setFilteredChamadosEscolhidos] = useState<Chamado[]>([]);
   const [chamadosResolvidos, setChamadosResolvidos] = useState<Chamado[]>([]);
   const [filteredChamadosResolvidos, setFilteredChamadosResolvidos] = useState<Chamado[]>([]);
-  const [selectedFilterAbertos, setSelectedFilterAbertos] = useState<'Todos' | 'Baixa' | 'Média' | 'Alta'>('Todos');
-  const [selectedFilterEscolhidos, setSelectedFilterEscolhidos] = useState<'Todos' | 'Baixa' | 'Média' | 'Alta'>('Todos');
-  const [selectedFilterResolvidos, setSelectedFilterResolvidos] = useState<'Todos' | 'Baixa' | 'Média' | 'Alta'>('Todos');
+  const [selectedFilterAbertos, setSelectedFilterAbertos] = useState<Filters>('Todos');
+  const [selectedFilterEscolhidos, setSelectedFilterEscolhidos] = useState<Filters>('Todos');
+  const [selectedFilterResolvidos, setSelectedFilterResolvidos] = useState<Filters>('Todos');
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -28,22 +30,22 @@ export default function TecnicoScreen() {
   const { showToast } = useToast();
   const { user, userLoading, userType } = useUser();
 
-  const filterByPriority = (chamados: Chamado[], filter: 'Todos' | 'Baixa' | 'Média' | 'Alta') => {
+  const filterByPriority = (chamados: Chamado[], filter: Filters) => {
     if (filter === 'Todos') return chamados;
     return chamados.filter(chamado => chamado.prioridade === filter);
   };
 
-  const handleFilterAbertosChange = (filter: 'Todos' | 'Baixa' | 'Média' | 'Alta') => {
+  const handleFilterAbertosChange = (filter: Filters) => {
     setSelectedFilterAbertos(filter);
     setFilteredChamadosAbertos(filterByPriority(chamadosAbertos, filter));
   };
 
-  const handleFilterEscolhidosChange = (filter: 'Todos' | 'Baixa' | 'Média' | 'Alta') => {
+  const handleFilterEscolhidosChange = (filter: Filters) => {
     setSelectedFilterEscolhidos(filter);
     setFilteredChamadosEscolhidos(filterByPriority(chamadosEscolhidos, filter));
   };
 
-  const handleFilterResolvidosChange = (filter: 'Todos' | 'Baixa' | 'Média' | 'Alta') => {
+  const handleFilterResolvidosChange = (filter: Filters) => {
     setSelectedFilterResolvidos(filter);
     setFilteredChamadosResolvidos(filterByPriority(chamadosResolvidos, filter));
   };
@@ -57,28 +59,18 @@ export default function TecnicoScreen() {
       setChamadosAbertos(abertos);
       setFilteredChamadosAbertos(filterByPriority(abertos, selectedFilterAbertos));
 
-      // Filtrar apenas os chamados do técnico logado
-      const isTecnico = user && ('tecnicoID' in user || 'especialidade' in user);
+      const tecnico: Tecnico = user as Tecnico;
+      const chamadosDoTecnico = pendentes.filter(
+        chamado => chamado.tecnicoResponsavel === tecnico.email
+      );
+      setChamadosEscolhidos(chamadosDoTecnico);
+      setFilteredChamadosEscolhidos(filterByPriority(chamadosDoTecnico, selectedFilterEscolhidos));
 
-      if (isTecnico) {
-        const tecnico = user as Tecnico;
-        const chamadosDoTecnico = pendentes.filter(
-          chamado => chamado.tecnicoResponsavel === tecnico.email
-        );
-        setChamadosEscolhidos(chamadosDoTecnico);
-        setFilteredChamadosEscolhidos(filterByPriority(chamadosDoTecnico, selectedFilterEscolhidos));
-
-        const chamadosResolvidosDoTecnico = fechados.filter(
-          chamado => chamado.tecnicoResponsavel === tecnico.email
-        );
-        setChamadosResolvidos(chamadosResolvidosDoTecnico);
-        setFilteredChamadosResolvidos(filterByPriority(chamadosResolvidosDoTecnico, selectedFilterResolvidos));
-      } else {
-        setChamadosEscolhidos([]);
-        setFilteredChamadosEscolhidos([]);
-        setChamadosResolvidos([]);
-        setFilteredChamadosResolvidos([]);
-      }
+      const chamadosResolvidosDoTecnico = fechados.filter(
+        chamado => chamado.tecnicoResponsavel === tecnico.email
+      );
+      setChamadosResolvidos(chamadosResolvidosDoTecnico);
+      setFilteredChamadosResolvidos(filterByPriority(chamadosResolvidosDoTecnico, selectedFilterResolvidos));
     } catch {
       showToast('Não foi possível buscar chamados');
     } finally {
@@ -106,46 +98,25 @@ export default function TecnicoScreen() {
 
   const handleEscolherChamado = async (chamado: Chamado) => {
     try {
-      if (!user) {
-        showToast('Usuário não identificado');
-        return;
-      }
+      const tecnico: Tecnico = user as Tecnico;
 
-      // Verificar se é técnico através do tecnicoID ou especialidade
-      const isTecnico = 'tecnicoID' in user || 'especialidade' in user;
-
-      if (!isTecnico) {
-        showToast('Usuário não identificado como técnico');
-        return;
-      }
-
-      const tecnico = user as Tecnico;
-
-      // Criar payload com todos os campos necessários
       const payload = {
         descricao: chamado.descricao,
         emailDoUsuario: chamado.emailDoUsuario,
         nomeDoUsuario: chamado.nomeDoUsuario,
         prioridade: chamado.prioridade,
         setorDoUsuario: chamado.setorDoUsuario,
-        status: 'Pendente' as any,
+        status: ChamadoStatus.Pendente,
         titulo: chamado.titulo,
         resposta: chamado.resposta || null,
         tecnicoResponsavel: tecnico.email,
       };
 
-      console.log('Atualizando chamado:', chamado.chamadoID);
-      console.log('Payload:', payload);
-
-      // Atualizar o status do chamado para 'Pendente' e adicionar técnico responsável
       await ChamadoService.update(chamado.chamadoID, payload);
-
-      // Recarregar os chamados do servidor para garantir sincronização
       await fetchChamados();
 
       showToast('Chamado escolhido com sucesso!');
-    } catch (error) {
-      console.error('Erro ao escolher chamado:', error);
+    } catch {
       showToast('Não foi possível escolher o chamado');
     }
   };
@@ -187,32 +158,32 @@ export default function TecnicoScreen() {
 
       {chamadosAbertos.length > 0 &&
         <View style={styles.filterContainer}>
-          <BaseButton 
-            onPress={() => handleFilterAbertosChange('Todos')} 
+          <BaseButton
+            onPress={() => handleFilterAbertosChange('Todos')}
             style={[styles.filterButton, selectedFilterAbertos === 'Todos' && styles.filterButtonActive]}
           >
             <Text style={[styles.filterButtonText, selectedFilterAbertos === 'Todos' && styles.filterButtonTextActive]}>
               Todos ({chamadosAbertos.length})
             </Text>
           </BaseButton>
-          <BaseButton 
-            onPress={() => handleFilterAbertosChange('Baixa')} 
+          <BaseButton
+            onPress={() => handleFilterAbertosChange('Baixa')}
             style={[styles.filterButton, selectedFilterAbertos === 'Baixa' && styles.filterButtonActive]}
           >
             <Text style={[styles.filterButtonText, selectedFilterAbertos === 'Baixa' && styles.filterButtonTextActive]}>
               Baixa ({chamadosAbertos.filter(c => c.prioridade === 'Baixa').length})
             </Text>
           </BaseButton>
-          <BaseButton 
-            onPress={() => handleFilterAbertosChange('Média')} 
+          <BaseButton
+            onPress={() => handleFilterAbertosChange('Média')}
             style={[styles.filterButton, selectedFilterAbertos === 'Média' && styles.filterButtonActive]}
           >
             <Text style={[styles.filterButtonText, selectedFilterAbertos === 'Média' && styles.filterButtonTextActive]}>
               Média ({chamadosAbertos.filter(c => c.prioridade === 'Média').length})
             </Text>
           </BaseButton>
-          <BaseButton 
-            onPress={() => handleFilterAbertosChange('Alta')} 
+          <BaseButton
+            onPress={() => handleFilterAbertosChange('Alta')}
             style={[styles.filterButton, selectedFilterAbertos === 'Alta' && styles.filterButtonActive]}
           >
             <Text style={[styles.filterButtonText, selectedFilterAbertos === 'Alta' && styles.filterButtonTextActive]}>
@@ -221,7 +192,7 @@ export default function TecnicoScreen() {
           </BaseButton>
         </View>
       }
-      
+
 
       {filteredChamadosAbertos.length === 0 ? (
         <View style={styles.emptyContainer}>
@@ -251,32 +222,32 @@ export default function TecnicoScreen() {
       </View>
 
       <View style={styles.filterContainer}>
-        <BaseButton 
-          onPress={() => handleFilterEscolhidosChange('Todos')} 
+        <BaseButton
+          onPress={() => handleFilterEscolhidosChange('Todos')}
           style={[styles.filterButton, selectedFilterEscolhidos === 'Todos' && styles.filterButtonActive]}
         >
           <Text style={[styles.filterButtonText, selectedFilterEscolhidos === 'Todos' && styles.filterButtonTextActive]}>
             Todos ({chamadosEscolhidos.length})
           </Text>
         </BaseButton>
-        <BaseButton 
-          onPress={() => handleFilterEscolhidosChange('Baixa')} 
+        <BaseButton
+          onPress={() => handleFilterEscolhidosChange('Baixa')}
           style={[styles.filterButton, selectedFilterEscolhidos === 'Baixa' && styles.filterButtonActive]}
         >
           <Text style={[styles.filterButtonText, selectedFilterEscolhidos === 'Baixa' && styles.filterButtonTextActive]}>
             Baixa ({chamadosEscolhidos.filter(c => c.prioridade === 'Baixa').length})
           </Text>
         </BaseButton>
-        <BaseButton 
-          onPress={() => handleFilterEscolhidosChange('Média')} 
+        <BaseButton
+          onPress={() => handleFilterEscolhidosChange('Média')}
           style={[styles.filterButton, selectedFilterEscolhidos === 'Média' && styles.filterButtonActive]}
         >
           <Text style={[styles.filterButtonText, selectedFilterEscolhidos === 'Média' && styles.filterButtonTextActive]}>
             Média ({chamadosEscolhidos.filter(c => c.prioridade === 'Média').length})
           </Text>
         </BaseButton>
-        <BaseButton 
-          onPress={() => handleFilterEscolhidosChange('Alta')} 
+        <BaseButton
+          onPress={() => handleFilterEscolhidosChange('Alta')}
           style={[styles.filterButton, selectedFilterEscolhidos === 'Alta' && styles.filterButtonActive]}
         >
           <Text style={[styles.filterButtonText, selectedFilterEscolhidos === 'Alta' && styles.filterButtonTextActive]}>
@@ -313,32 +284,32 @@ export default function TecnicoScreen() {
       </View>
 
       <View style={styles.filterContainer}>
-        <BaseButton 
-          onPress={() => handleFilterResolvidosChange('Todos')} 
+        <BaseButton
+          onPress={() => handleFilterResolvidosChange('Todos')}
           style={[styles.filterButton, selectedFilterResolvidos === 'Todos' && styles.filterButtonActive]}
         >
           <Text style={[styles.filterButtonText, selectedFilterResolvidos === 'Todos' && styles.filterButtonTextActive]}>
             Todos ({chamadosResolvidos.length})
           </Text>
         </BaseButton>
-        <BaseButton 
-          onPress={() => handleFilterResolvidosChange('Baixa')} 
+        <BaseButton
+          onPress={() => handleFilterResolvidosChange('Baixa')}
           style={[styles.filterButton, selectedFilterResolvidos === 'Baixa' && styles.filterButtonActive]}
         >
           <Text style={[styles.filterButtonText, selectedFilterResolvidos === 'Baixa' && styles.filterButtonTextActive]}>
             Baixa ({chamadosResolvidos.filter(c => c.prioridade === 'Baixa').length})
           </Text>
         </BaseButton>
-        <BaseButton 
-          onPress={() => handleFilterResolvidosChange('Média')} 
+        <BaseButton
+          onPress={() => handleFilterResolvidosChange('Média')}
           style={[styles.filterButton, selectedFilterResolvidos === 'Média' && styles.filterButtonActive]}
         >
           <Text style={[styles.filterButtonText, selectedFilterResolvidos === 'Média' && styles.filterButtonTextActive]}>
             Média ({chamadosResolvidos.filter(c => c.prioridade === 'Média').length})
           </Text>
         </BaseButton>
-        <BaseButton 
-          onPress={() => handleFilterResolvidosChange('Alta')} 
+        <BaseButton
+          onPress={() => handleFilterResolvidosChange('Alta')}
           style={[styles.filterButton, selectedFilterResolvidos === 'Alta' && styles.filterButtonActive]}
         >
           <Text style={[styles.filterButtonText, selectedFilterResolvidos === 'Alta' && styles.filterButtonTextActive]}>
