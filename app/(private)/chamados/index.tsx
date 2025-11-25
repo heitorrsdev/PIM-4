@@ -18,6 +18,8 @@ import styles from './style';
 
 export default function ChamadosScreen() {
   const [chamados, setChamados] = useState<Chamado[]>([]);
+  const [filteredChamados, setFilteredChamados] = useState<Chamado[]>([]);
+  const [selectedFilter, setSelectedFilter] = useState<'Todos' | 'Aberto' | 'Pendente' | 'Fechado'>('Todos');
   const [chatbotVisible, setChatbotVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
@@ -35,12 +37,27 @@ export default function ChamadosScreen() {
     try {
       const data = await ChamadoService.getByEmail(userEmail);
       setChamados(data);
+      filterChamados(data, selectedFilter);
     } catch {
       showToast('Não foi possível buscar chamados');
     } finally {
       setLoading(false);
       setRefreshing(false);
     }
+  };
+
+  const filterChamados = (data: Chamado[], filter: 'Todos' | 'Aberto' | 'Pendente' | 'Fechado') => {
+    if (filter === 'Todos') {
+      setFilteredChamados(data);
+    } else {
+      const filtered = data.filter(chamado => chamado.status === filter);
+      setFilteredChamados(filtered);
+    }
+  };
+
+  const handleFilterChange = (filter: 'Todos' | 'Aberto' | 'Pendente' | 'Fechado') => {
+    setSelectedFilter(filter);
+    filterChamados(chamados, filter);
   };
 
   useEffect(() => {
@@ -117,11 +134,47 @@ export default function ChamadosScreen() {
             </BaseButton>
           </View>
         </View>
+        
+        {/* Filtros por Status */}
+        <View style={styles.filterContainer}>
+          <BaseButton 
+            onPress={() => handleFilterChange('Todos')} 
+            style={[styles.filterButton, selectedFilter === 'Todos' && styles.filterButtonActive]}
+          >
+            <Text style={[styles.filterButtonText, selectedFilter === 'Todos' && styles.filterButtonTextActive]}>
+              Todos ({chamados.length})
+            </Text>
+          </BaseButton>
+          <BaseButton 
+            onPress={() => handleFilterChange('Aberto')} 
+            style={[styles.filterButton, selectedFilter === 'Aberto' && styles.filterButtonActive]}
+          >
+            <Text style={[styles.filterButtonText, selectedFilter === 'Aberto' && styles.filterButtonTextActive]}>
+              Aberto ({chamados.filter(c => c.status === 'Aberto').length})
+            </Text>
+          </BaseButton>
+          <BaseButton 
+            onPress={() => handleFilterChange('Pendente')} 
+            style={[styles.filterButton, selectedFilter === 'Pendente' && styles.filterButtonActive]}
+          >
+            <Text style={[styles.filterButtonText, selectedFilter === 'Pendente' && styles.filterButtonTextActive]}>
+              Pendente ({chamados.filter(c => c.status === 'Pendente').length})
+            </Text>
+          </BaseButton>
+          <BaseButton 
+            onPress={() => handleFilterChange('Fechado')} 
+            style={[styles.filterButton, selectedFilter === 'Fechado' && styles.filterButtonActive]}
+          >
+            <Text style={[styles.filterButtonText, selectedFilter === 'Fechado' && styles.filterButtonTextActive]}>
+              Fechado ({chamados.filter(c => c.status === 'Fechado').length})
+            </Text>
+          </BaseButton>
+        </View>
       </View>
 
       <View style={styles.contentWrapper}>
         <FlatList
-          data={chamados}
+          data={filteredChamados}
           keyExtractor={(item) => item.chamadoID}
           ListEmptyComponent={
             <View style={styles.emptyContainer}>
