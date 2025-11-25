@@ -13,8 +13,8 @@ interface Props {
 }
 
 export function ChamadoCard({ chamado, onEdit, onDelete, onInfo }: Props) {
-  const [menuVisible, setMenuVisible] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ top: 0, right: 0 });
+  const [menuVisible, setMenuVisible] = useState(false);
   const buttonRef = useRef<View>(null);
 
   const handleEdit = () => {
