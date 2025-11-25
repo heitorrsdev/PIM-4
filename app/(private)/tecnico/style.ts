@@ -54,7 +54,34 @@ export default StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     gap: 12,
-    marginBottom: 20,
+    marginBottom: 12,
+  },
+  filterContainer: {
+    flexDirection: 'row',
+    gap: 8,
+    marginBottom: 16,
+    flexWrap: 'wrap',
+  },
+  filterButton: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    backgroundColor: '#f3f4f6',
+    minHeight: 36,
+    height: 36,
+  },
+  filterButtonActive: {
+    backgroundColor: theme.colors.primary,
+  },
+  filterButtonText: {
+    fontSize: theme.typography.fontSize.small,
+    color: theme.colors.textSecondary,
+    fontWeight: theme.typography.fontWeight.medium,
+    textTransform: 'none',
+  } as any,
+  filterButtonTextActive: {
+    color: '#fff',
+    fontWeight: theme.typography.fontWeight.bold,
   },
   loadingText: {
     color: theme.colors.textSecondary,
