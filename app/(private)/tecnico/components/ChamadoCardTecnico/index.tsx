@@ -10,6 +10,7 @@ import styles from './style';
 interface Props {
   chamado: Chamado;
   onSubmit: () => void;
+  buttonText?: string;
 }
 
 function getPriorityColor(prioridade: string): string {
@@ -20,7 +21,7 @@ function getPriorityColor(prioridade: string): string {
   return '#6b7280';
 }
 
-export function ChamadoCardTecnico({ chamado, onSubmit }: Props) {
+export function ChamadoCardTecnico({ chamado, onSubmit, buttonText = 'Responder' }: Props) {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
@@ -49,7 +50,7 @@ export function ChamadoCardTecnico({ chamado, onSubmit }: Props) {
         </BaseButton>
 
         <BaseButton onPress={onSubmit} style={styles.submitButton}>
-          Responder
+          {buttonText}
         </BaseButton>
       </View>
 
@@ -66,6 +67,11 @@ export function ChamadoCardTecnico({ chamado, onSubmit }: Props) {
 
           <Text style={styles.detailLabel}>Status:</Text>
           <Text style={styles.detailValue}>{chamado.status}</Text>
+
+          <Text style={styles.detailLabel}>Técnico Responsável:</Text>
+          <Text style={styles.detailValue}>
+            {chamado.tecnicoResponsavel || 'Ainda não foi selecionado por nenhum técnico'}
+          </Text>
 
           <Text style={styles.detailLabel}>Usuário:</Text>
           <Text style={styles.detailValue}>{chamado.nomeDoUsuario}</Text>
