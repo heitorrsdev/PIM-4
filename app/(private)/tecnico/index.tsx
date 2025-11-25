@@ -4,7 +4,7 @@ import { RefreshControl, ScrollView, Text, View } from 'react-native';
 
 import { useToast,useUser } from '@/hooks';
 import { Chamado, ChamadoService } from '@/services/chamados';
-import { Tecnico, TecnicoService } from '@/services/tecnicos';
+import { Tecnico } from '@/services/tecnicos';
 
 import { ChamadoCardTecnico } from './components/ChamadoCardTecnico';
 import { TicketResponseModal } from './components/TicketResponseModal';
@@ -26,10 +26,10 @@ export default function TecnicoScreen() {
       const pendentes = await ChamadoService.getByStatus('Pendente');
 
       setChamadosAbertos(abertos);
-      
+
       // Filtrar apenas os chamados do técnico logado
       const isTecnico = user && ('tecnicoID' in user || 'especialidade' in user);
-      
+
       if (isTecnico) {
         const tecnico = user as Tecnico;
         const chamadosDoTecnico = pendentes.filter(
@@ -40,7 +40,7 @@ export default function TecnicoScreen() {
         setChamadosEscolhidos([]);
       }
     } catch {
-      showToast('Erro', 'Não foi possível buscar chamados');
+      showToast('Não foi possível buscar chamados');
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -67,15 +67,15 @@ export default function TecnicoScreen() {
   const handleEscolherChamado = async (chamado: Chamado) => {
     try {
       if (!user) {
-        showAlert('Erro', 'Usuário não identificado');
+        showToast('Usuário não identificado');
         return;
       }
 
       // Verificar se é técnico através do tecnicoID ou especialidade
       const isTecnico = 'tecnicoID' in user || 'especialidade' in user;
-      
+
       if (!isTecnico) {
-        showAlert('Erro', 'Usuário não identificado como técnico');
+        showToast('Usuário não identificado como técnico');
         return;
       }
 
@@ -103,10 +103,10 @@ export default function TecnicoScreen() {
       // Recarregar os chamados do servidor para garantir sincronização
       await fetchChamados();
 
-      showAlert('Sucesso', 'Chamado escolhido com sucesso!');
+      showToast('Chamado escolhido com sucesso!');
     } catch (error) {
       console.error('Erro ao escolher chamado:', error);
-      showAlert('Erro', 'Não foi possível escolher o chamado');
+      showToast('Não foi possível escolher o chamado');
     }
   };
 
