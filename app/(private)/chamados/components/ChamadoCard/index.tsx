@@ -13,8 +13,8 @@ interface Props {
 }
 
 export function ChamadoCard({ chamado, onEdit, onDelete, onInfo }: Props) {
-  const [menuVisible, setMenuVisible] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ top: 0, right: 0 });
+  const [menuVisible, setMenuVisible] = useState(false);
   const buttonRef = useRef<View>(null);
 
   const handleEdit = () => {
@@ -75,12 +75,16 @@ export function ChamadoCard({ chamado, onEdit, onDelete, onInfo }: Props) {
               >
                 <Text style={styles.menuItemText}> Informações</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.menuItem}
-                onPress={handleEdit}
-              >
-                <Text style={styles.menuItemText}> Editar</Text>
-              </TouchableOpacity>
+
+              {chamado.status !== 'Fechado' && (
+                <TouchableOpacity
+                  style={styles.menuItem}
+                  onPress={handleEdit}
+                >
+                  <Text style={styles.menuItemText}> Editar</Text>
+                </TouchableOpacity>
+              )}
+
               <TouchableOpacity
                 style={[styles.menuItem, styles.menuItemDelete]}
                 onPress={handleDelete}
