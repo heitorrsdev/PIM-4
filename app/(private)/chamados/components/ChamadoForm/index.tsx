@@ -53,24 +53,24 @@ export function ChamadoForm({ onSuccess }: Props) {
     return isValid;
   };
 
-    const handleSubmit = async (): Promise<void> => {
-      if (!validateForm(form)) {
-        showToast('Preencha todos os campos antes de continuar.');
-        return;
-      }
+  const handleSubmit = async (): Promise<void> => {
+    if (!validateForm(form)) {
+      showToast('Preencha todos os campos antes de continuar.');
+      return;
+    }
 
-      setLoading(true);
-      try {
-        await ChamadoService.create(form);
-        showToast('Chamado criado com sucesso!');
-        onSuccess();
-        setForm(defaultForm);
-      } catch {
-        showToast('Não foi possível criar o chamado.');
-      } finally {
-        setLoading(false);
-      }
-    };
+    setLoading(true);
+    try {
+      await ChamadoService.create(form);
+      showToast('Chamado criado com sucesso!');
+      onSuccess();
+      setForm(defaultForm);
+    } catch {
+      showToast('Não foi possível criar o chamado.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
     const prioridadeOptions = Object.values(ChamadoPrioridade).map((p) => ({
       label: p,
