@@ -17,8 +17,8 @@ export default function TecnicoScreen() {
   const [modalVisible, setModalVisible] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [selectedChamado, setSelectedChamado] = useState<Chamado | null>(null);
-  const { userLoading, userType } = useUser();
   const { showToast } = useToast();
+  const { user, userLoading, userType } = useUser();
 
   const fetchChamados = async () => {
     try {
