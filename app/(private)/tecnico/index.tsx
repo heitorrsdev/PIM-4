@@ -27,18 +27,12 @@ export default function TecnicoScreen() {
 
       setChamadosAbertos(abertos);
 
-      // Filtrar apenas os chamados do técnico logado
-      const isTecnico = user && ('tecnicoID' in user || 'especialidade' in user);
 
-      if (isTecnico) {
-        const tecnico = user as Tecnico;
-        const chamadosDoTecnico = pendentes.filter(
-          chamado => chamado.tecnicoResponsavel === tecnico.email
-        );
-        setChamadosEscolhidos(chamadosDoTecnico);
-      } else {
-        setChamadosEscolhidos([]);
-      }
+      const tecnico = user as Tecnico;
+      const chamadosDoTecnico = pendentes.filter(
+        chamado => chamado.tecnicoResponsavel === tecnico.email
+      );
+      setChamadosEscolhidos(chamadosDoTecnico);
     } catch {
       showToast('Não foi possível buscar chamados');
     } finally {
