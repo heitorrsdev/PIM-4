@@ -1,10 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react';
 
+import { showToastGlobal } from '@/contexts';
 import { useAuth } from '@/hooks';
 import { AuthService, Tecnico, TecnicoService, Usuario } from '@/services';
 import { Email } from '@/services/auth';
 import { UsuarioService } from '@/services/usuarios/usuario.service';
-import { showAlert } from '@/utils';
 
 interface UserContextProps {
   user: Usuario | Tecnico | null;
@@ -62,7 +62,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       setUser(resolvedUser);
       setUserType(tecnico ? 'Tecnico' : usuario ? 'Usuario' : null);
     } catch {
-      showAlert('Erro', 'Não foi possível carregar os dados do usuário.');
+      showToastGlobal('Não foi possível carregar os dados do usuário.');
     } finally {
       setUserLoading(false);
     }

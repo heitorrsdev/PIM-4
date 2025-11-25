@@ -4,10 +4,9 @@ import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-n
 
 import { BaseButton } from '@/components/buttons';
 import { BaseModal } from '@/components/modals';
-import { useUser } from '@/hooks';
+import { useToast,useUser  } from '@/hooks';
 import { ChamadoService } from '@/services/chamados';
 import { Chamado } from '@/services/chamados/chamado.types';
-import { showAlert } from '@/utils';
 
 import { ChamadoCard } from './components/ChamadoCard';
 import { ChamadoForm } from './components/ChamadoForm';
@@ -30,13 +29,14 @@ export default function ChamadosScreen() {
   const { user, userLoading } = useUser();
   const userEmail = user?.email || '';
   const { userType } = useUser();
+  const { showToast } = useToast();
 
   const fetchChamados = async () => {
     try {
       const data = await ChamadoService.getByEmail(userEmail);
       setChamados(data);
     } catch {
-      showAlert('Erro', 'Não foi possível buscar chamados');
+      showToast('Não foi possível buscar chamados');
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -47,7 +47,7 @@ export default function ChamadosScreen() {
     if (userLoading) return;
 
     if (userType !== 'Usuario') {
-      showAlert('Erro', 'Apenas usuários podem acessar essa tela.');
+      showToast('Apenas usuários podem acessar essa tela.');
       router.replace('/(public)/login');
       return;
     }

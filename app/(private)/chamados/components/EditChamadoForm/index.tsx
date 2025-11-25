@@ -3,9 +3,9 @@ import { ActivityIndicator, Text, View } from 'react-native';
 
 import { BaseButton } from '@/components/buttons';
 import { TextField } from '@/components/inputs';
+import { useToast } from '@/hooks';
 import { ChamadoService } from '@/services/chamados';
 import { Chamado, ChamadoPrioridade } from '@/services/chamados/chamado.types';
-import { showAlert } from '@/utils';
 
 import styles from './style';
 
@@ -19,10 +19,11 @@ export function EditChamadoForm({ chamado, onSuccess }: Props) {
   const [descricao, setDescricao] = useState(chamado.descricao);
   const [prioridade, setPrioridade] = useState(chamado.prioridade);
   const [loading, setLoading] = useState(false);
+  const { showToast } = useToast();
 
   const handleSubmit = async () => {
     if (!titulo.trim() || !descricao.trim()) {
-      showAlert('Erro', 'Preencha todos os campos');
+      showToast('Preencha todos os campos');
       return;
     }
 
@@ -37,10 +38,10 @@ export function EditChamadoForm({ chamado, onSuccess }: Props) {
         setorDoUsuario: chamado.setorDoUsuario,
         status: chamado.status,
       });
-      showAlert('Sucesso', 'Chamado atualizado com sucesso!');
+      showToast('Chamado atualizado com sucesso!');
       onSuccess();
     } catch {
-      showAlert('Erro', 'Não foi possível atualizar o chamado');
+      showToast('Não foi possível atualizar o chamado');
     } finally {
       setLoading(false);
     }

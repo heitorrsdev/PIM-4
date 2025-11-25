@@ -4,8 +4,8 @@ import { Text, View } from 'react-native';
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
 import { BaseModal } from '@/components/modals';
+import { useToast } from '@/hooks';
 import { Chamado, ChamadoService, ChamadoStatus } from '@/services/chamados';
-import { showAlert } from '@/utils';
 
 import styles from './style';
 
@@ -20,6 +20,7 @@ export function TicketResponseModal({ visible, onClose, chamado, onSuccess }: Pr
   const [response, setResponse] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   const resetForm = () => {
     setResponse('');
@@ -36,12 +37,12 @@ export function TicketResponseModal({ visible, onClose, chamado, onSuccess }: Pr
       const { chamadoID, ...apiPayload } = updatedChamado;
       await ChamadoService.update(chamado.chamadoID, apiPayload);
 
-      showAlert('Sucesso', 'Chamado respondido com sucesso!');
+      showToast('Chamado respondido com sucesso!');
       resetForm();
       onSuccess();
       onClose();
     } catch {
-      showAlert('Erro', 'Não foi possível responder o chamado.');
+      showToast('Não foi possível responder o chamado.');
     } finally {
       setLoading(false);
     }
