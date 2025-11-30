@@ -5,7 +5,7 @@ import { Text, View } from 'react-native';
 import { BaseForm } from '@/components/forms';
 import { TextField } from '@/components/inputs';
 import { useAuth , useToast } from '@/hooks';
-import { isValidEmail } from '@/utils/validation';
+import { isValidEmail } from '@/utils';
 
 import styles from './style';
 
