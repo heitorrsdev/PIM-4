@@ -56,33 +56,7 @@ export default StyleSheet.create({
     gap: 12,
     marginBottom: 12,
   },
-  filterContainer: {
-    flexDirection: 'row',
-    gap: 8,
-    marginBottom: 16,
-    flexWrap: 'wrap',
-  },
-  filterButton: {
-    backgroundColor: '#f3f4f6',
-    borderRadius: 20,
-    height: 36,
-    minHeight: 36,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-  },
-  filterButtonActive: {
-    backgroundColor: theme.colors.primary,
-  },
-  filterButtonText: {
-    color: theme.colors.textSecondary,
-    fontSize: theme.typography.fontSize.small,
-    fontWeight: theme.typography.fontWeight.medium,
-    textTransform: 'none',
-  } as any,
-  filterButtonTextActive: {
-    color: '#fff',
-    fontWeight: theme.typography.fontWeight.bold,
-  },
+
   loadingText: {
     color: theme.colors.textSecondary,
     fontSize: theme.typography.fontSize.normal,

@@ -73,7 +73,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   }, [token]);
 
   return (
-    <UserContext.Provider value={{ user, userType, userLoading: userLoading, refreshUser: loadUser }}>
+    <UserContext.Provider value={{ user, userType, userLoading, refreshUser: loadUser }}>
       {children}
     </UserContext.Provider>
   );

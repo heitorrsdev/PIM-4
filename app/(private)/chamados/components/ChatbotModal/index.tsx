@@ -4,12 +4,12 @@ import { WebView } from 'react-native-webview';
 
 import styles from './style';
 
-interface ChatbotModalProps {
+interface Props {
   visible: boolean;
   onClose: () => void;
 }
 
-export function ChatbotModal({ visible, onClose }: ChatbotModalProps) {
+export function ChatbotModal({ visible, onClose }: Props) {
   const typebotUrl = 'https://typebot.co/suptech-ia-z7eza52';
 
   // Para web, renderizar iframe
