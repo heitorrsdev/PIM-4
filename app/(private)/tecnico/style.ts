@@ -65,4 +65,11 @@ export default StyleSheet.create({
     fontSize: theme.typography.fontSize.title,
     fontWeight: theme.typography.fontWeight.bold,
   },
+  navigationButtons: {
+    flexDirection: 'row',
+    gap: 24,
+    justifyContent: 'center',
+    marginBottom: 16,
+    width: '100%',
+  },
 });
