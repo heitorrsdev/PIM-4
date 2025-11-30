@@ -56,7 +56,6 @@ export default StyleSheet.create({
     gap: 12,
     marginBottom: 12,
   },
-
   loadingText: {
     color: theme.colors.textSecondary,
     fontSize: theme.typography.fontSize.normal,
