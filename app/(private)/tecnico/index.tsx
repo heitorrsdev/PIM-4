@@ -8,6 +8,7 @@ import { Chamado, ChamadoService, ChamadoStatus } from '@/services/chamados';
 import { Tecnico } from '@/services/tecnicos';
 
 import { ChamadoCardTecnico } from './components/ChamadoCardTecnico';
+import { TecnicoFilterButtons } from './components/TecnicoFilterButtons';
 import { TicketResponseModal } from './components/TicketResponseModal';
 import styles from './style';
 
@@ -156,43 +157,13 @@ export default function TecnicoScreen() {
         </View>
       </View>
 
-      {chamadosAbertos.length > 0 &&
-        <View style={styles.filterContainer}>
-          <BaseButton
-            onPress={() => handleFilterAbertosChange('Todos')}
-            style={[styles.filterButton, selectedFilterAbertos === 'Todos' && styles.filterButtonActive]}
-          >
-            <Text style={[styles.filterButtonText, selectedFilterAbertos === 'Todos' && styles.filterButtonTextActive]}>
-              Todos ({chamadosAbertos.length})
-            </Text>
-          </BaseButton>
-          <BaseButton
-            onPress={() => handleFilterAbertosChange('Baixa')}
-            style={[styles.filterButton, selectedFilterAbertos === 'Baixa' && styles.filterButtonActive]}
-          >
-            <Text style={[styles.filterButtonText, selectedFilterAbertos === 'Baixa' && styles.filterButtonTextActive]}>
-              Baixa ({chamadosAbertos.filter(c => c.prioridade === 'Baixa').length})
-            </Text>
-          </BaseButton>
-          <BaseButton
-            onPress={() => handleFilterAbertosChange('Média')}
-            style={[styles.filterButton, selectedFilterAbertos === 'Média' && styles.filterButtonActive]}
-          >
-            <Text style={[styles.filterButtonText, selectedFilterAbertos === 'Média' && styles.filterButtonTextActive]}>
-              Média ({chamadosAbertos.filter(c => c.prioridade === 'Média').length})
-            </Text>
-          </BaseButton>
-          <BaseButton
-            onPress={() => handleFilterAbertosChange('Alta')}
-            style={[styles.filterButton, selectedFilterAbertos === 'Alta' && styles.filterButtonActive]}
-          >
-            <Text style={[styles.filterButtonText, selectedFilterAbertos === 'Alta' && styles.filterButtonTextActive]}>
-              Alta ({chamadosAbertos.filter(c => c.prioridade === 'Alta').length})
-            </Text>
-          </BaseButton>
-        </View>
-      }
-
+      {chamadosAbertos.length > 0 && (
+        <TecnicoFilterButtons
+          chamados={chamadosAbertos}
+          selectedFilter={selectedFilterAbertos}
+          onFilterChange={handleFilterAbertosChange}
+        />
+      )}
 
       {filteredChamadosAbertos.length === 0 ? (
         <View style={styles.emptyContainer}>
@@ -221,40 +192,13 @@ export default function TecnicoScreen() {
         </View>
       </View>
 
-      <View style={styles.filterContainer}>
-        <BaseButton
-          onPress={() => handleFilterEscolhidosChange('Todos')}
-          style={[styles.filterButton, selectedFilterEscolhidos === 'Todos' && styles.filterButtonActive]}
-        >
-          <Text style={[styles.filterButtonText, selectedFilterEscolhidos === 'Todos' && styles.filterButtonTextActive]}>
-            Todos ({chamadosEscolhidos.length})
-          </Text>
-        </BaseButton>
-        <BaseButton
-          onPress={() => handleFilterEscolhidosChange('Baixa')}
-          style={[styles.filterButton, selectedFilterEscolhidos === 'Baixa' && styles.filterButtonActive]}
-        >
-          <Text style={[styles.filterButtonText, selectedFilterEscolhidos === 'Baixa' && styles.filterButtonTextActive]}>
-            Baixa ({chamadosEscolhidos.filter(c => c.prioridade === 'Baixa').length})
-          </Text>
-        </BaseButton>
-        <BaseButton
-          onPress={() => handleFilterEscolhidosChange('Média')}
-          style={[styles.filterButton, selectedFilterEscolhidos === 'Média' && styles.filterButtonActive]}
-        >
-          <Text style={[styles.filterButtonText, selectedFilterEscolhidos === 'Média' && styles.filterButtonTextActive]}>
-            Média ({chamadosEscolhidos.filter(c => c.prioridade === 'Média').length})
-          </Text>
-        </BaseButton>
-        <BaseButton
-          onPress={() => handleFilterEscolhidosChange('Alta')}
-          style={[styles.filterButton, selectedFilterEscolhidos === 'Alta' && styles.filterButtonActive]}
-        >
-          <Text style={[styles.filterButtonText, selectedFilterEscolhidos === 'Alta' && styles.filterButtonTextActive]}>
-            Alta ({chamadosEscolhidos.filter(c => c.prioridade === 'Alta').length})
-          </Text>
-        </BaseButton>
-      </View>
+      {chamadosEscolhidos.length > 0 && (
+        <TecnicoFilterButtons
+          chamados={chamadosEscolhidos}
+          selectedFilter={selectedFilterEscolhidos}
+          onFilterChange={handleFilterEscolhidosChange}
+        />
+      )}
 
       {filteredChamadosEscolhidos.length === 0 ? (
         <View style={styles.emptyContainer}>
@@ -283,40 +227,13 @@ export default function TecnicoScreen() {
         </View>
       </View>
 
-      <View style={styles.filterContainer}>
-        <BaseButton
-          onPress={() => handleFilterResolvidosChange('Todos')}
-          style={[styles.filterButton, selectedFilterResolvidos === 'Todos' && styles.filterButtonActive]}
-        >
-          <Text style={[styles.filterButtonText, selectedFilterResolvidos === 'Todos' && styles.filterButtonTextActive]}>
-            Todos ({chamadosResolvidos.length})
-          </Text>
-        </BaseButton>
-        <BaseButton
-          onPress={() => handleFilterResolvidosChange('Baixa')}
-          style={[styles.filterButton, selectedFilterResolvidos === 'Baixa' && styles.filterButtonActive]}
-        >
-          <Text style={[styles.filterButtonText, selectedFilterResolvidos === 'Baixa' && styles.filterButtonTextActive]}>
-            Baixa ({chamadosResolvidos.filter(c => c.prioridade === 'Baixa').length})
-          </Text>
-        </BaseButton>
-        <BaseButton
-          onPress={() => handleFilterResolvidosChange('Média')}
-          style={[styles.filterButton, selectedFilterResolvidos === 'Média' && styles.filterButtonActive]}
-        >
-          <Text style={[styles.filterButtonText, selectedFilterResolvidos === 'Média' && styles.filterButtonTextActive]}>
-            Média ({chamadosResolvidos.filter(c => c.prioridade === 'Média').length})
-          </Text>
-        </BaseButton>
-        <BaseButton
-          onPress={() => handleFilterResolvidosChange('Alta')}
-          style={[styles.filterButton, selectedFilterResolvidos === 'Alta' && styles.filterButtonActive]}
-        >
-          <Text style={[styles.filterButtonText, selectedFilterResolvidos === 'Alta' && styles.filterButtonTextActive]}>
-            Alta ({chamadosResolvidos.filter(c => c.prioridade === 'Alta').length})
-          </Text>
-        </BaseButton>
-      </View>
+      {chamadosResolvidos.length > 0 && (
+        <TecnicoFilterButtons
+          chamados={chamadosResolvidos}
+          selectedFilter={selectedFilterResolvidos}
+          onFilterChange={handleFilterResolvidosChange}
+        />
+      )}
 
       {filteredChamadosResolvidos.length === 0 ? (
         <View style={styles.emptyContainer}>
