@@ -173,7 +173,7 @@ export default function TecnicoScreen() {
             {chamadosAbertos.length === 0 ? 'Todos os chamados foram escolhidos.' : 'Nenhum chamado com esta prioridade.'}
           </Text>
         </View>
-        ) : (
+      ) : (
         filteredChamadosAbertos.map((chamado) => (
           <ChamadoCardTecnico
             key={chamado.chamadoID}
