@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { theme } from '@/styles';
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   badge: {
     alignItems: 'center',
     backgroundColor: theme.colors.primary,
@@ -73,3 +73,5 @@ export default StyleSheet.create({
     width: '100%',
   },
 });
+
+export default styles;
