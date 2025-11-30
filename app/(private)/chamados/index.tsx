@@ -9,6 +9,7 @@ import { ChamadoService } from '@/services/chamados';
 import { Chamado } from '@/services/chamados/chamado.types';
 
 import { ChamadoCard } from './components/ChamadoCard';
+import { ChamadoFilterButtons } from './components/ChamadoFilterButtons';
 import { ChamadoForm } from './components/ChamadoForm';
 import { ChamadoInfoModal } from './components/ChamadoInfoModal';
 import { ChatbotModal } from './components/ChatbotModal';
@@ -137,41 +138,11 @@ export default function ChamadosScreen() {
           </View>
         </View>
 
-        {/* Filtros por Status */}
-        <View style={styles.filterContainer}>
-          <BaseButton
-            onPress={() => handleFilterChange('Todos')}
-            style={[styles.filterButton, selectedFilter === 'Todos' && styles.filterButtonActive]}
-          >
-            <Text style={[styles.filterButtonText, selectedFilter === 'Todos' && styles.filterButtonTextActive]}>
-              Todos ({chamados.length})
-            </Text>
-          </BaseButton>
-          <BaseButton
-            onPress={() => handleFilterChange('Aberto')}
-            style={[styles.filterButton, selectedFilter === 'Aberto' && styles.filterButtonActive]}
-          >
-            <Text style={[styles.filterButtonText, selectedFilter === 'Aberto' && styles.filterButtonTextActive]}>
-              Aberto ({chamados.filter(c => c.status === 'Aberto').length})
-            </Text>
-          </BaseButton>
-          <BaseButton
-            onPress={() => handleFilterChange('Pendente')}
-            style={[styles.filterButton, selectedFilter === 'Pendente' && styles.filterButtonActive]}
-          >
-            <Text style={[styles.filterButtonText, selectedFilter === 'Pendente' && styles.filterButtonTextActive]}>
-              Pendente ({chamados.filter(c => c.status === 'Pendente').length})
-            </Text>
-          </BaseButton>
-          <BaseButton
-            onPress={() => handleFilterChange('Fechado')}
-            style={[styles.filterButton, selectedFilter === 'Fechado' && styles.filterButtonActive]}
-          >
-            <Text style={[styles.filterButtonText, selectedFilter === 'Fechado' && styles.filterButtonTextActive]}>
-              Fechado ({chamados.filter(c => c.status === 'Fechado').length})
-            </Text>
-          </BaseButton>
-        </View>
+        <ChamadoFilterButtons
+          chamados={chamados}
+          selectedFilter={selectedFilter}
+          onFilterChange={handleFilterChange}
+        />
       </View>
 
       <View style={styles.contentWrapper}>
