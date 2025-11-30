@@ -68,9 +68,6 @@ export function ChamadoCardTecnico({ chamado, onSubmit, buttonText = 'Responder'
           <Text style={styles.detailLabel}>Prioridade:</Text>
           <Text style={styles.detailValue}>{chamado.prioridade}</Text>
 
-          <Text style={styles.detailLabel}>Status:</Text>
-          <Text style={styles.detailValue}>{chamado.status}</Text>
-
           <Text style={styles.detailLabel}>Técnico Responsável:</Text>
           <Text style={styles.detailValue}>
             {chamado.tecnicoResponsavel || 'Ainda não foi selecionado por nenhum técnico'}

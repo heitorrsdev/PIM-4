@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 12,
   },
-
   aiButton: {
     paddingHorizontal: 20,
     paddingVertical: 12,

@@ -15,7 +15,7 @@ export default function Redirect() {
     if (userType === 'Usuario') {
       router.replace('/(private)/chamados');
     } else if (userType === 'Tecnico') {
-      router.replace('/(private)/tecnico');
+      router.replace('/(private)/tecnico/abertos');
     } else {
       router.replace('/login');
     }

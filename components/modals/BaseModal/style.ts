@@ -30,7 +30,8 @@ export default StyleSheet.create({
   } as any,
   content: {
     maxHeight: 500,
-    padding: 20,
+    paddingBottom: 20,
+    paddingHorizontal: 20,
   },
   header: {
     alignItems: 'center',

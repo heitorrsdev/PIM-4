@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 import { theme } from '@/styles';
 
-export default StyleSheet.create({
+const styles = StyleSheet.create({
   badge: {
     alignItems: 'center',
     backgroundColor: theme.colors.primary,
@@ -56,7 +56,6 @@ export default StyleSheet.create({
     gap: 12,
     marginBottom: 12,
   },
-
   loadingText: {
     color: theme.colors.textSecondary,
     fontSize: theme.typography.fontSize.normal,
@@ -66,4 +65,13 @@ export default StyleSheet.create({
     fontSize: theme.typography.fontSize.title,
     fontWeight: theme.typography.fontWeight.bold,
   },
+  navigationButtons: {
+    flexDirection: 'row',
+    gap: 24,
+    justifyContent: 'center',
+    marginBottom: 16,
+    width: '100%',
+  },
 });
+
+export default styles;

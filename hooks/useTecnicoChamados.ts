@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useToast, useUser } from '@/hooks';
 import { Chamado, ChamadoService, ChamadoStatus } from '@/services/chamados';
@@ -29,8 +29,15 @@ export function useTecnicoChamados() {
   const { user } = useUser();
   const tecnico = user as Tecnico;
 
-  const fetchChamados = useCallback(async () => {
-    setLoading(true);
+  // Chama fetchChamados apenas uma vez ao montar o componente
+  useEffect(() => {
+    if (tecnico?.email) {
+      fetchChamados();
+    }
+  }, [tecnico?.email]);
+
+  const fetchChamados = useCallback(async (showLoading = true) => {
+    if (showLoading) setLoading(true);
     try {
       const allChamados = await ChamadoService.getAll();
 
@@ -55,7 +62,7 @@ export function useTecnicoChamados() {
     } catch {
       showToast('Não foi possível buscar chamados');
     } finally {
-      setLoading(false);
+      if (showLoading) setLoading(false);
       setRefreshing(false);
     }
   }, [tecnico?.email, selectedFilterAbertos, selectedFilterEscolhidos, selectedFilterResolvidos, showToast]);
@@ -77,7 +84,7 @@ export function useTecnicoChamados() {
 
   const handleRefresh = useCallback(async () => {
     setRefreshing(true);
-    await fetchChamados();
+    await fetchChamados(false);
   }, [fetchChamados]);
 
   const handleEscolherChamado = useCallback(async (chamado: Chamado) => {
@@ -95,7 +102,7 @@ export function useTecnicoChamados() {
       };
 
       await ChamadoService.update(chamado.chamadoID, payload);
-      await fetchChamados();
+      await fetchChamados(false);
 
       showToast('Chamado escolhido com sucesso!');
     } catch {
@@ -104,7 +111,7 @@ export function useTecnicoChamados() {
   }, [tecnico?.email, fetchChamados, showToast]);
 
   const handleRespostaSuccess = useCallback(async () => {
-    await fetchChamados();
+    await fetchChamados(false);
   }, [fetchChamados]);
 
   return {
