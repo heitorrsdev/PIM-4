@@ -4,8 +4,7 @@ import { ActivityIndicator, FlatList, RefreshControl, Text, View } from 'react-n
 
 import { BaseButton } from '@/components/buttons';
 import { BaseModal } from '@/components/modals';
-import { useToast,useUser  } from '@/hooks';
-import { ChamadoService } from '@/services/chamados';
+import { useChamados, useToast, useUser } from '@/hooks';
 import { Chamado } from '@/services/chamados/chamado.types';
 
 import { ChamadoCard } from './components/ChamadoCard';
@@ -17,51 +16,29 @@ import { DeleteChamadoModal } from './components/DeleteChamadoModal';
 import { EditChamadoForm } from './components/EditChamadoForm';
 import styles from './style';
 
-type StatusFilter = 'Todos' | 'Aberto' | 'Pendente' | 'Fechado';
-
 export default function ChamadosScreen() {
-  const [chamados, setChamados] = useState<Chamado[]>([]);
   const [chatbotVisible, setChatbotVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [editModalVisible, setEditModalVisible] = useState(false);
-  const [filteredChamados, setFilteredChamados] = useState<Chamado[]>([]);
   const [infoModalVisible, setInfoModalVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
-  const [selectedChamado, setSelectedChamado] = useState<Chamado | null>(null);
-  const [selectedFilter, setSelectedFilter] = useState<StatusFilter>('Todos');
-  const { user, userLoading } = useUser();
-  const userEmail = user?.email || '';
+
   const { showToast } = useToast();
-  const { userType } = useUser();
+  const { user, userLoading, userType } = useUser();
 
-  const fetchChamados = async () => {
-    try {
-      const data = await ChamadoService.getByEmail(userEmail);
-      setChamados(data);
-      filterChamados(data, selectedFilter);
-    } catch {
-      showToast('Não foi possível buscar chamados');
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
-    }
-  };
-
-  const filterChamados = (data: Chamado[], filter: StatusFilter) => {
-    if (filter === 'Todos') {
-      setFilteredChamados(data);
-    } else {
-      const filtered = data.filter(chamado => chamado.status === filter);
-      setFilteredChamados(filtered);
-    }
-  };
-
-  const handleFilterChange = (filter: StatusFilter) => {
-    setSelectedFilter(filter);
-    filterChamados(chamados, filter);
-  };
+  const {
+    chamados,
+    fetchChamados,
+    filteredChamados,
+    handleFilterChange,
+    handleRefresh,
+    handleSuccessAction,
+    loading,
+    refreshing,
+    selectedChamado,
+    selectedFilter,
+    setSelectedChamado,
+  } = useChamados();
 
   useEffect(() => {
     if (userLoading) return;
@@ -72,19 +49,14 @@ export default function ChamadosScreen() {
       return;
     }
 
-    if (userEmail) {
+    if (user?.email) {
       fetchChamados();
     }
-  }, [userLoading, userType, userEmail]);
-
-  const handleRefresh = async () => {
-    setRefreshing(true);
-    await fetchChamados();
-  };
+  }, [userLoading, userType, user?.email, fetchChamados, showToast]);
 
   const handleSuccessCreate = () => {
     setModalVisible(false);
-    fetchChamados();
+    handleSuccessAction();
   };
 
   const handleEdit = (chamado: Chamado) => {
@@ -104,14 +76,12 @@ export default function ChamadosScreen() {
 
   const handleSuccessEdit = () => {
     setEditModalVisible(false);
-    setSelectedChamado(null);
-    fetchChamados();
+    handleSuccessAction();
   };
 
   const handleSuccessDelete = () => {
     setDeleteModalVisible(false);
-    setSelectedChamado(null);
-    fetchChamados();
+    handleSuccessAction();
   };
 
   if (loading || userLoading) {
