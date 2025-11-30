@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { RefreshControl, ScrollView, Text, View } from 'react-native';
 
+import LinkButton from '@/components/buttons/LinkButton';
 import { useTecnicoChamados } from '@/hooks/useTecnicoChamados';
 import { Chamado } from '@/services/chamados';
 
@@ -43,6 +44,16 @@ export default function MeusChamadosScreen() {
         <View style={[styles.badge, { backgroundColor: '#eab308' }]}>
           <Text style={styles.badgeText}>{chamadosEscolhidos.length}</Text>
         </View>
+      </View>
+
+      <View style={styles.navigationButtons}>
+        <LinkButton href="/tecnico/abertos">
+          Chamados em Aberto
+        </LinkButton>
+
+        <LinkButton href="/tecnico/resolvidos">
+          Chamados Resolvidos
+        </LinkButton>
       </View>
 
       {chamadosEscolhidos.length > 0 && (

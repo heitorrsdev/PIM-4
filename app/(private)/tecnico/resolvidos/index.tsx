@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { RefreshControl, ScrollView, Text, View } from 'react-native';
 
+import LinkButton from '@/components/buttons/LinkButton';
 import { useTecnicoChamados } from '@/hooks/useTecnicoChamados';
 import { Chamado } from '@/services/chamados';
 
@@ -8,6 +9,7 @@ import { ChamadoCardTecnico } from '../components/ChamadoCardTecnico';
 import { TecnicoFilterButtons } from '../components/TecnicoFilterButtons';
 import { TicketResponseModal } from '../components/TicketResponseModal';
 import styles from '../style';
+import style from '../style';
 
 export default function ChamadosResolvidosScreen() {
   const [modalVisible, setModalVisible] = useState(false);
@@ -43,6 +45,16 @@ export default function ChamadosResolvidosScreen() {
         <View style={[styles.badge, { backgroundColor: '#22c55e' }]}>
           <Text style={styles.badgeText}>{chamadosResolvidos.length}</Text>
         </View>
+      </View>
+
+      <View style={styles.navigationButtons}>
+        <LinkButton href="/tecnico/abertos">
+          Chamados em Aberto
+        </LinkButton>
+
+        <LinkButton href="/tecnico/meus">
+          Meus Chamados
+        </LinkButton>
       </View>
 
       {chamadosResolvidos.length > 0 && (

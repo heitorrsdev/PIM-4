@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { theme } from '@/styles';
+import { transparent } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 
 export default StyleSheet.create({
   badge: {
@@ -65,5 +66,15 @@ export default StyleSheet.create({
     color: theme.colors.textPrimary,
     fontSize: theme.typography.fontSize.title,
     fontWeight: theme.typography.fontWeight.bold,
+  },
+  navigationButtons: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 16,
+    gap: 24,
+  },
+  navButton: {
+
   },
 });

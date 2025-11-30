@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { RefreshControl, ScrollView, Text, View } from 'react-native';
 
+import LinkButton from '@/components/buttons/LinkButton';
 import { useTecnicoChamados } from '@/hooks/useTecnicoChamados';
 
 import { ChamadoCardTecnico } from '../components/ChamadoCardTecnico';
@@ -37,6 +38,16 @@ export default function ChamadosAbertosScreen() {
         <View style={styles.badge}>
           <Text style={styles.badgeText}>{chamadosAbertos.length}</Text>
         </View>
+      </View>
+
+      <View style={styles.navigationButtons}>
+        <LinkButton href="/tecnico/meus">
+          Meus Chamados
+        </LinkButton>
+
+        <LinkButton href="/tecnico/resolvidos">
+          Chamados Resolvidos
+        </LinkButton>
       </View>
 
       {chamadosAbertos.length > 0 && (
