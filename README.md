@@ -1,6 +1,5 @@
 # Suptech App - Frontend (Mobile e Web)
 
-<!-- BADGES SECTION -->
 [![Status do Projeto](https://img.shields.io/badge/Status-Conclu%C3%ADdo-brightgreen)](https://github.com/heitorrsdev/PIM-4)
 [![Licença](https://img.shields.io/github/license/heitorrsdev/PIM-4)](LICENSE)
 [![Tecnologia Principal](https://img.shields.io/badge/Frontend-React%20Native%20Web-61DAFB?logo=react&logoColor=white)](https://reactnative.dev/)
