@@ -78,13 +78,19 @@ Para executar o **Suptech App** em seu ambiente de desenvolvimento, siga os pass
     npm install
     ```
     
-5.  **Inicie a aplicação:**
+5. **Use a versão correta do Node.js (via NVM)**
+
+    ```shell
+    nvm use --install-if-missing
+    ```
+
+6.  **Inicie a aplicação:**
     
     ```shell
     npx expo start
     ```
     
-6.  **Acesse a Aplicação:**
+7.  **Acesse a Aplicação:**
     *   Use o aplicativo **Expo Go** no seu dispositivo móvel para escanear o QR Code.
     *   Pressione `w` no terminal para abrir a versão web no seu navegador.
 
