@@ -96,7 +96,7 @@ Para executar o **Suptech App** em seu ambiente de desenvolvimento, siga os pass
 
 ## 🤝 Contribuição e Manutenção
 
-O projeto está concluído, mas contribuições para manutenção e melhorias futuras são bem-vindas. Por favor, siga o guia de commits [COMMIT\_GUIDE.md](COMMIT_GUIDE.md) e abra um Pull Request.
+O projeto está concluído, mas contribuições para manutenção e melhorias futuras são bem-vindas. Por favor, siga o guia de commits [CONTRIBUTING.md](CONTRIBUTING.md) e abra um Pull Request.
 
 ## 📄 Licença
 
